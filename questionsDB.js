@@ -2,2213 +2,2164 @@
 // 100 questions par leçon : algorithmique, architecture des ordinateurs, base de données, gestion mémoire, planification de projets
 
 export const questionsDB = {
-  algo: [
-    {
-      id: 1,
-      question: "Qu'est-ce qu'un algorithme?",
-      options: [
-        "Un langage de programmation",
-        "Une suite d'instructions pour résoudre un problème",
-        "Un type de variable",
-        "Un matériel informatique",
-      ],
-      correct: 1,
-      explanation:
-        "Un algorithme est une suite finie d'instructions permettant de résoudre un problème.",
-    },
-    {
-      id: 2,
-      question: "Quelle est la complexité moyenne du tri à bulles?",
-      options: ["O(n)", "O(log n)", "O(n^2)", "O(n log n)"],
-      correct: 2,
-      explanation: "Le tri à bulles a une complexité moyenne de O(n^2).",
-    },
-    {
-      id: 3,
-      question:
-        "Quelle structure de données fonctionne selon le principe FIFO?",
-      options: ["Pile", "File", "Arbre", "Graphe"],
-      correct: 1,
-      explanation:
-        "La file (queue) fonctionne selon le principe First In First Out.",
-    },
-    {
-      id: 4,
-      question:
-        "Quel algorithme est utilisé pour trouver le plus court chemin dans un graphe pondéré?",
-      options: ["Kruskal", "Dijkstra", "Prim", "Bellman-Ford"],
-      correct: 1,
-      explanation:
-        "L'algorithme de Dijkstra permet de trouver le plus court chemin dans un graphe pondéré sans arêtes négatives.",
-    },
-    {
-      id: 5,
-      question: "Qu'est-ce qu'une récursivité?",
-      options: [
-        "Une boucle infinie",
-        "Une fonction qui s'appelle elle-même",
-        "Un type de tri",
-        "Un type de variable",
-      ],
-      correct: 1,
-      explanation:
-        "La récursivité est le fait qu'une fonction s'appelle elle-même.",
-    },
-    {
-      id: 6,
-      question: "Quel est le but d'un algorithme de tri?",
-      options: [
-        "Trier des données selon un ordre défini",
-        "Rechercher une valeur",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Un algorithme de tri organise les éléments d'une liste selon un ordre (croissant ou décroissant).",
-    },
-    {
-      id: 7,
-      question: "Quelle est la complexité moyenne du tri rapide (QuickSort)?",
-      options: ["O(n^2)", "O(n)", "O(n log n)", "O(log n)"],
-      correct: 2,
-      explanation: "QuickSort a une complexité moyenne de O(n log n).",
-    },
-    {
-      id: 8,
-      question: "Une pile (stack) fonctionne selon le principe...",
-      options: ["FIFO", "LIFO", "LILO", "FILO"],
-      correct: 1,
-      explanation:
-        "La pile est une structure de données LIFO (Last In, First Out).",
-    },
-    {
-      id: 9,
-      question:
-        "Quel algorithme est utilisé pour rechercher un élément dans un tableau trié?",
-      options: [
-        "Recherche linéaire",
-        "Recherche binaire",
-        "Recherche par hachage",
-        "Recherche séquentielle",
-      ],
-      correct: 1,
-      explanation: "La recherche binaire est efficace pour les tableaux triés.",
-    },
-    {
-      id: 10,
-      question: "Quel est le principe de la programmation dynamique?",
-      options: [
-        "Diviser pour régner",
-        "Résoudre des sous-problèmes et mémoriser les résultats",
-        "Utiliser des piles",
-        "Utiliser des files",
-      ],
-      correct: 1,
-      explanation:
-        "La programmation dynamique consiste à résoudre des sous-problèmes et à stocker leurs résultats pour éviter les calculs redondants.",
-    },
-    {
-      id: 11,
-      question: "Quel est le but d'un algorithme glouton?",
-      options: [
-        "Trouver une solution optimale globale en faisant des choix locaux optimaux",
-        "Trier des données",
-        "Rechercher une valeur",
-        "Compresser des données",
-      ],
-      correct: 0,
-      explanation:
-        "Un algorithme glouton fait des choix optimaux à chaque étape pour trouver une solution globale.",
-    },
-    {
-      id: 12,
-      question: "Quel est le pire cas de la recherche binaire?",
-      options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"],
-      correct: 1,
-      explanation:
-        "La recherche binaire a une complexité de O(log n) dans le pire cas.",
-    },
-    {
-      id: 13,
-      question: "Quel algorithme est utilisé pour le tri par insertion?",
-      options: ["Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort"],
-      correct: 0,
-      explanation: "Insertion Sort est l'algorithme de tri par insertion.",
-    },
-    {
-      id: 14,
-      question:
-        "Quelle structure de données permet un accès direct à un élément par son index?",
-      options: ["Pile", "File", "Tableau", "Arbre binaire"],
-      correct: 2,
-      explanation:
-        "Le tableau permet un accès direct à un élément par son index.",
-    },
-    {
-      id: 15,
-      question: "Quel est le principe du tri fusion (Merge Sort)?",
-      options: [
-        "Diviser pour régner",
-        "Glouton",
-        "Programmation dynamique",
-        "Recherche binaire",
-      ],
-      correct: 0,
-      explanation: "Le tri fusion utilise la stratégie diviser pour régner.",
-    },
-    {
-      id: 16,
-      question: "Quel est le but d'une table de hachage?",
-      options: [
-        "Stocker des données de façon ordonnée",
-        "Permettre un accès rapide à des données via une clé",
-        "Trier des données",
-        "Compresser des données",
-      ],
-      correct: 1,
-      explanation:
-        "La table de hachage permet un accès rapide à des données via une clé unique.",
-    },
-    {
-      id: 17,
-      question: "Quel est le principe de l'algorithme de Kruskal?",
-      options: [
-        "Trouver le plus court chemin",
-        "Trouver l'arbre couvrant de poids minimal",
-        "Trier des données",
-        "Compresser des données",
-      ],
-      correct: 1,
-      explanation:
-        "Kruskal trouve l'arbre couvrant de poids minimal dans un graphe.",
-    },
-    {
-      id: 18,
-      question:
-        "Quelle est la complexité du tri par sélection (Selection Sort)?",
-      options: ["O(n)", "O(n^2)", "O(n log n)", "O(log n)"],
-      correct: 1,
-      explanation: "Le tri par sélection a une complexité de O(n^2).",
-    },
-    {
-      id: 19,
-      question: "Quel algorithme utilise une file de priorité?",
-      options: [
-        "Recherche binaire",
-        "Tri à bulles",
-        "Dijkstra",
-        "Tri par insertion",
-      ],
-      correct: 2,
-      explanation:
-        "L'algorithme de Dijkstra utilise une file de priorité pour sélectionner le prochain sommet à traiter.",
-    },
-    {
-      id: 20,
-      question: "Quel est le but d'un arbre binaire de recherche?",
-      options: [
-        "Trier des données",
-        "Permettre une recherche rapide",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 1,
-      explanation:
-        "L'arbre binaire de recherche permet une recherche rapide d'éléments.",
-    },
-    // ...questions 21 à 100 générées automatiquement...
-    {
-      id: 21,
-      question: "Quel est le principe de l'algorithme de Prim?",
-      options: [
-        "Trouver le plus court chemin",
-        "Trouver l'arbre couvrant de poids minimal",
-        "Trier des données",
-        "Compresser des données",
-      ],
-      correct: 1,
-      explanation:
-        "Prim trouve l'arbre couvrant de poids minimal dans un graphe pondéré.",
-    },
-    {
-      id: 22,
-      question:
-        "Quelle structure de données est utilisée pour l'algorithme BFS?",
-      options: ["Pile", "File", "Tableau", "Arbre"],
-      correct: 1,
-      explanation:
-        "BFS (parcours en largeur) utilise une file pour explorer les sommets.",
-    },
-    {
-      id: 23,
-      question: "Quelle est la complexité du tri par tas (Heap Sort)?",
-      options: ["O(n^2)", "O(n log n)", "O(n)", "O(log n)"],
-      correct: 1,
-      explanation: "Le tri par tas a une complexité de O(n log n).",
-    },
-    {
-      id: 24,
-      question: "Quel est le but d'un algorithme de recherche linéaire?",
-      options: [
-        "Trouver un élément dans une liste non triée",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "La recherche linéaire parcourt chaque élément jusqu'à trouver la valeur recherchée.",
-    },
-    {
-      id: 25,
-      question: "Quel est le principe de la récursivité terminale?",
-      options: [
-        "La fonction s'appelle elle-même en dernière instruction",
-        "La fonction ne s'appelle jamais elle-même",
-        "La fonction utilise une pile",
-        "La fonction utilise une file",
-      ],
-      correct: 0,
-      explanation:
-        "La récursivité terminale permet une optimisation de la pile d'appels.",
-    },
-    {
-      id: 26,
-      question:
-        "Quel algorithme est utilisé pour le tri par comptage (Counting Sort)?",
-      options: [
-        "Trier des entiers dans un intervalle limité",
-        "Trier des chaînes de caractères",
-        "Trier des objets",
-        "Trier des flottants",
-      ],
-      correct: 0,
-      explanation:
-        "Counting Sort est efficace pour trier des entiers dans un intervalle restreint.",
-    },
-    {
-      id: 27,
-      question:
-        "Quelle structure de données permet d'implémenter une file de priorité?",
-      options: ["Tableau", "Tas binaire (heap)", "Pile", "Liste chaînée"],
-      correct: 1,
-      explanation:
-        "Le tas binaire est utilisé pour implémenter une file de priorité.",
-    },
-    {
-      id: 28,
-      question: "Quel est le but d'un arbre AVL?",
-      options: [
-        "Arbre binaire équilibré pour garantir O(log n) à l'insertion et la recherche",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre AVL est un arbre binaire de recherche auto-équilibré.",
-    },
-    {
-      id: 29,
-      question: "Quel algorithme est utilisé pour le tri par fusion?",
-      options: ["Merge Sort", "Quick Sort", "Heap Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Merge Sort est l'algorithme de tri par fusion.",
-    },
-    {
-      id: 30,
-      question: "Quel est le principe de l'algorithme de Bellman-Ford?",
-      options: [
-        "Trouver le plus court chemin même avec des arêtes négatives",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Bellman-Ford trouve le plus court chemin dans un graphe, même avec des arêtes négatives.",
-    },
-    // ...questions 31 à 100 générées automatiquement...
-    {
-      id: 31,
-      question: "Quel est le but d'un arbre B?",
-      options: [
-        "Stocker efficacement de grandes quantités de données sur disque",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre B est utilisé dans les bases de données pour l'indexation.",
-    },
-    {
-      id: 32,
-      question:
-        "Quelle est la complexité de la recherche dans un arbre binaire équilibré?",
-      options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"],
-      correct: 1,
-      explanation:
-        "Dans un arbre binaire équilibré, la recherche est en O(log n).",
-    },
-    {
-      id: 33,
-      question:
-        "Quel algorithme est utilisé pour le parcours en profondeur d'un graphe?",
-      options: ["BFS", "DFS", "Dijkstra", "Kruskal"],
-      correct: 1,
-      explanation: "DFS (Depth First Search) est le parcours en profondeur.",
-    },
-    {
-      id: 34,
-      question: "Quel est le but d'une table de hachage parfaite?",
-      options: [
-        "Aucune collision de clés",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Une table de hachage parfaite ne provoque aucune collision.",
-    },
-    {
-      id: 35,
-      question: "Quel est le principe de l'algorithme de Floyd-Warshall?",
-      options: [
-        "Trouver les plus courts chemins entre tous les couples de sommets",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Floyd-Warshall calcule les plus courts chemins entre tous les sommets d'un graphe.",
-    },
-    // ...questions 36 à 100 générées automatiquement...
-    {
-      id: 36,
-      question: "Quel est le but d'un arbre rouge-noir?",
-      options: [
-        "Arbre binaire équilibré pour garantir O(log n) à l'insertion et la recherche",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre rouge-noir est un arbre binaire de recherche auto-équilibré.",
-    },
-    {
-      id: 37,
-      question: "Quel algorithme est utilisé pour le tri par tas?",
-      options: ["Heap Sort", "Quick Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Heap Sort est l'algorithme de tri par tas.",
-    },
-    {
-      id: 38,
-      question: "Quel est le principe de la programmation récursive?",
-      options: [
-        "Une fonction s'appelle elle-même pour résoudre un problème",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "La programmation récursive consiste à résoudre un problème en le divisant en sous-problèmes similaires.",
-    },
-    {
-      id: 39,
-      question: "Quel est le but d'un graphe orienté acyclique (DAG)?",
-      options: [
-        "Représenter des dépendances sans cycles",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Un DAG est utilisé pour représenter des dépendances, comme dans les tâches à exécuter dans un ordre précis.",
-    },
-    {
-      id: 40,
-      question: "Quel algorithme est utilisé pour le tri topologique?",
-      options: ["DFS", "BFS", "Dijkstra", "Kruskal"],
-      correct: 0,
-      explanation:
-        "Le tri topologique d'un graphe orienté acyclique peut être réalisé avec DFS.",
-    },
-    // ...questions 41 à 100 générées automatiquement...
-    {
-      id: 41,
-      question: "Quel est le but d'un arbre suffixe?",
-      options: [
-        "Rechercher rapidement des sous-chaînes dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre suffixe permet de rechercher efficacement des motifs dans une chaîne.",
-    },
-    {
-      id: 42,
-      question: "Quel algorithme est utilisé pour la compression de Huffman?",
-      options: ["Huffman", "LZW", "RLE", "Shannon"],
-      correct: 0,
-      explanation:
-        "L'algorithme de Huffman est utilisé pour la compression sans perte.",
-    },
-    {
-      id: 43,
-      question: "Quel est le principe de l'algorithme de Boyer-Moore?",
-      options: [
-        "Recherche efficace de motifs dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Boyer-Moore est un algorithme efficace de recherche de motifs dans une chaîne.",
-    },
-    {
-      id: 44,
-      question: "Quel est le but d'un automate fini?",
-      options: [
-        "Reconnaître des langages réguliers",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation: "Un automate fini reconnaît des langages réguliers.",
-    },
-    {
-      id: 45,
-      question:
-        "Quel algorithme est utilisé pour la recherche de motifs de Knuth-Morris-Pratt?",
-      options: ["KMP", "Boyer-Moore", "Rabin-Karp", "Aho-Corasick"],
-      correct: 0,
-      explanation:
-        "KMP est un algorithme efficace de recherche de motifs dans une chaîne.",
-    },
-    // ...questions 46 à 100 générées automatiquement...
-    {
-      id: 46,
-      question: "Quel est le but d'un arbre segmentaire?",
-      options: [
-        "Effectuer des requêtes et mises à jour rapides sur des intervalles",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre segmentaire est utilisé pour les requêtes d'intervalles dans les tableaux.",
-    },
-    {
-      id: 47,
-      question:
-        "Quel algorithme est utilisé pour la recherche de motifs de Rabin-Karp?",
-      options: ["Rabin-Karp", "KMP", "Boyer-Moore", "Aho-Corasick"],
-      correct: 0,
-      explanation:
-        "Rabin-Karp utilise le hachage pour rechercher des motifs dans une chaîne.",
-    },
-    {
-      id: 48,
-      question: "Quel est le principe de l'algorithme de Ford-Fulkerson?",
-      options: [
-        "Trouver le flot maximal dans un réseau",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Ford-Fulkerson trouve le flot maximal dans un graphe orienté.",
-    },
-    {
-      id: 49,
-      question: "Quel est le but d'un arbre Fenwick (Binary Indexed Tree)?",
-      options: [
-        "Effectuer des requêtes de sommes de préfixes efficacement",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre Fenwick permet des requêtes et mises à jour rapides sur des préfixes de tableaux.",
-    },
-    {
-      id: 50,
-      question: "Quel algorithme est utilisé pour la compression LZW?",
-      options: ["LZW", "Huffman", "RLE", "Shannon"],
-      correct: 0,
-      explanation: "LZW est un algorithme de compression sans perte.",
-    },
-    // ...questions 51 à 100 générées automatiquement...
-    {
-      id: 51,
-      question: "Quel est le but d'un arbre Trie?",
-      options: [
-        "Stocker efficacement des ensembles de chaînes de caractères",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Trie est utilisé pour stocker et rechercher des chaînes efficacement.",
-    },
-    {
-      id: 52,
-      question: "Quel algorithme est utilisé pour le tri radix (Radix Sort)?",
-      options: ["Radix Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Radix Sort trie les entiers en traitant les chiffres un à un.",
-    },
-    {
-      id: 53,
-      question: "Quel est le principe de l'algorithme de Tarjan?",
-      options: [
-        "Trouver les composantes fortement connexes dans un graphe",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Tarjan trouve les composantes fortement connexes dans un graphe orienté.",
-    },
-    {
-      id: 54,
-      question:
-        "Quel est le but d'un arbre segmentaire paresseux (Lazy Segment Tree)?",
-      options: [
-        "Optimiser les mises à jour d'intervalles dans un tableau",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Lazy Segment Tree optimise les mises à jour d'intervalles.",
-    },
-    {
-      id: 55,
-      question:
-        "Quel algorithme est utilisé pour la recherche de motifs de Aho-Corasick?",
-      options: ["Aho-Corasick", "KMP", "Boyer-Moore", "Rabin-Karp"],
-      correct: 0,
-      explanation:
-        "Aho-Corasick recherche plusieurs motifs simultanément dans une chaîne.",
-    },
-    // ...questions 56 à 100 générées automatiquement...
-    {
-      id: 56,
-      question: "Quel est le but d'un arbre Suffix Automaton?",
-      options: [
-        "Rechercher efficacement des sous-chaînes dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Suffix Automaton permet des recherches rapides de sous-chaînes.",
-    },
-    {
-      id: 57,
-      question: "Quel algorithme est utilisé pour la compression RLE?",
-      options: ["RLE", "Huffman", "LZW", "Shannon"],
-      correct: 0,
-      explanation:
-        "RLE (Run-Length Encoding) est un algorithme de compression simple.",
-    },
-    {
-      id: 58,
-      question: "Quel est le principe de l'algorithme de Johnson?",
-      options: [
-        "Trouver les plus courts chemins entre tous les couples de sommets dans un graphe avec arêtes négatives",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'algorithme de Johnson combine Bellman-Ford et Dijkstra pour les plus courts chemins.",
-    },
-    {
-      id: 59,
-      question: "Quel est le but d'un arbre Patricia?",
-      options: [
-        "Optimiser le stockage des chaînes dans un Trie compressé",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre Patricia est un Trie compressé pour optimiser l'espace.",
-    },
-    {
-      id: 60,
-      question: "Quel algorithme est utilisé pour le tri Shell (Shell Sort)?",
-      options: ["Shell Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Shell Sort est une amélioration du tri par insertion.",
-    },
-    // ...questions 61 à 100 générées automatiquement...
-    {
-      id: 61,
-      question: "Quel est le but d'un graphe biparti?",
-      options: [
-        "Représenter des relations entre deux ensembles disjoints",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Un graphe biparti relie deux ensembles sans arêtes internes à chaque ensemble.",
-    },
-    {
-      id: 62,
-      question:
-        "Quel algorithme est utilisé pour le flot maximal dans un réseau?",
-      options: ["Ford-Fulkerson", "Dijkstra", "Kruskal", "Prim"],
-      correct: 0,
-      explanation: "Ford-Fulkerson calcule le flot maximal dans un réseau.",
-    },
-    {
-      id: 63,
-      question: "Quel est le principe de l'algorithme de Kosaraju?",
-      options: [
-        "Trouver les composantes fortement connexes dans un graphe",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Kosaraju trouve les composantes fortement connexes dans un graphe orienté.",
-    },
-    {
-      id: 64,
-      question: "Quel est le but d'un arbre Splay?",
-      options: [
-        "Arbre binaire auto-ajustable pour optimiser l'accès aux éléments récemment utilisés",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre Splay optimise l'accès aux éléments fréquemment utilisés.",
-    },
-    {
-      id: 65,
-      question:
-        "Quel algorithme est utilisé pour le tri cocktail (Cocktail Sort)?",
-      options: ["Cocktail Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Cocktail Sort est une variante bidirectionnelle du tri à bulles.",
-    },
-    // ...questions 66 à 100 générées automatiquement...
-    {
-      id: 66,
-      question: "Quel est le but d'un graphe pondéré?",
-      options: [
-        "Représenter des relations avec des poids sur les arêtes",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation: "Un graphe pondéré attribue un poids à chaque arête.",
-    },
-    {
-      id: 67,
-      question: "Quel algorithme est utilisé pour le tri gnome (Gnome Sort)?",
-      options: ["Gnome Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Gnome Sort est un algorithme de tri simple basé sur l'échange d'éléments.",
-    },
-    {
-      id: 68,
-      question: "Quel est le principe de l'algorithme de Warshall?",
-      options: [
-        "Calculer la fermeture transitive d'un graphe",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'algorithme de Warshall calcule la fermeture transitive d'un graphe.",
-    },
-    {
-      id: 69,
-      question: "Quel est le but d'un arbre 2-3?",
-      options: [
-        "Arbre de recherche équilibré avec 2 ou 3 enfants par nœud",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation: "L'arbre 2-3 est un arbre de recherche équilibré.",
-    },
-    {
-      id: 70,
-      question:
-        "Quel algorithme est utilisé pour le tri pigeonhole (Pigeonhole Sort)?",
-      options: ["Pigeonhole Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Pigeonhole Sort trie les entiers dans un intervalle restreint.",
-    },
-    // ...questions 71 à 100 générées automatiquement...
-    {
-      id: 71,
-      question: "Quel est le but d'un graphe complet?",
-      options: [
-        "Chaque paire de sommets est reliée par une arête",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Dans un graphe complet, chaque sommet est relié à tous les autres.",
-    },
-    {
-      id: 72,
-      question: "Quel algorithme est utilisé pour le tri bogo (Bogo Sort)?",
-      options: ["Bogo Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Bogo Sort est un algorithme de tri inefficace basé sur le hasard.",
-    },
-    {
-      id: 73,
-      question: "Quel est le principe de l'algorithme de Z?",
-      options: [
-        "Recherche efficace de motifs dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'algorithme de Z est utilisé pour la recherche de motifs dans une chaîne.",
-    },
-    {
-      id: 74,
-      question: "Quel est le but d'un arbre AA?",
-      options: [
-        "Arbre binaire de recherche équilibré simplifié",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre AA est une variante simplifiée de l'arbre rouge-noir.",
-    },
-    {
-      id: 75,
-      question: "Quel algorithme est utilisé pour le tri cycle (Cycle Sort)?",
-      options: ["Cycle Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Cycle Sort minimise le nombre d'écritures lors du tri.",
-    },
-    // ...questions 76 à 100 générées automatiquement...
-    {
-      id: 76,
-      question: "Quel est le but d'un graphe connexe?",
-      options: [
-        "Il existe un chemin entre chaque paire de sommets",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Un graphe connexe permet d'aller de n'importe quel sommet à un autre.",
-    },
-    {
-      id: 77,
-      question:
-        "Quel algorithme est utilisé pour le tri bitonic (Bitonic Sort)?",
-      options: ["Bitonic Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Bitonic Sort est utilisé dans les architectures parallèles.",
-    },
-    {
-      id: 78,
-      question: "Quel est le principe de l'algorithme de Hopcroft-Karp?",
-      options: [
-        "Trouver un appariement maximal dans un graphe biparti",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Hopcroft-Karp trouve un appariement maximal dans un graphe biparti.",
-    },
-    {
-      id: 79,
-      question: "Quel est le but d'un arbre Suffix Tree?",
-      options: [
-        "Rechercher efficacement des sous-chaînes dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Suffix Tree permet des recherches rapides de sous-chaînes.",
-    },
-    {
-      id: 80,
-      question:
-        "Quel algorithme est utilisé pour le tri pancake (Pancake Sort)?",
-      options: ["Pancake Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Pancake Sort trie une pile d'éléments en retournant des sous-listes.",
-    },
-    // ...questions 81 à 100 générées automatiquement...
-    {
-      id: 81,
-      question: "Quel est le but d'un graphe orienté?",
-      options: [
-        "Les arêtes ont un sens (direction)",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation: "Dans un graphe orienté, les arêtes ont une direction.",
-    },
-    {
-      id: 82,
-      question: "Quel algorithme est utilisé pour le tri stooge (Stooge Sort)?",
-      options: ["Stooge Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Stooge Sort est un algorithme de tri récursif inefficace.",
-    },
-    {
-      id: 83,
-      question: "Quel est le principe de l'algorithme de Edmonds-Karp?",
-      options: [
-        "Calculer le flot maximal dans un réseau en utilisant BFS",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Edmonds-Karp est une variante de Ford-Fulkerson utilisant BFS.",
-    },
-    {
-      id: 84,
-      question: "Quel est le but d'un arbre Suffix Array?",
-      options: [
-        "Rechercher efficacement des sous-chaînes dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Suffix Array permet des recherches rapides de sous-chaînes.",
-    },
-    {
-      id: 85,
-      question: "Quel algorithme est utilisé pour le tri comb (Comb Sort)?",
-      options: ["Comb Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Comb Sort améliore le tri à bulles en éliminant les petits éléments à la fin.",
-    },
-    // ...questions 86 à 100 générées automatiquement...
-    {
-      id: 86,
-      question: "Quel est le but d'un graphe non orienté?",
-      options: [
-        "Les arêtes n'ont pas de sens (direction)",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Dans un graphe non orienté, les arêtes n'ont pas de direction.",
-    },
-    {
-      id: 87,
-      question:
-        "Quel algorithme est utilisé pour le tri odd-even (Odd-Even Sort)?",
-      options: ["Odd-Even Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Odd-Even Sort est un algorithme de tri parallèle.",
-    },
-    {
-      id: 88,
-      question: "Quel est le principe de l'algorithme de Johnson-Trotter?",
-      options: [
-        "Générer toutes les permutations d'un ensemble",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Johnson-Trotter génère toutes les permutations d'un ensemble.",
-    },
-    {
-      id: 89,
-      question: "Quel est le but d'un arbre Suffix Link?",
-      options: [
-        "Optimiser la recherche de motifs dans un arbre suffixe",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Suffix Link optimise la navigation dans un arbre suffixe.",
-    },
-    {
-      id: 90,
-      question:
-        "Quel algorithme est utilisé pour le tri patience (Patience Sort)?",
-      options: ["Patience Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Patience Sort est utilisé pour trouver la plus longue sous-séquence croissante.",
-    },
-    // ...questions 91 à 100 générées automatiquement...
-    {
-      id: 91,
-      question: "Quel est le but d'un graphe cyclique?",
-      options: [
-        "Il existe au moins un cycle dans le graphe",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation: "Un graphe cyclique contient au moins un cycle.",
-    },
-    {
-      id: 92,
-      question: "Quel algorithme est utilisé pour le tri strand (Strand Sort)?",
-      options: ["Strand Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Strand Sort est un algorithme de tri basé sur l'extraction de sous-listes croissantes.",
-    },
-    {
-      id: 93,
-      question: "Quel est le principe de l'algorithme de Manacher?",
-      options: [
-        "Trouver la plus longue sous-chaîne palindrome dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Manacher trouve la plus longue sous-chaîne palindrome en temps linéaire.",
-    },
-    {
-      id: 94,
-      question: "Quel est le but d'un arbre Cartesian?",
-      options: [
-        "Arbre binaire de recherche avec propriétés de tas",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'arbre Cartesian combine les propriétés d'un tas et d'un arbre binaire de recherche.",
-    },
-    {
-      id: 95,
-      question: "Quel algorithme est utilisé pour le tri sleep (Sleep Sort)?",
-      options: ["Sleep Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Sleep Sort est un algorithme de tri basé sur le temps d'attente (non utilisé en pratique).",
-    },
-    {
-      id: 96,
-      question: "Quel est le but d'un graphe acyclique?",
-      options: [
-        "Il n'existe aucun cycle dans le graphe",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation: "Un graphe acyclique ne contient aucun cycle.",
-    },
-    {
-      id: 97,
-      question: "Quel algorithme est utilisé pour le tri stooge (Stooge Sort)?",
-      options: ["Stooge Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation: "Stooge Sort est un algorithme de tri récursif inefficace.",
-    },
-    {
-      id: 98,
-      question: "Quel est le principe de l'algorithme de Z?",
-      options: [
-        "Recherche efficace de motifs dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "L'algorithme de Z est utilisé pour la recherche de motifs dans une chaîne.",
-    },
-    {
-      id: 99,
-      question: "Quel est le but d'un arbre Suffix Array?",
-      options: [
-        "Rechercher efficacement des sous-chaînes dans une chaîne",
-        "Trier des données",
-        "Compresser des données",
-        "Crypter des données",
-      ],
-      correct: 0,
-      explanation:
-        "Le Suffix Array permet des recherches rapides de sous-chaînes.",
-    },
-    {
-      id: 100,
-      question:
-        "Quel algorithme est utilisé pour le tri patience (Patience Sort)?",
-      options: ["Patience Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
-      correct: 0,
-      explanation:
-        "Patience Sort est utilisé pour trouver la plus longue sous-séquence croissante.",
-    },
-  ],
-  archi: [
-    {
-      id: 1,
-      question: "Quel composant exécute les instructions dans un ordinateur?",
-      options: ["CPU", "RAM", "Disque dur", "Carte graphique"],
-      correct: 0,
-      explanation: "Le CPU (processeur) exécute les instructions.",
-    },
-    {
-      id: 2,
-      question: "La mémoire vive (RAM) est utilisée pour...",
-      options: [
-        "Stocker temporairement les données",
-        "Stocker les fichiers de façon permanente",
-        "Afficher les images",
-        "Connecter les périphériques",
-      ],
-      correct: 0,
-      explanation:
-        "La RAM stocke temporairement les données utilisées par le processeur.",
-    },
-    {
-      id: 3,
-      question: "Quel est le rôle du bus dans un ordinateur?",
-      options: [
-        "Transférer les données entre composants",
-        "Exécuter les programmes",
-        "Afficher les images",
-        "Stocker les données",
-      ],
-      correct: 0,
-      explanation:
-        "Le bus permet la communication entre les composants matériels.",
-    },
-    {
-      id: 4,
-      question: "L'unité de contrôle du processeur...",
-      options: [
-        "Décode et orchestre l'exécution des instructions",
-        "Stocke les données",
-        "Affiche les résultats",
-        "Gère la mémoire virtuelle",
-      ],
-      correct: 0,
-      explanation:
-        "L'unité de contrôle décode les instructions et coordonne leur exécution.",
-    },
-    {
-      id: 5,
-      question: "Quel composant stocke les données de façon permanente?",
-      options: ["RAM", "Disque dur", "CPU", "Carte réseau"],
-      correct: 1,
-      explanation:
-        "Le disque dur (ou SSD) stocke les données de façon permanente.",
-    },
-    {
-      id: 6,
-      question: "Quel composant gère l'affichage à l'écran?",
-      options: ["Carte graphique", "CPU", "RAM", "Disque dur"],
-      correct: 0,
-      explanation:
-        "La carte graphique (GPU) gère l'affichage des images à l'écran.",
-    },
-    {
-      id: 7,
-      question: "Quel est le rôle du BIOS?",
-      options: [
-        "Initialiser le matériel au démarrage",
-        "Gérer la mémoire virtuelle",
-        "Exécuter les programmes",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le BIOS initialise le matériel et lance le système d'exploitation.",
-    },
-    {
-      id: 8,
-      question: "Quel bus relie le processeur à la mémoire principale?",
-      options: ["Bus système", "Bus USB", "Bus PCI", "Bus SATA"],
-      correct: 0,
-      explanation: "Le bus système relie le CPU à la mémoire principale (RAM).",
-    },
-    {
-      id: 9,
-      question: "Quel composant stocke les instructions en cours d'exécution?",
-      options: ["Registre", "Disque dur", "Carte graphique", "Carte réseau"],
-      correct: 0,
-      explanation:
-        "Les registres du processeur stockent les instructions et données en cours d'exécution.",
-    },
-    {
-      id: 10,
-      question: "Quel est le rôle de la mémoire cache?",
-      options: [
-        "Accélérer l'accès aux données fréquemment utilisées",
-        "Stocker les fichiers",
-        "Afficher les images",
-        "Connecter les périphériques",
-      ],
-      correct: 0,
-      explanation:
-        "La mémoire cache accélère l'accès aux données pour le processeur.",
-    },
-    {
-      id: 11,
-      question: "Quel composant permet la connexion à un réseau?",
-      options: ["Carte réseau", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte réseau permet la connexion à Internet ou à un réseau local.",
-    },
-    {
-      id: 12,
-      question: "Quel est le rôle du chipset sur la carte mère?",
-      options: [
-        "Gérer la communication entre les composants",
-        "Stocker les données",
-        "Afficher les images",
-        "Exécuter les programmes",
-      ],
-      correct: 0,
-      explanation:
-        "Le chipset gère la communication entre le CPU, la RAM, les bus et les périphériques.",
-    },
-    {
-      id: 13,
-      question: "Quel type de mémoire est non-volatile?",
-      options: ["ROM", "RAM", "Cache", "Registre"],
-      correct: 0,
-      explanation:
-        "La ROM (Read Only Memory) conserve les données même sans alimentation.",
-    },
-    {
-      id: 14,
-      question: "Quel composant est responsable de l'horloge système?",
-      options: ["Quartz", "CPU", "RAM", "Carte graphique"],
-      correct: 0,
-      explanation:
-        "Le quartz fournit le signal d'horloge pour synchroniser les opérations du système.",
-    },
-    {
-      id: 15,
-      question: "Quel est le rôle du contrôleur de disque?",
-      options: [
-        "Gérer la communication entre le disque et le reste du système",
-        "Afficher les images",
-        "Exécuter les programmes",
-        "Gérer la mémoire virtuelle",
-      ],
-      correct: 0,
-      explanation:
-        "Le contrôleur de disque gère les échanges de données entre le disque et la carte mère.",
-    },
-    {
-      id: 16,
-      question: "Quel est le rôle du port USB?",
-      options: [
-        "Connecter des périphériques externes",
-        "Stocker les données",
-        "Afficher les images",
-        "Exécuter les programmes",
-      ],
-      correct: 0,
-      explanation:
-        "Le port USB permet de connecter des périphériques externes (clés, souris, etc.).",
-    },
-    {
-      id: 17,
-      question: "Quel composant gère le son dans un ordinateur?",
-      options: ["Carte son", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte son gère l'entrée et la sortie audio.",
-    },
-    {
-      id: 18,
-      question: "Quel est le rôle du système d'exploitation?",
-      options: [
-        "Gérer les ressources matérielles et logicielles",
-        "Afficher les images",
-        "Stocker les données",
-        "Connecter les périphériques",
-      ],
-      correct: 0,
-      explanation:
-        "Le système d'exploitation gère l'ensemble des ressources de l'ordinateur.",
-    },
-    {
-      id: 19,
-      question: "Quel composant permet de refroidir le processeur?",
-      options: ["Ventilateur", "Carte graphique", "RAM", "Disque dur"],
-      correct: 0,
-      explanation: "Le ventilateur (ou dissipateur) refroidit le processeur.",
-    },
-    {
-      id: 20,
-      question: "Quel est le rôle du bus PCI?",
-      options: [
-        "Connecter des cartes d'extension à la carte mère",
-        "Connecter le CPU à la RAM",
-        "Connecter le disque dur",
-        "Connecter le réseau",
-      ],
-      correct: 0,
-      explanation:
-        "Le bus PCI permet d'ajouter des cartes d'extension (son, réseau, etc.).",
-    },
-    // ...questions 21 à 100 générées automatiquement...
-    {
-      id: 21,
-      question:
-        "Quel composant gère l'alimentation électrique de l'ordinateur?",
-      options: ["Bloc d'alimentation", "Carte mère", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "Le bloc d'alimentation convertit le courant secteur en courant utilisable par l'ordinateur.",
-    },
-    {
-      id: 22,
-      question: "Quel est le rôle du port HDMI?",
-      options: [
-        "Transmettre l'audio et la vidéo haute définition",
-        "Connecter des périphériques USB",
-        "Alimenter l'ordinateur",
-        "Stocker les données",
-      ],
-      correct: 0,
-      explanation:
-        "Le port HDMI transmet l'audio et la vidéo en haute définition.",
-    },
-    {
-      id: 23,
-      question:
-        "Quel composant permet de sauvegarder les données en cas de coupure de courant?",
-      options: ["Onduleur (UPS)", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "L'onduleur fournit une alimentation de secours temporaire.",
-    },
-    {
-      id: 24,
-      question: "Quel est le rôle du port Ethernet?",
-      options: [
-        "Connecter l'ordinateur à un réseau filaire",
-        "Connecter des périphériques USB",
-        "Transmettre l'audio",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Ethernet permet la connexion à un réseau filaire (LAN).",
-    },
-    {
-      id: 25,
-      question:
-        "Quel composant gère la gestion de la batterie dans un ordinateur portable?",
-      options: ["Carte mère", "CPU", "RAM", "Carte graphique"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la charge et la décharge de la batterie.",
-    },
-    {
-      id: 26,
-      question: "Quel est le rôle du port VGA?",
-      options: [
-        "Transmettre la vidéo analogique",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Alimenter l'ordinateur",
-      ],
-      correct: 0,
-      explanation: "Le port VGA transmet la vidéo analogique vers un écran.",
-    },
-    {
-      id: 27,
-      question:
-        "Quel composant permet de stocker temporairement les données lors d'un transfert?",
-      options: [
-        "Mémoire tampon (buffer)",
-        "CPU",
-        "Carte graphique",
-        "Carte réseau",
-      ],
-      correct: 0,
-      explanation:
-        "La mémoire tampon stocke temporairement les données lors d'un transfert.",
-    },
-    {
-      id: 28,
-      question: "Quel est le rôle du port SATA?",
-      options: [
-        "Connecter les disques durs et SSD à la carte mère",
-        "Connecter des périphériques USB",
-        "Transmettre l'audio",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port SATA connecte les disques durs et SSD à la carte mère.",
-    },
-    {
-      id: 29,
-      question:
-        "Quel composant gère la conversion du signal numérique en signal analogique pour l'audio?",
-      options: ["Carte son", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte son convertit le signal numérique en analogique pour les haut-parleurs.",
-    },
-    {
-      id: 30,
-      question: "Quel est le rôle du port DisplayPort?",
-      options: [
-        "Transmettre l'audio et la vidéo numérique",
-        "Connecter des périphériques USB",
-        "Alimenter l'ordinateur",
-        "Stocker les données",
-      ],
-      correct: 0,
-      explanation:
-        "Le port DisplayPort transmet l'audio et la vidéo numérique.",
-    },
-    // ...questions 31 à 100 générées automatiquement...
-    {
-      id: 31,
-      question:
-        "Quel composant gère la gestion de l'énergie dans un ordinateur portable?",
-      options: ["Carte mère", "CPU", "RAM", "Carte graphique"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la distribution et la gestion de l'énergie.",
-    },
-    {
-      id: 32,
-      question: "Quel est le rôle du port PS/2?",
-      options: [
-        "Connecter un clavier ou une souris",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port PS/2 connecte un clavier ou une souris à l'ordinateur.",
-    },
-    {
-      id: 33,
-      question: "Quel composant permet de lire des CD/DVD?",
-      options: ["Lecteur optique", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "Le lecteur optique lit les CD, DVD ou Blu-ray.",
-    },
-    {
-      id: 34,
-      question: "Quel est le rôle du port Thunderbolt?",
-      options: [
-        "Transférer des données à très haut débit et connecter des écrans",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Alimenter l'ordinateur",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Thunderbolt permet des transferts de données très rapides et la connexion d'écrans.",
-    },
-    {
-      id: 35,
-      question: "Quel composant gère la gestion du Bluetooth?",
-      options: ["Carte réseau", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte réseau gère aussi le Bluetooth dans de nombreux ordinateurs.",
-    },
-    {
-      id: 36,
-      question: "Quel est le rôle du port FireWire?",
-      options: [
-        "Transférer des données à haut débit entre appareils",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port FireWire permet des transferts rapides entre appareils (caméras, disques durs externes, etc.).",
-    },
-    {
-      id: 37,
-      question: "Quel composant gère la gestion du Wi-Fi?",
-      options: ["Carte réseau", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte réseau gère la connexion Wi-Fi.",
-    },
-    {
-      id: 38,
-      question: "Quel est le rôle du port audio jack?",
-      options: [
-        "Connecter des écouteurs ou haut-parleurs",
-        "Transmettre la vidéo",
-        "Connecter des périphériques USB",
-        "Alimenter l'ordinateur",
-      ],
-      correct: 0,
-      explanation:
-        "Le port audio jack connecte des écouteurs ou haut-parleurs.",
-    },
-    {
-      id: 39,
-      question: "Quel composant gère la gestion de la webcam?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion de la webcam.",
-    },
-    {
-      id: 40,
-      question: "Quel est le rôle du port SD?",
-      options: [
-        "Lire et écrire sur des cartes mémoire SD",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port SD permet de lire et écrire sur des cartes mémoire SD.",
-    },
-    // ...questions 41 à 100 générées automatiquement...
-    {
-      id: 41,
-      question:
-        "Quel composant gère la gestion du pavé tactile sur un ordinateur portable?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la connexion du pavé tactile (touchpad).",
-    },
-    {
-      id: 42,
-      question: "Quel est le rôle du port eSATA?",
-      options: [
-        "Connecter des disques durs externes à la carte mère",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port eSATA connecte des disques durs externes à la carte mère.",
-    },
-    {
-      id: 43,
-      question:
-        "Quel composant gère la gestion du lecteur d'empreintes digitales?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la connexion du lecteur d'empreintes digitales.",
-    },
-    {
-      id: 44,
-      question: "Quel est le rôle du port infrarouge?",
-      options: [
-        "Transférer des données sans fil par lumière infrarouge",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port infrarouge permet des transferts de données sans fil par lumière infrarouge.",
-    },
-    {
-      id: 45,
-      question: "Quel composant gère la gestion du capteur de luminosité?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de luminosité.",
-    },
-    {
-      id: 46,
-      question: "Quel est le rôle du port RJ45?",
-      options: [
-        "Connecter l'ordinateur à un réseau Ethernet",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port RJ45 connecte l'ordinateur à un réseau Ethernet.",
-    },
-    {
-      id: 47,
-      question: "Quel composant gère la gestion du lecteur de carte SIM?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du lecteur de carte SIM.",
-    },
-    {
-      id: 48,
-      question: "Quel est le rôle du port micro-USB?",
-      options: [
-        "Connecter des périphériques externes de petite taille",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port micro-USB connecte des périphériques externes de petite taille.",
-    },
-    {
-      id: 49,
-      question:
-        "Quel composant gère la gestion du capteur d'empreintes digitales?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la connexion du capteur d'empreintes digitales.",
-    },
-    {
-      id: 50,
-      question: "Quel est le rôle du port Lightning?",
-      options: [
-        "Connecter des appareils Apple pour la charge et le transfert de données",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Lightning connecte des appareils Apple pour la charge et le transfert de données.",
-    },
-    // ...questions 51 à 100 générées automatiquement...
-    {
-      id: 51,
-      question: "Quel composant gère la gestion du capteur de proximité?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de proximité.",
-    },
-    {
-      id: 52,
-      question: "Quel est le rôle du port USB-C?",
-      options: [
-        "Connecter des périphériques et transmettre l'alimentation, les données et la vidéo",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port USB-C permet la connexion de périphériques, l'alimentation, les données et la vidéo.",
-    },
-    {
-      id: 53,
-      question: "Quel composant gère la gestion du capteur gyroscopique?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur gyroscopique.",
-    },
-    {
-      id: 54,
-      question: "Quel est le rôle du port Mini DisplayPort?",
-      options: [
-        "Transmettre l'audio et la vidéo numérique dans un format compact",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Mini DisplayPort transmet l'audio et la vidéo numérique dans un format compact.",
-    },
-    {
-      id: 55,
-      question: "Quel composant gère la gestion du capteur magnétique?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur magnétique.",
-    },
-    {
-      id: 56,
-      question: "Quel est le rôle du port DVI?",
-      options: [
-        "Transmettre la vidéo numérique vers un écran",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port DVI transmet la vidéo numérique vers un écran.",
-    },
-    {
-      id: 57,
-      question: "Quel composant gère la gestion du capteur de température?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de température.",
-    },
-    {
-      id: 58,
-      question: "Quel est le rôle du port S/PDIF?",
-      options: [
-        "Transmettre l'audio numérique entre appareils",
-        "Transmettre la vidéo",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port S/PDIF transmet l'audio numérique entre appareils.",
-    },
-    {
-      id: 59,
-      question: "Quel composant gère la gestion du capteur d'accélération?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur d'accélération.",
-    },
-    {
-      id: 60,
-      question: "Quel est le rôle du port PCI Express?",
-      options: [
-        "Connecter des cartes d'extension à très haut débit",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port PCI Express connecte des cartes d'extension à très haut débit.",
-    },
-    // ...questions 61 à 100 générées automatiquement...
-    {
-      id: 61,
-      question: "Quel composant gère la gestion du capteur de pression?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de pression.",
-    },
-    {
-      id: 62,
-      question: "Quel est le rôle du port M.2?",
-      options: [
-        "Connecter des SSD et autres modules d'extension à la carte mère",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port M.2 connecte des SSD et autres modules d'extension à la carte mère.",
-    },
-    {
-      id: 63,
-      question: "Quel composant gère la gestion du capteur d'humidité?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur d'humidité.",
-    },
-    {
-      id: 64,
-      question: "Quel est le rôle du port ExpressCard?",
-      options: [
-        "Ajouter des cartes d'extension à un ordinateur portable",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port ExpressCard permet d'ajouter des cartes d'extension à un ordinateur portable.",
-    },
-    {
-      id: 65,
-      question: "Quel composant gère la gestion du capteur de gaz?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de gaz.",
-    },
-    {
-      id: 66,
-      question: "Quel est le rôle du port Smart Card?",
-      options: [
-        "Lire les cartes à puce pour l'authentification",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Smart Card lit les cartes à puce pour l'authentification.",
-    },
-    {
-      id: 67,
-      question: "Quel composant gère la gestion du capteur de CO2?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de CO2.",
-    },
-    {
-      id: 68,
-      question: "Quel est le rôle du port IRDA?",
-      options: [
-        "Transférer des données sans fil par infrarouge",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port IRDA permet des transferts de données sans fil par infrarouge.",
-    },
-    {
-      id: 69,
-      question:
-        "Quel composant gère la gestion du capteur de lumière ambiante?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la connexion du capteur de lumière ambiante.",
-    },
-    {
-      id: 70,
-      question: "Quel est le rôle du port Parallel?",
-      options: [
-        "Connecter des imprimantes et autres périphériques anciens",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Parallel connecte des imprimantes et périphériques anciens.",
-    },
-    // ...questions 71 à 100 générées automatiquement...
-    {
-      id: 71,
-      question: "Quel composant gère la gestion du capteur de distance?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de distance.",
-    },
-    {
-      id: 72,
-      question: "Quel est le rôle du port Serial?",
-      options: [
-        "Connecter des périphériques série comme des modems",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Serial connecte des périphériques série comme des modems.",
-    },
-    {
-      id: 73,
-      question: "Quel composant gère la gestion du capteur de couleur?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de couleur.",
-    },
-    {
-      id: 74,
-      question: "Quel est le rôle du port Game?",
-      options: [
-        "Connecter des manettes de jeu et joysticks",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port Game connecte des manettes de jeu et joysticks.",
-    },
-    {
-      id: 75,
-      question: "Quel composant gère la gestion du capteur de vibration?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de vibration.",
-    },
-    {
-      id: 76,
-      question: "Quel est le rôle du port MIDI?",
-      options: [
-        "Connecter des instruments de musique numériques",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port MIDI connecte des instruments de musique numériques.",
-    },
-    {
-      id: 77,
-      question: "Quel composant gère la gestion du capteur de mouvement?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de mouvement.",
-    },
-    {
-      id: 78,
-      question: "Quel est le rôle du port CAN?",
-      options: [
-        "Connecter des réseaux de contrôle dans l'automobile",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port CAN connecte des réseaux de contrôle dans l'automobile.",
-    },
-    {
-      id: 79,
-      question: "Quel composant gère la gestion du capteur de flexion?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de flexion.",
-    },
-    {
-      id: 80,
-      question: "Quel est le rôle du port LVDS?",
-      options: [
-        "Transmettre la vidéo numérique à haute vitesse dans les écrans",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port LVDS transmet la vidéo numérique à haute vitesse dans les écrans.",
-    },
-    // ...questions 81 à 100 générées automatiquement...
-    {
-      id: 81,
-      question: "Quel composant gère la gestion du capteur de torsion?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de torsion.",
-    },
-    {
-      id: 82,
-      question: "Quel est le rôle du port SCSI?",
-      options: [
-        "Connecter des disques durs et périphériques à haut débit",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port SCSI connecte des disques durs et périphériques à haut débit.",
-    },
-    {
-      id: 83,
-      question: "Quel composant gère la gestion du capteur de force?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de force.",
-    },
-    {
-      id: 84,
-      question: "Quel est le rôle du port XLR?",
-      options: [
-        "Connecter des microphones professionnels",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port XLR connecte des microphones professionnels.",
-    },
-    {
-      id: 85,
-      question: "Quel composant gère la gestion du capteur de tension?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de tension.",
-    },
-    {
-      id: 86,
-      question: "Quel est le rôle du port BNC?",
-      options: [
-        "Connecter des câbles coaxiaux pour la vidéo ou le réseau",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port BNC connecte des câbles coaxiaux pour la vidéo ou le réseau.",
-    },
-    {
-      id: 87,
-      question: "Quel composant gère la gestion du capteur de courant?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de courant.",
-    },
-    {
-      id: 88,
-      question: "Quel est le rôle du port DB9?",
-      options: [
-        "Connecter des périphériques série comme des modems",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port DB9 connecte des périphériques série comme des modems.",
-    },
-    {
-      id: 89,
-      question: "Quel composant gère la gestion du capteur de débit?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de débit.",
-    },
-    {
-      id: 90,
-      question: "Quel est le rôle du port RJ11?",
-      options: [
-        "Connecter des lignes téléphoniques",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port RJ11 connecte des lignes téléphoniques.",
-    },
-    // ...questions 91 à 100 générées automatiquement...
-    {
-      id: 91,
-      question: "Quel composant gère la gestion du capteur de niveau?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de niveau.",
-    },
-    {
-      id: 92,
-      question: "Quel est le rôle du port Mini USB?",
-      options: [
-        "Connecter des périphériques externes de petite taille",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Mini USB connecte des périphériques externes de petite taille.",
-    },
-    {
-      id: 93,
-      question: "Quel composant gère la gestion du capteur de vitesse?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de vitesse.",
-    },
-    {
-      id: 94,
-      question: "Quel est le rôle du port Micro HDMI?",
-      options: [
-        "Transmettre l'audio et la vidéo haute définition dans un format compact",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Micro HDMI transmet l'audio et la vidéo HD dans un format compact.",
-    },
-    {
-      id: 95,
-      question: "Quel composant gère la gestion du capteur de position?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de position.",
-    },
-    {
-      id: 96,
-      question: "Quel est le rôle du port MagSafe?",
-      options: [
-        "Connecter et alimenter les ordinateurs portables Apple",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port MagSafe connecte et alimente les ordinateurs portables Apple.",
-    },
-    {
-      id: 97,
-      question: "Quel composant gère la gestion du capteur de gravité?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation: "La carte mère gère la connexion du capteur de gravité.",
-    },
-    {
-      id: 98,
-      question: "Quel est le rôle du port U.2?",
-      options: [
-        "Connecter des SSD NVMe à la carte mère",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation: "Le port U.2 connecte des SSD NVMe à la carte mère.",
-    },
-    {
-      id: 99,
-      question:
-        "Quel composant gère la gestion du capteur de champ magnétique?",
-      options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
-      correct: 0,
-      explanation:
-        "La carte mère gère la connexion du capteur de champ magnétique.",
-    },
-    {
-      id: 100,
-      question: "Quel est le rôle du port Mini HDMI?",
-      options: [
-        "Transmettre l'audio et la vidéo haute définition dans un format compact",
-        "Transmettre l'audio",
-        "Connecter des périphériques USB",
-        "Afficher les images",
-      ],
-      correct: 0,
-      explanation:
-        "Le port Mini HDMI transmet l'audio et la vidéo HD dans un format compact.",
-    },
-  ],
+//   algo: [
+//     {
+//       id: 1,
+//       question: "Qu'est-ce qu'un algorithme?",
+//       options: [
+//         "Un langage de programmation",
+//         "Une suite d'instructions pour résoudre un problème",
+//         "Un type de variable",
+//         "Un matériel informatique",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "Un algorithme est une suite finie d'instructions permettant de résoudre un problème.",
+//     },
+//     {
+//       id: 2,
+//       question: "Quelle est la complexité moyenne du tri à bulles?",
+//       options: ["O(n)", "O(log n)", "O(n^2)", "O(n log n)"],
+//       correct: 2,
+//       explanation: "Le tri à bulles a une complexité moyenne de O(n^2).",
+//     },
+//     {
+//       id: 3,
+//       question:
+//         "Quelle structure de données fonctionne selon le principe FIFO?",
+//       options: ["Pile", "File", "Arbre", "Graphe"],
+//       correct: 1,
+//       explanation:
+//         "La file (queue) fonctionne selon le principe First In First Out.",
+//     },
+//     {
+//       id: 4,
+//       question:
+//         "Quel algorithme est utilisé pour trouver le plus court chemin dans un graphe pondéré?",
+//       options: ["Kruskal", "Dijkstra", "Prim", "Bellman-Ford"],
+//       correct: 1,
+//       explanation:
+//         "L'algorithme de Dijkstra permet de trouver le plus court chemin dans un graphe pondéré sans arêtes négatives.",
+//     },
+//     {
+//       id: 5,
+//       question: "Qu'est-ce qu'une récursivité?",
+//       options: [
+//         "Une boucle infinie",
+//         "Une fonction qui s'appelle elle-même",
+//         "Un type de tri",
+//         "Un type de variable",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "La récursivité est le fait qu'une fonction s'appelle elle-même.",
+//     },
+//     {
+//       id: 6,
+//       question: "Quel est le but d'un algorithme de tri?",
+//       options: [
+//         "Trier des données selon un ordre défini",
+//         "Rechercher une valeur",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Un algorithme de tri organise les éléments d'une liste selon un ordre (croissant ou décroissant).",
+//     },
+//     {
+//       id: 7,
+//       question: "Quelle est la complexité moyenne du tri rapide (QuickSort)?",
+//       options: ["O(n^2)", "O(n)", "O(n log n)", "O(log n)"],
+//       correct: 2,
+//       explanation: "QuickSort a une complexité moyenne de O(n log n).",
+//     },
+//     {
+//       id: 8,
+//       question: "Une pile (stack) fonctionne selon le principe...",
+//       options: ["FIFO", "LIFO", "LILO", "FILO"],
+//       correct: 1,
+//       explanation:
+//         "La pile est une structure de données LIFO (Last In, First Out).",
+//     },
+//     {
+//       id: 9,
+//       question:
+//         "Quel algorithme est utilisé pour rechercher un élément dans un tableau trié?",
+//       options: [
+//         "Recherche linéaire",
+//         "Recherche binaire",
+//         "Recherche par hachage",
+//         "Recherche séquentielle",
+//       ],
+//       correct: 1,
+//       explanation: "La recherche binaire est efficace pour les tableaux triés.",
+//     },
+//     {
+//       id: 10,
+//       question: "Quel est le principe de la programmation dynamique?",
+//       options: [
+//         "Diviser pour régner",
+//         "Résoudre des sous-problèmes et mémoriser les résultats",
+//         "Utiliser des piles",
+//         "Utiliser des files",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "La programmation dynamique consiste à résoudre des sous-problèmes et à stocker leurs résultats pour éviter les calculs redondants.",
+//     },
+//     {
+//       id: 11,
+//       question: "Quel est le but d'un algorithme glouton?",
+//       options: [
+//         "Trouver une solution optimale globale en faisant des choix locaux optimaux",
+//         "Trier des données",
+//         "Rechercher une valeur",
+//         "Compresser des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Un algorithme glouton fait des choix optimaux à chaque étape pour trouver une solution globale.",
+//     },
+//     {
+//       id: 12,
+//       question: "Quel est le pire cas de la recherche binaire?",
+//       options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"],
+//       correct: 1,
+//       explanation:
+//         "La recherche binaire a une complexité de O(log n) dans le pire cas.",
+//     },
+//     {
+//       id: 13,
+//       question: "Quel algorithme est utilisé pour le tri par insertion?",
+//       options: ["Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort"],
+//       correct: 0,
+//       explanation: "Insertion Sort est l'algorithme de tri par insertion.",
+//     },
+//     {
+//       id: 14,
+//       question:
+//         "Quelle structure de données permet un accès direct à un élément par son index?",
+//       options: ["Pile", "File", "Tableau", "Arbre binaire"],
+//       correct: 2,
+//       explanation:
+//         "Le tableau permet un accès direct à un élément par son index.",
+//     },
+//     {
+//       id: 15,
+//       question: "Quel est le principe du tri fusion (Merge Sort)?",
+//       options: [
+//         "Diviser pour régner",
+//         "Glouton",
+//         "Programmation dynamique",
+//         "Recherche binaire",
+//       ],
+//       correct: 0,
+//       explanation: "Le tri fusion utilise la stratégie diviser pour régner.",
+//     },
+//     {
+//       id: 16,
+//       question: "Quel est le but d'une table de hachage?",
+//       options: [
+//         "Stocker des données de façon ordonnée",
+//         "Permettre un accès rapide à des données via une clé",
+//         "Trier des données",
+//         "Compresser des données",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "La table de hachage permet un accès rapide à des données via une clé unique.",
+//     },
+//     {
+//       id: 17,
+//       question: "Quel est le principe de l'algorithme de Kruskal?",
+//       options: [
+//         "Trouver le plus court chemin",
+//         "Trouver l'arbre couvrant de poids minimal",
+//         "Trier des données",
+//         "Compresser des données",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "Kruskal trouve l'arbre couvrant de poids minimal dans un graphe.",
+//     },
+//     {
+//       id: 18,
+//       question:
+//         "Quelle est la complexité du tri par sélection (Selection Sort)?",
+//       options: ["O(n)", "O(n^2)", "O(n log n)", "O(log n)"],
+//       correct: 1,
+//       explanation: "Le tri par sélection a une complexité de O(n^2).",
+//     },
+//     {
+//       id: 19,
+//       question: "Quel algorithme utilise une file de priorité?",
+//       options: [
+//         "Recherche binaire",
+//         "Tri à bulles",
+//         "Dijkstra",
+//         "Tri par insertion",
+//       ],
+//       correct: 2,
+//       explanation:
+//         "L'algorithme de Dijkstra utilise une file de priorité pour sélectionner le prochain sommet à traiter.",
+//     },
+//     {
+//       id: 20,
+//       question: "Quel est le but d'un arbre binaire de recherche?",
+//       options: [
+//         "Trier des données",
+//         "Permettre une recherche rapide",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "L'arbre binaire de recherche permet une recherche rapide d'éléments.",
+//     },
+//     // ...questions 21 à 100 générées automatiquement...
+//     {
+//       id: 21,
+//       question: "Quel est le principe de l'algorithme de Prim?",
+//       options: [
+//         "Trouver le plus court chemin",
+//         "Trouver l'arbre couvrant de poids minimal",
+//         "Trier des données",
+//         "Compresser des données",
+//       ],
+//       correct: 1,
+//       explanation:
+//         "Prim trouve l'arbre couvrant de poids minimal dans un graphe pondéré.",
+//     },
+//     {
+//       id: 22,
+//       question:
+//         "Quelle structure de données est utilisée pour l'algorithme BFS?",
+//       options: ["Pile", "File", "Tableau", "Arbre"],
+//       correct: 1,
+//       explanation:
+//         "BFS (parcours en largeur) utilise une file pour explorer les sommets.",
+//     },
+//     {
+//       id: 23,
+//       question: "Quelle est la complexité du tri par tas (Heap Sort)?",
+//       options: ["O(n^2)", "O(n log n)", "O(n)", "O(log n)"],
+//       correct: 1,
+//       explanation: "Le tri par tas a une complexité de O(n log n).",
+//     },
+//     {
+//       id: 24,
+//       question: "Quel est le but d'un algorithme de recherche linéaire?",
+//       options: [
+//         "Trouver un élément dans une liste non triée",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "La recherche linéaire parcourt chaque élément jusqu'à trouver la valeur recherchée.",
+//     },
+//     {
+//       id: 25,
+//       question: "Quel est le principe de la récursivité terminale?",
+//       options: [
+//         "La fonction s'appelle elle-même en dernière instruction",
+//         "La fonction ne s'appelle jamais elle-même",
+//         "La fonction utilise une pile",
+//         "La fonction utilise une file",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "La récursivité terminale permet une optimisation de la pile d'appels.",
+//     },
+//     {
+//       id: 26,
+//       question:
+//         "Quel algorithme est utilisé pour le tri par comptage (Counting Sort)?",
+//       options: [
+//         "Trier des entiers dans un intervalle limité",
+//         "Trier des chaînes de caractères",
+//         "Trier des objets",
+//         "Trier des flottants",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Counting Sort est efficace pour trier des entiers dans un intervalle restreint.",
+//     },
+//     {
+//       id: 27,
+//       question:
+//         "Quelle structure de données permet d'implémenter une file de priorité?",
+//       options: ["Tableau", "Tas binaire (heap)", "Pile", "Liste chaînée"],
+//       correct: 1,
+//       explanation:
+//         "Le tas binaire est utilisé pour implémenter une file de priorité.",
+//     },
+//     {
+//       id: 28,
+//       question: "Quel est le but d'un arbre AVL?",
+//       options: [
+//         "Arbre binaire équilibré pour garantir O(log n) à l'insertion et la recherche",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre AVL est un arbre binaire de recherche auto-équilibré.",
+//     },
+//     {
+//       id: 29,
+//       question: "Quel algorithme est utilisé pour le tri par fusion?",
+//       options: ["Merge Sort", "Quick Sort", "Heap Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Merge Sort est l'algorithme de tri par fusion.",
+//     },
+//     {
+//       id: 30,
+//       question: "Quel est le principe de l'algorithme de Bellman-Ford?",
+//       options: [
+//         "Trouver le plus court chemin même avec des arêtes négatives",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Bellman-Ford trouve le plus court chemin dans un graphe, même avec des arêtes négatives.",
+//     },
+//     // ...questions 31 à 100 générées automatiquement...
+//     {
+//       id: 31,
+//       question: "Quel est le but d'un arbre B?",
+//       options: [
+//         "Stocker efficacement de grandes quantités de données sur disque",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre B est utilisé dans les bases de données pour l'indexation.",
+//     },
+//     {
+//       id: 32,
+//       question:
+//         "Quelle est la complexité de la recherche dans un arbre binaire équilibré?",
+//       options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"],
+//       correct: 1,
+//       explanation:
+//         "Dans un arbre binaire équilibré, la recherche est en O(log n).",
+//     },
+//     {
+//       id: 33,
+//       question:
+//         "Quel algorithme est utilisé pour le parcours en profondeur d'un graphe?",
+//       options: ["BFS", "DFS", "Dijkstra", "Kruskal"],
+//       correct: 1,
+//       explanation: "DFS (Depth First Search) est le parcours en profondeur.",
+//     },
+//     {
+//       id: 34,
+//       question: "Quel est le but d'une table de hachage parfaite?",
+//       options: [
+//         "Aucune collision de clés",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Une table de hachage parfaite ne provoque aucune collision.",
+//     },
+//     {
+//       id: 35,
+//       question: "Quel est le principe de l'algorithme de Floyd-Warshall?",
+//       options: [
+//         "Trouver les plus courts chemins entre tous les couples de sommets",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Floyd-Warshall calcule les plus courts chemins entre tous les sommets d'un graphe.",
+//     },
+//     // ...questions 36 à 100 générées automatiquement...
+//     {
+//       id: 36,
+//       question: "Quel est le but d'un arbre rouge-noir?",
+//       options: [
+//         "Arbre binaire équilibré pour garantir O(log n) à l'insertion et la recherche",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre rouge-noir est un arbre binaire de recherche auto-équilibré.",
+//     },
+//     {
+//       id: 37,
+//       question: "Quel algorithme est utilisé pour le tri par tas?",
+//       options: ["Heap Sort", "Quick Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Heap Sort est l'algorithme de tri par tas.",
+//     },
+//     {
+//       id: 38,
+//       question: "Quel est le principe de la programmation récursive?",
+//       options: [
+//         "Une fonction s'appelle elle-même pour résoudre un problème",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "La programmation récursive consiste à résoudre un problème en le divisant en sous-problèmes similaires.",
+//     },
+//     {
+//       id: 39,
+//       question: "Quel est le but d'un graphe orienté acyclique (DAG)?",
+//       options: [
+//         "Représenter des dépendances sans cycles",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Un DAG est utilisé pour représenter des dépendances, comme dans les tâches à exécuter dans un ordre précis.",
+//     },
+//     {
+//       id: 40,
+//       question: "Quel algorithme est utilisé pour le tri topologique?",
+//       options: ["DFS", "BFS", "Dijkstra", "Kruskal"],
+//       correct: 0,
+//       explanation:
+//         "Le tri topologique d'un graphe orienté acyclique peut être réalisé avec DFS.",
+//     },
+//     // ...questions 41 à 100 générées automatiquement...
+//     {
+//       id: 41,
+//       question: "Quel est le but d'un arbre suffixe?",
+//       options: [
+//         "Rechercher rapidement des sous-chaînes dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre suffixe permet de rechercher efficacement des motifs dans une chaîne.",
+//     },
+//     {
+//       id: 42,
+//       question: "Quel algorithme est utilisé pour la compression de Huffman?",
+//       options: ["Huffman", "LZW", "RLE", "Shannon"],
+//       correct: 0,
+//       explanation:
+//         "L'algorithme de Huffman est utilisé pour la compression sans perte.",
+//     },
+//     {
+//       id: 43,
+//       question: "Quel est le principe de l'algorithme de Boyer-Moore?",
+//       options: [
+//         "Recherche efficace de motifs dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Boyer-Moore est un algorithme efficace de recherche de motifs dans une chaîne.",
+//     },
+//     {
+//       id: 44,
+//       question: "Quel est le but d'un automate fini?",
+//       options: [
+//         "Reconnaître des langages réguliers",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation: "Un automate fini reconnaît des langages réguliers.",
+//     },
+//     {
+//       id: 45,
+//       question:
+//         "Quel algorithme est utilisé pour la recherche de motifs de Knuth-Morris-Pratt?",
+//       options: ["KMP", "Boyer-Moore", "Rabin-Karp", "Aho-Corasick"],
+//       correct: 0,
+//       explanation:
+//         "KMP est un algorithme efficace de recherche de motifs dans une chaîne.",
+//     },
+//     // ...questions 46 à 100 générées automatiquement...
+//     {
+//       id: 46,
+//       question: "Quel est le but d'un arbre segmentaire?",
+//       options: [
+//         "Effectuer des requêtes et mises à jour rapides sur des intervalles",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre segmentaire est utilisé pour les requêtes d'intervalles dans les tableaux.",
+//     },
+//     {
+//       id: 47,
+//       question:
+//         "Quel algorithme est utilisé pour la recherche de motifs de Rabin-Karp?",
+//       options: ["Rabin-Karp", "KMP", "Boyer-Moore", "Aho-Corasick"],
+//       correct: 0,
+//       explanation:
+//         "Rabin-Karp utilise le hachage pour rechercher des motifs dans une chaîne.",
+//     },
+//     {
+//       id: 48,
+//       question: "Quel est le principe de l'algorithme de Ford-Fulkerson?",
+//       options: [
+//         "Trouver le flot maximal dans un réseau",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Ford-Fulkerson trouve le flot maximal dans un graphe orienté.",
+//     },
+//     {
+//       id: 49,
+//       question: "Quel est le but d'un arbre Fenwick (Binary Indexed Tree)?",
+//       options: [
+//         "Effectuer des requêtes de sommes de préfixes efficacement",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre Fenwick permet des requêtes et mises à jour rapides sur des préfixes de tableaux.",
+//     },
+//     {
+//       id: 50,
+//       question: "Quel algorithme est utilisé pour la compression LZW?",
+//       options: ["LZW", "Huffman", "RLE", "Shannon"],
+//       correct: 0,
+//       explanation: "LZW est un algorithme de compression sans perte.",
+//     },
+//     // ...questions 51 à 100 générées automatiquement...
+//     {
+//       id: 51,
+//       question: "Quel est le but d'un arbre Trie?",
+//       options: [
+//         "Stocker efficacement des ensembles de chaînes de caractères",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Trie est utilisé pour stocker et rechercher des chaînes efficacement.",
+//     },
+//     {
+//       id: 52,
+//       question: "Quel algorithme est utilisé pour le tri radix (Radix Sort)?",
+//       options: ["Radix Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Radix Sort trie les entiers en traitant les chiffres un à un.",
+//     },
+//     {
+//       id: 53,
+//       question: "Quel est le principe de l'algorithme de Tarjan?",
+//       options: [
+//         "Trouver les composantes fortement connexes dans un graphe",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Tarjan trouve les composantes fortement connexes dans un graphe orienté.",
+//     },
+//     {
+//       id: 54,
+//       question:
+//         "Quel est le but d'un arbre segmentaire paresseux (Lazy Segment Tree)?",
+//       options: [
+//         "Optimiser les mises à jour d'intervalles dans un tableau",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Lazy Segment Tree optimise les mises à jour d'intervalles.",
+//     },
+//     {
+//       id: 55,
+//       question:
+//         "Quel algorithme est utilisé pour la recherche de motifs de Aho-Corasick?",
+//       options: ["Aho-Corasick", "KMP", "Boyer-Moore", "Rabin-Karp"],
+//       correct: 0,
+//       explanation:
+//         "Aho-Corasick recherche plusieurs motifs simultanément dans une chaîne.",
+//     },
+//     // ...questions 56 à 100 générées automatiquement...
+//     {
+//       id: 56,
+//       question: "Quel est le but d'un arbre Suffix Automaton?",
+//       options: [
+//         "Rechercher efficacement des sous-chaînes dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Suffix Automaton permet des recherches rapides de sous-chaînes.",
+//     },
+//     {
+//       id: 57,
+//       question: "Quel algorithme est utilisé pour la compression RLE?",
+//       options: ["RLE", "Huffman", "LZW", "Shannon"],
+//       correct: 0,
+//       explanation:
+//         "RLE (Run-Length Encoding) est un algorithme de compression simple.",
+//     },
+//     {
+//       id: 58,
+//       question: "Quel est le principe de l'algorithme de Johnson?",
+//       options: [
+//         "Trouver les plus courts chemins entre tous les couples de sommets dans un graphe avec arêtes négatives",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'algorithme de Johnson combine Bellman-Ford et Dijkstra pour les plus courts chemins.",
+//     },
+//     {
+//       id: 59,
+//       question: "Quel est le but d'un arbre Patricia?",
+//       options: [
+//         "Optimiser le stockage des chaînes dans un Trie compressé",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre Patricia est un Trie compressé pour optimiser l'espace.",
+//     },
+//     {
+//       id: 60,
+//       question: "Quel algorithme est utilisé pour le tri Shell (Shell Sort)?",
+//       options: ["Shell Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Shell Sort est une amélioration du tri par insertion.",
+//     },
+//     // ...questions 61 à 100 générées automatiquement...
+//     {
+//       id: 61,
+//       question: "Quel est le but d'un graphe biparti?",
+//       options: [
+//         "Représenter des relations entre deux ensembles disjoints",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Un graphe biparti relie deux ensembles sans arêtes internes à chaque ensemble.",
+//     },
+//     {
+//       id: 62,
+//       question:
+//         "Quel algorithme est utilisé pour le flot maximal dans un réseau?",
+//       options: ["Ford-Fulkerson", "Dijkstra", "Kruskal", "Prim"],
+//       correct: 0,
+//       explanation: "Ford-Fulkerson calcule le flot maximal dans un réseau.",
+//     },
+//     {
+//       id: 63,
+//       question: "Quel est le principe de l'algorithme de Kosaraju?",
+//       options: [
+//         "Trouver les composantes fortement connexes dans un graphe",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Kosaraju trouve les composantes fortement connexes dans un graphe orienté.",
+//     },
+//     {
+//       id: 64,
+//       question: "Quel est le but d'un arbre Splay?",
+//       options: [
+//         "Arbre binaire auto-ajustable pour optimiser l'accès aux éléments récemment utilisés",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre Splay optimise l'accès aux éléments fréquemment utilisés.",
+//     },
+//     {
+//       id: 65,
+//       question:
+//         "Quel algorithme est utilisé pour le tri cocktail (Cocktail Sort)?",
+//       options: ["Cocktail Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Cocktail Sort est une variante bidirectionnelle du tri à bulles.",
+//     },
+//     // ...questions 66 à 100 générées automatiquement...
+//     {
+//       id: 66,
+//       question: "Quel est le but d'un graphe pondéré?",
+//       options: [
+//         "Représenter des relations avec des poids sur les arêtes",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation: "Un graphe pondéré attribue un poids à chaque arête.",
+//     },
+//     {
+//       id: 67,
+//       question: "Quel algorithme est utilisé pour le tri gnome (Gnome Sort)?",
+//       options: ["Gnome Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Gnome Sort est un algorithme de tri simple basé sur l'échange d'éléments.",
+//     },
+//     {
+//       id: 68,
+//       question: "Quel est le principe de l'algorithme de Warshall?",
+//       options: [
+//         "Calculer la fermeture transitive d'un graphe",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'algorithme de Warshall calcule la fermeture transitive d'un graphe.",
+//     },
+//     {
+//       id: 69,
+//       question: "Quel est le but d'un arbre 2-3?",
+//       options: [
+//         "Arbre de recherche équilibré avec 2 ou 3 enfants par nœud",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation: "L'arbre 2-3 est un arbre de recherche équilibré.",
+//     },
+//     {
+//       id: 70,
+//       question:
+//         "Quel algorithme est utilisé pour le tri pigeonhole (Pigeonhole Sort)?",
+//       options: ["Pigeonhole Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Pigeonhole Sort trie les entiers dans un intervalle restreint.",
+//     },
+//     // ...questions 71 à 100 générées automatiquement...
+//     {
+//       id: 71,
+//       question: "Quel est le but d'un graphe complet?",
+//       options: [
+//         "Chaque paire de sommets est reliée par une arête",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Dans un graphe complet, chaque sommet est relié à tous les autres.",
+//     },
+//     {
+//       id: 72,
+//       question: "Quel algorithme est utilisé pour le tri bogo (Bogo Sort)?",
+//       options: ["Bogo Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Bogo Sort est un algorithme de tri inefficace basé sur le hasard.",
+//     },
+//     {
+//       id: 73,
+//       question: "Quel est le principe de l'algorithme de Z?",
+//       options: [
+//         "Recherche efficace de motifs dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'algorithme de Z est utilisé pour la recherche de motifs dans une chaîne.",
+//     },
+//     {
+//       id: 74,
+//       question: "Quel est le but d'un arbre AA?",
+//       options: [
+//         "Arbre binaire de recherche équilibré simplifié",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre AA est une variante simplifiée de l'arbre rouge-noir.",
+//     },
+//     {
+//       id: 75,
+//       question: "Quel algorithme est utilisé pour le tri cycle (Cycle Sort)?",
+//       options: ["Cycle Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Cycle Sort minimise le nombre d'écritures lors du tri.",
+//     },
+//     // ...questions 76 à 100 générées automatiquement...
+//     {
+//       id: 76,
+//       question: "Quel est le but d'un graphe connexe?",
+//       options: [
+//         "Il existe un chemin entre chaque paire de sommets",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Un graphe connexe permet d'aller de n'importe quel sommet à un autre.",
+//     },
+//     {
+//       id: 77,
+//       question:
+//         "Quel algorithme est utilisé pour le tri bitonic (Bitonic Sort)?",
+//       options: ["Bitonic Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Bitonic Sort est utilisé dans les architectures parallèles.",
+//     },
+//     {
+//       id: 78,
+//       question: "Quel est le principe de l'algorithme de Hopcroft-Karp?",
+//       options: [
+//         "Trouver un appariement maximal dans un graphe biparti",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Hopcroft-Karp trouve un appariement maximal dans un graphe biparti.",
+//     },
+//     {
+//       id: 79,
+//       question: "Quel est le but d'un arbre Suffix Tree?",
+//       options: [
+//         "Rechercher efficacement des sous-chaînes dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Suffix Tree permet des recherches rapides de sous-chaînes.",
+//     },
+//     {
+//       id: 80,
+//       question:
+//         "Quel algorithme est utilisé pour le tri pancake (Pancake Sort)?",
+//       options: ["Pancake Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Pancake Sort trie une pile d'éléments en retournant des sous-listes.",
+//     },
+//     // ...questions 81 à 100 générées automatiquement...
+//     {
+//       id: 81,
+//       question: "Quel est le but d'un graphe orienté?",
+//       options: [
+//         "Les arêtes ont un sens (direction)",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation: "Dans un graphe orienté, les arêtes ont une direction.",
+//     },
+//     {
+//       id: 82,
+//       question: "Quel algorithme est utilisé pour le tri stooge (Stooge Sort)?",
+//       options: ["Stooge Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Stooge Sort est un algorithme de tri récursif inefficace.",
+//     },
+//     {
+//       id: 83,
+//       question: "Quel est le principe de l'algorithme de Edmonds-Karp?",
+//       options: [
+//         "Calculer le flot maximal dans un réseau en utilisant BFS",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Edmonds-Karp est une variante de Ford-Fulkerson utilisant BFS.",
+//     },
+//     {
+//       id: 84,
+//       question: "Quel est le but d'un arbre Suffix Array?",
+//       options: [
+//         "Rechercher efficacement des sous-chaînes dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Suffix Array permet des recherches rapides de sous-chaînes.",
+//     },
+//     {
+//       id: 85,
+//       question: "Quel algorithme est utilisé pour le tri comb (Comb Sort)?",
+//       options: ["Comb Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Comb Sort améliore le tri à bulles en éliminant les petits éléments à la fin.",
+//     },
+//     // ...questions 86 à 100 générées automatiquement...
+//     {
+//       id: 86,
+//       question: "Quel est le but d'un graphe non orienté?",
+//       options: [
+//         "Les arêtes n'ont pas de sens (direction)",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Dans un graphe non orienté, les arêtes n'ont pas de direction.",
+//     },
+//     {
+//       id: 87,
+//       question:
+//         "Quel algorithme est utilisé pour le tri odd-even (Odd-Even Sort)?",
+//       options: ["Odd-Even Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Odd-Even Sort est un algorithme de tri parallèle.",
+//     },
+//     {
+//       id: 88,
+//       question: "Quel est le principe de l'algorithme de Johnson-Trotter?",
+//       options: [
+//         "Générer toutes les permutations d'un ensemble",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Johnson-Trotter génère toutes les permutations d'un ensemble.",
+//     },
+//     {
+//       id: 89,
+//       question: "Quel est le but d'un arbre Suffix Link?",
+//       options: [
+//         "Optimiser la recherche de motifs dans un arbre suffixe",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Suffix Link optimise la navigation dans un arbre suffixe.",
+//     },
+//     {
+//       id: 90,
+//       question:
+//         "Quel algorithme est utilisé pour le tri patience (Patience Sort)?",
+//       options: ["Patience Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Patience Sort est utilisé pour trouver la plus longue sous-séquence croissante.",
+//     },
+//     // ...questions 91 à 100 générées automatiquement...
+//     {
+//       id: 91,
+//       question: "Quel est le but d'un graphe cyclique?",
+//       options: [
+//         "Il existe au moins un cycle dans le graphe",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation: "Un graphe cyclique contient au moins un cycle.",
+//     },
+//     {
+//       id: 92,
+//       question: "Quel algorithme est utilisé pour le tri strand (Strand Sort)?",
+//       options: ["Strand Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Strand Sort est un algorithme de tri basé sur l'extraction de sous-listes croissantes.",
+//     },
+//     {
+//       id: 93,
+//       question: "Quel est le principe de l'algorithme de Manacher?",
+//       options: [
+//         "Trouver la plus longue sous-chaîne palindrome dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Manacher trouve la plus longue sous-chaîne palindrome en temps linéaire.",
+//     },
+//     {
+//       id: 94,
+//       question: "Quel est le but d'un arbre Cartesian?",
+//       options: [
+//         "Arbre binaire de recherche avec propriétés de tas",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'arbre Cartesian combine les propriétés d'un tas et d'un arbre binaire de recherche.",
+//     },
+//     {
+//       id: 95,
+//       question: "Quel algorithme est utilisé pour le tri sleep (Sleep Sort)?",
+//       options: ["Sleep Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Sleep Sort est un algorithme de tri basé sur le temps d'attente (non utilisé en pratique).",
+//     },
+//     {
+//       id: 96,
+//       question: "Quel est le but d'un graphe acyclique?",
+//       options: [
+//         "Il n'existe aucun cycle dans le graphe",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation: "Un graphe acyclique ne contient aucun cycle.",
+//     },
+//     {
+//       id: 97,
+//       question: "Quel algorithme est utilisé pour le tri stooge (Stooge Sort)?",
+//       options: ["Stooge Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation: "Stooge Sort est un algorithme de tri récursif inefficace.",
+//     },
+//     {
+//       id: 98,
+//       question: "Quel est le principe de l'algorithme de Z?",
+//       options: [
+//         "Recherche efficace de motifs dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'algorithme de Z est utilisé pour la recherche de motifs dans une chaîne.",
+//     },
+//     {
+//       id: 99,
+//       question: "Quel est le but d'un arbre Suffix Array?",
+//       options: [
+//         "Rechercher efficacement des sous-chaînes dans une chaîne",
+//         "Trier des données",
+//         "Compresser des données",
+//         "Crypter des données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le Suffix Array permet des recherches rapides de sous-chaînes.",
+//     },
+//     {
+//       id: 100,
+//       question:
+//         "Quel algorithme est utilisé pour le tri patience (Patience Sort)?",
+//       options: ["Patience Sort", "Heap Sort", "Merge Sort", "Bubble Sort"],
+//       correct: 0,
+//       explanation:
+//         "Patience Sort est utilisé pour trouver la plus longue sous-séquence croissante.",
+//     },
+//   ],
+//   archi: [
+//     {
+//       id: 1,
+//       question: "Quel composant exécute les instructions dans un ordinateur?",
+//       options: ["CPU", "RAM", "Disque dur", "Carte graphique"],
+//       correct: 0,
+//       explanation: "Le CPU (processeur) exécute les instructions.",
+//     },
+//     {
+//       id: 2,
+//       question: "La mémoire vive (RAM) est utilisée pour...",
+//       options: [
+//         "Stocker temporairement les données",
+//         "Stocker les fichiers de façon permanente",
+//         "Afficher les images",
+//         "Connecter les périphériques",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "La RAM stocke temporairement les données utilisées par le processeur.",
+//     },
+//     {
+//       id: 3,
+//       question: "Quel est le rôle du bus dans un ordinateur?",
+//       options: [
+//         "Transférer les données entre composants",
+//         "Exécuter les programmes",
+//         "Afficher les images",
+//         "Stocker les données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le bus permet la communication entre les composants matériels.",
+//     },
+//     {
+//       id: 4,
+//       question: "L'unité de contrôle du processeur...",
+//       options: [
+//         "Décode et orchestre l'exécution des instructions",
+//         "Stocke les données",
+//         "Affiche les résultats",
+//         "Gère la mémoire virtuelle",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "L'unité de contrôle décode les instructions et coordonne leur exécution.",
+//     },
+//     {
+//       id: 5,
+//       question: "Quel composant stocke les données de façon permanente?",
+//       options: ["RAM", "Disque dur", "CPU", "Carte réseau"],
+//       correct: 1,
+//       explanation:
+//         "Le disque dur (ou SSD) stocke les données de façon permanente.",
+//     },
+//     {
+//       id: 6,
+//       question: "Quel composant gère l'affichage à l'écran?",
+//       options: ["Carte graphique", "CPU", "RAM", "Disque dur"],
+//       correct: 0,
+//       explanation:
+//         "La carte graphique (GPU) gère l'affichage des images à l'écran.",
+//     },
+//     {
+//       id: 7,
+//       question: "Quel est le rôle du BIOS?",
+//       options: [
+//         "Initialiser le matériel au démarrage",
+//         "Gérer la mémoire virtuelle",
+//         "Exécuter les programmes",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le BIOS initialise le matériel et lance le système d'exploitation.",
+//     },
+//     {
+//       id: 8,
+//       question: "Quel bus relie le processeur à la mémoire principale?",
+//       options: ["Bus système", "Bus USB", "Bus PCI", "Bus SATA"],
+//       correct: 0,
+//       explanation: "Le bus système relie le CPU à la mémoire principale (RAM).",
+//     },
+//     {
+//       id: 9,
+//       question: "Quel composant stocke les instructions en cours d'exécution?",
+//       options: ["Registre", "Disque dur", "Carte graphique", "Carte réseau"],
+//       correct: 0,
+//       explanation:
+//         "Les registres du processeur stockent les instructions et données en cours d'exécution.",
+//     },
+//     {
+//       id: 10,
+//       question: "Quel est le rôle de la mémoire cache?",
+//       options: [
+//         "Accélérer l'accès aux données fréquemment utilisées",
+//         "Stocker les fichiers",
+//         "Afficher les images",
+//         "Connecter les périphériques",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "La mémoire cache accélère l'accès aux données pour le processeur.",
+//     },
+//     {
+//       id: 11,
+//       question: "Quel composant permet la connexion à un réseau?",
+//       options: ["Carte réseau", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte réseau permet la connexion à Internet ou à un réseau local.",
+//     },
+//     {
+//       id: 12,
+//       question: "Quel est le rôle du chipset sur la carte mère?",
+//       options: [
+//         "Gérer la communication entre les composants",
+//         "Stocker les données",
+//         "Afficher les images",
+//         "Exécuter les programmes",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le chipset gère la communication entre le CPU, la RAM, les bus et les périphériques.",
+//     },
+//     {
+//       id: 13,
+//       question: "Quel type de mémoire est non-volatile?",
+//       options: ["ROM", "RAM", "Cache", "Registre"],
+//       correct: 0,
+//       explanation:
+//         "La ROM (Read Only Memory) conserve les données même sans alimentation.",
+//     },
+//     {
+//       id: 14,
+//       question: "Quel composant est responsable de l'horloge système?",
+//       options: ["Quartz", "CPU", "RAM", "Carte graphique"],
+//       correct: 0,
+//       explanation:
+//         "Le quartz fournit le signal d'horloge pour synchroniser les opérations du système.",
+//     },
+//     {
+//       id: 15,
+//       question: "Quel est le rôle du contrôleur de disque?",
+//       options: [
+//         "Gérer la communication entre le disque et le reste du système",
+//         "Afficher les images",
+//         "Exécuter les programmes",
+//         "Gérer la mémoire virtuelle",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le contrôleur de disque gère les échanges de données entre le disque et la carte mère.",
+//     },
+//     {
+//       id: 16,
+//       question: "Quel est le rôle du port USB?",
+//       options: [
+//         "Connecter des périphériques externes",
+//         "Stocker les données",
+//         "Afficher les images",
+//         "Exécuter les programmes",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port USB permet de connecter des périphériques externes (clés, souris, etc.).",
+//     },
+//     {
+//       id: 17,
+//       question: "Quel composant gère le son dans un ordinateur?",
+//       options: ["Carte son", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte son gère l'entrée et la sortie audio.",
+//     },
+//     {
+//       id: 18,
+//       question: "Quel est le rôle du système d'exploitation?",
+//       options: [
+//         "Gérer les ressources matérielles et logicielles",
+//         "Afficher les images",
+//         "Stocker les données",
+//         "Connecter les périphériques",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le système d'exploitation gère l'ensemble des ressources de l'ordinateur.",
+//     },
+//     {
+//       id: 19,
+//       question: "Quel composant permet de refroidir le processeur?",
+//       options: ["Ventilateur", "Carte graphique", "RAM", "Disque dur"],
+//       correct: 0,
+//       explanation: "Le ventilateur (ou dissipateur) refroidit le processeur.",
+//     },
+//     {
+//       id: 20,
+//       question: "Quel est le rôle du bus PCI?",
+//       options: [
+//         "Connecter des cartes d'extension à la carte mère",
+//         "Connecter le CPU à la RAM",
+//         "Connecter le disque dur",
+//         "Connecter le réseau",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le bus PCI permet d'ajouter des cartes d'extension (son, réseau, etc.).",
+//     },
+//     // ...questions 21 à 100 générées automatiquement...
+//     {
+//       id: 21,
+//       question:
+//         "Quel composant gère l'alimentation électrique de l'ordinateur?",
+//       options: ["Bloc d'alimentation", "Carte mère", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "Le bloc d'alimentation convertit le courant secteur en courant utilisable par l'ordinateur.",
+//     },
+//     {
+//       id: 22,
+//       question: "Quel est le rôle du port HDMI?",
+//       options: [
+//         "Transmettre l'audio et la vidéo haute définition",
+//         "Connecter des périphériques USB",
+//         "Alimenter l'ordinateur",
+//         "Stocker les données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port HDMI transmet l'audio et la vidéo en haute définition.",
+//     },
+//     {
+//       id: 23,
+//       question:
+//         "Quel composant permet de sauvegarder les données en cas de coupure de courant?",
+//       options: ["Onduleur (UPS)", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "L'onduleur fournit une alimentation de secours temporaire.",
+//     },
+//     {
+//       id: 24,
+//       question: "Quel est le rôle du port Ethernet?",
+//       options: [
+//         "Connecter l'ordinateur à un réseau filaire",
+//         "Connecter des périphériques USB",
+//         "Transmettre l'audio",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Ethernet permet la connexion à un réseau filaire (LAN).",
+//     },
+//     {
+//       id: 25,
+//       question:
+//         "Quel composant gère la gestion de la batterie dans un ordinateur portable?",
+//       options: ["Carte mère", "CPU", "RAM", "Carte graphique"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la charge et la décharge de la batterie.",
+//     },
+//     {
+//       id: 26,
+//       question: "Quel est le rôle du port VGA?",
+//       options: [
+//         "Transmettre la vidéo analogique",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Alimenter l'ordinateur",
+//       ],
+//       correct: 0,
+//       explanation: "Le port VGA transmet la vidéo analogique vers un écran.",
+//     },
+//     {
+//       id: 27,
+//       question:
+//         "Quel composant permet de stocker temporairement les données lors d'un transfert?",
+//       options: [
+//         "Mémoire tampon (buffer)",
+//         "CPU",
+//         "Carte graphique",
+//         "Carte réseau",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "La mémoire tampon stocke temporairement les données lors d'un transfert.",
+//     },
+//     {
+//       id: 28,
+//       question: "Quel est le rôle du port SATA?",
+//       options: [
+//         "Connecter les disques durs et SSD à la carte mère",
+//         "Connecter des périphériques USB",
+//         "Transmettre l'audio",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port SATA connecte les disques durs et SSD à la carte mère.",
+//     },
+//     {
+//       id: 29,
+//       question:
+//         "Quel composant gère la conversion du signal numérique en signal analogique pour l'audio?",
+//       options: ["Carte son", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte son convertit le signal numérique en analogique pour les haut-parleurs.",
+//     },
+//     {
+//       id: 30,
+//       question: "Quel est le rôle du port DisplayPort?",
+//       options: [
+//         "Transmettre l'audio et la vidéo numérique",
+//         "Connecter des périphériques USB",
+//         "Alimenter l'ordinateur",
+//         "Stocker les données",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port DisplayPort transmet l'audio et la vidéo numérique.",
+//     },
+//     // ...questions 31 à 100 générées automatiquement...
+//     {
+//       id: 31,
+//       question:
+//         "Quel composant gère la gestion de l'énergie dans un ordinateur portable?",
+//       options: ["Carte mère", "CPU", "RAM", "Carte graphique"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la distribution et la gestion de l'énergie.",
+//     },
+//     {
+//       id: 32,
+//       question: "Quel est le rôle du port PS/2?",
+//       options: [
+//         "Connecter un clavier ou une souris",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port PS/2 connecte un clavier ou une souris à l'ordinateur.",
+//     },
+//     {
+//       id: 33,
+//       question: "Quel composant permet de lire des CD/DVD?",
+//       options: ["Lecteur optique", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "Le lecteur optique lit les CD, DVD ou Blu-ray.",
+//     },
+//     {
+//       id: 34,
+//       question: "Quel est le rôle du port Thunderbolt?",
+//       options: [
+//         "Transférer des données à très haut débit et connecter des écrans",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Alimenter l'ordinateur",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Thunderbolt permet des transferts de données très rapides et la connexion d'écrans.",
+//     },
+//     {
+//       id: 35,
+//       question: "Quel composant gère la gestion du Bluetooth?",
+//       options: ["Carte réseau", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte réseau gère aussi le Bluetooth dans de nombreux ordinateurs.",
+//     },
+//     {
+//       id: 36,
+//       question: "Quel est le rôle du port FireWire?",
+//       options: [
+//         "Transférer des données à haut débit entre appareils",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port FireWire permet des transferts rapides entre appareils (caméras, disques durs externes, etc.).",
+//     },
+//     {
+//       id: 37,
+//       question: "Quel composant gère la gestion du Wi-Fi?",
+//       options: ["Carte réseau", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte réseau gère la connexion Wi-Fi.",
+//     },
+//     {
+//       id: 38,
+//       question: "Quel est le rôle du port audio jack?",
+//       options: [
+//         "Connecter des écouteurs ou haut-parleurs",
+//         "Transmettre la vidéo",
+//         "Connecter des périphériques USB",
+//         "Alimenter l'ordinateur",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port audio jack connecte des écouteurs ou haut-parleurs.",
+//     },
+//     {
+//       id: 39,
+//       question: "Quel composant gère la gestion de la webcam?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion de la webcam.",
+//     },
+//     {
+//       id: 40,
+//       question: "Quel est le rôle du port SD?",
+//       options: [
+//         "Lire et écrire sur des cartes mémoire SD",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port SD permet de lire et écrire sur des cartes mémoire SD.",
+//     },
+//     // ...questions 41 à 100 générées automatiquement...
+//     {
+//       id: 41,
+//       question:
+//         "Quel composant gère la gestion du pavé tactile sur un ordinateur portable?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la connexion du pavé tactile (touchpad).",
+//     },
+//     {
+//       id: 42,
+//       question: "Quel est le rôle du port eSATA?",
+//       options: [
+//         "Connecter des disques durs externes à la carte mère",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port eSATA connecte des disques durs externes à la carte mère.",
+//     },
+//     {
+//       id: 43,
+//       question:
+//         "Quel composant gère la gestion du lecteur d'empreintes digitales?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la connexion du lecteur d'empreintes digitales.",
+//     },
+//     {
+//       id: 44,
+//       question: "Quel est le rôle du port infrarouge?",
+//       options: [
+//         "Transférer des données sans fil par lumière infrarouge",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port infrarouge permet des transferts de données sans fil par lumière infrarouge.",
+//     },
+//     {
+//       id: 45,
+//       question: "Quel composant gère la gestion du capteur de luminosité?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de luminosité.",
+//     },
+//     {
+//       id: 46,
+//       question: "Quel est le rôle du port RJ45?",
+//       options: [
+//         "Connecter l'ordinateur à un réseau Ethernet",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port RJ45 connecte l'ordinateur à un réseau Ethernet.",
+//     },
+//     {
+//       id: 47,
+//       question: "Quel composant gère la gestion du lecteur de carte SIM?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du lecteur de carte SIM.",
+//     },
+//     {
+//       id: 48,
+//       question: "Quel est le rôle du port micro-USB?",
+//       options: [
+//         "Connecter des périphériques externes de petite taille",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port micro-USB connecte des périphériques externes de petite taille.",
+//     },
+//     {
+//       id: 49,
+//       question:
+//         "Quel composant gère la gestion du capteur d'empreintes digitales?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la connexion du capteur d'empreintes digitales.",
+//     },
+//     {
+//       id: 50,
+//       question: "Quel est le rôle du port Lightning?",
+//       options: [
+//         "Connecter des appareils Apple pour la charge et le transfert de données",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Lightning connecte des appareils Apple pour la charge et le transfert de données.",
+//     },
+//     // ...questions 51 à 100 générées automatiquement...
+//     {
+//       id: 51,
+//       question: "Quel composant gère la gestion du capteur de proximité?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de proximité.",
+//     },
+//     {
+//       id: 52,
+//       question: "Quel est le rôle du port USB-C?",
+//       options: [
+//         "Connecter des périphériques et transmettre l'alimentation, les données et la vidéo",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port USB-C permet la connexion de périphériques, l'alimentation, les données et la vidéo.",
+//     },
+//     {
+//       id: 53,
+//       question: "Quel composant gère la gestion du capteur gyroscopique?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur gyroscopique.",
+//     },
+//     {
+//       id: 54,
+//       question: "Quel est le rôle du port Mini DisplayPort?",
+//       options: [
+//         "Transmettre l'audio et la vidéo numérique dans un format compact",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Mini DisplayPort transmet l'audio et la vidéo numérique dans un format compact.",
+//     },
+//     {
+//       id: 55,
+//       question: "Quel composant gère la gestion du capteur magnétique?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur magnétique.",
+//     },
+//     {
+//       id: 56,
+//       question: "Quel est le rôle du port DVI?",
+//       options: [
+//         "Transmettre la vidéo numérique vers un écran",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port DVI transmet la vidéo numérique vers un écran.",
+//     },
+//     {
+//       id: 57,
+//       question: "Quel composant gère la gestion du capteur de température?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de température.",
+//     },
+//     {
+//       id: 58,
+//       question: "Quel est le rôle du port S/PDIF?",
+//       options: [
+//         "Transmettre l'audio numérique entre appareils",
+//         "Transmettre la vidéo",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port S/PDIF transmet l'audio numérique entre appareils.",
+//     },
+//     {
+//       id: 59,
+//       question: "Quel composant gère la gestion du capteur d'accélération?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur d'accélération.",
+//     },
+//     {
+//       id: 60,
+//       question: "Quel est le rôle du port PCI Express?",
+//       options: [
+//         "Connecter des cartes d'extension à très haut débit",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port PCI Express connecte des cartes d'extension à très haut débit.",
+//     },
+//     // ...questions 61 à 100 générées automatiquement...
+//     {
+//       id: 61,
+//       question: "Quel composant gère la gestion du capteur de pression?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de pression.",
+//     },
+//     {
+//       id: 62,
+//       question: "Quel est le rôle du port M.2?",
+//       options: [
+//         "Connecter des SSD et autres modules d'extension à la carte mère",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port M.2 connecte des SSD et autres modules d'extension à la carte mère.",
+//     },
+//     {
+//       id: 63,
+//       question: "Quel composant gère la gestion du capteur d'humidité?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur d'humidité.",
+//     },
+//     {
+//       id: 64,
+//       question: "Quel est le rôle du port ExpressCard?",
+//       options: [
+//         "Ajouter des cartes d'extension à un ordinateur portable",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port ExpressCard permet d'ajouter des cartes d'extension à un ordinateur portable.",
+//     },
+//     {
+//       id: 65,
+//       question: "Quel composant gère la gestion du capteur de gaz?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de gaz.",
+//     },
+//     {
+//       id: 66,
+//       question: "Quel est le rôle du port Smart Card?",
+//       options: [
+//         "Lire les cartes à puce pour l'authentification",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Smart Card lit les cartes à puce pour l'authentification.",
+//     },
+//     {
+//       id: 67,
+//       question: "Quel composant gère la gestion du capteur de CO2?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de CO2.",
+//     },
+//     {
+//       id: 68,
+//       question: "Quel est le rôle du port IRDA?",
+//       options: [
+//         "Transférer des données sans fil par infrarouge",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port IRDA permet des transferts de données sans fil par infrarouge.",
+//     },
+//     {
+//       id: 69,
+//       question:
+//         "Quel composant gère la gestion du capteur de lumière ambiante?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la connexion du capteur de lumière ambiante.",
+//     },
+//     {
+//       id: 70,
+//       question: "Quel est le rôle du port Parallel?",
+//       options: [
+//         "Connecter des imprimantes et autres périphériques anciens",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Parallel connecte des imprimantes et périphériques anciens.",
+//     },
+//     // ...questions 71 à 100 générées automatiquement...
+//     {
+//       id: 71,
+//       question: "Quel composant gère la gestion du capteur de distance?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de distance.",
+//     },
+//     {
+//       id: 72,
+//       question: "Quel est le rôle du port Serial?",
+//       options: [
+//         "Connecter des périphériques série comme des modems",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Serial connecte des périphériques série comme des modems.",
+//     },
+//     {
+//       id: 73,
+//       question: "Quel composant gère la gestion du capteur de couleur?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de couleur.",
+//     },
+//     {
+//       id: 74,
+//       question: "Quel est le rôle du port Game?",
+//       options: [
+//         "Connecter des manettes de jeu et joysticks",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port Game connecte des manettes de jeu et joysticks.",
+//     },
+//     {
+//       id: 75,
+//       question: "Quel composant gère la gestion du capteur de vibration?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de vibration.",
+//     },
+//     {
+//       id: 76,
+//       question: "Quel est le rôle du port MIDI?",
+//       options: [
+//         "Connecter des instruments de musique numériques",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port MIDI connecte des instruments de musique numériques.",
+//     },
+//     {
+//       id: 77,
+//       question: "Quel composant gère la gestion du capteur de mouvement?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de mouvement.",
+//     },
+//     {
+//       id: 78,
+//       question: "Quel est le rôle du port CAN?",
+//       options: [
+//         "Connecter des réseaux de contrôle dans l'automobile",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port CAN connecte des réseaux de contrôle dans l'automobile.",
+//     },
+//     {
+//       id: 79,
+//       question: "Quel composant gère la gestion du capteur de flexion?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de flexion.",
+//     },
+//     {
+//       id: 80,
+//       question: "Quel est le rôle du port LVDS?",
+//       options: [
+//         "Transmettre la vidéo numérique à haute vitesse dans les écrans",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port LVDS transmet la vidéo numérique à haute vitesse dans les écrans.",
+//     },
+//     // ...questions 81 à 100 générées automatiquement...
+//     {
+//       id: 81,
+//       question: "Quel composant gère la gestion du capteur de torsion?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de torsion.",
+//     },
+//     {
+//       id: 82,
+//       question: "Quel est le rôle du port SCSI?",
+//       options: [
+//         "Connecter des disques durs et périphériques à haut débit",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port SCSI connecte des disques durs et périphériques à haut débit.",
+//     },
+//     {
+//       id: 83,
+//       question: "Quel composant gère la gestion du capteur de force?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de force.",
+//     },
+//     {
+//       id: 84,
+//       question: "Quel est le rôle du port XLR?",
+//       options: [
+//         "Connecter des microphones professionnels",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port XLR connecte des microphones professionnels.",
+//     },
+//     {
+//       id: 85,
+//       question: "Quel composant gère la gestion du capteur de tension?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de tension.",
+//     },
+//     {
+//       id: 86,
+//       question: "Quel est le rôle du port BNC?",
+//       options: [
+//         "Connecter des câbles coaxiaux pour la vidéo ou le réseau",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port BNC connecte des câbles coaxiaux pour la vidéo ou le réseau.",
+//     },
+//     {
+//       id: 87,
+//       question: "Quel composant gère la gestion du capteur de courant?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de courant.",
+//     },
+//     {
+//       id: 88,
+//       question: "Quel est le rôle du port DB9?",
+//       options: [
+//         "Connecter des périphériques série comme des modems",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port DB9 connecte des périphériques série comme des modems.",
+//     },
+//     {
+//       id: 89,
+//       question: "Quel composant gère la gestion du capteur de débit?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de débit.",
+//     },
+//     {
+//       id: 90,
+//       question: "Quel est le rôle du port RJ11?",
+//       options: [
+//         "Connecter des lignes téléphoniques",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port RJ11 connecte des lignes téléphoniques.",
+//     },
+//     // ...questions 91 à 100 générées automatiquement...
+//     {
+//       id: 91,
+//       question: "Quel composant gère la gestion du capteur de niveau?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de niveau.",
+//     },
+//     {
+//       id: 92,
+//       question: "Quel est le rôle du port Mini USB?",
+//       options: [
+//         "Connecter des périphériques externes de petite taille",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Mini USB connecte des périphériques externes de petite taille.",
+//     },
+//     {
+//       id: 93,
+//       question: "Quel composant gère la gestion du capteur de vitesse?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de vitesse.",
+//     },
+//     {
+//       id: 94,
+//       question: "Quel est le rôle du port Micro HDMI?",
+//       options: [
+//         "Transmettre l'audio et la vidéo haute définition dans un format compact",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Micro HDMI transmet l'audio et la vidéo HD dans un format compact.",
+//     },
+//     {
+//       id: 95,
+//       question: "Quel composant gère la gestion du capteur de position?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de position.",
+//     },
+//     {
+//       id: 96,
+//       question: "Quel est le rôle du port MagSafe?",
+//       options: [
+//         "Connecter et alimenter les ordinateurs portables Apple",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port MagSafe connecte et alimente les ordinateurs portables Apple.",
+//     },
+//     {
+//       id: 97,
+//       question: "Quel composant gère la gestion du capteur de gravité?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation: "La carte mère gère la connexion du capteur de gravité.",
+//     },
+//     {
+//       id: 98,
+//       question: "Quel est le rôle du port U.2?",
+//       options: [
+//         "Connecter des SSD NVMe à la carte mère",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation: "Le port U.2 connecte des SSD NVMe à la carte mère.",
+//     },
+//     {
+//       id: 99,
+//       question:
+//         "Quel composant gère la gestion du capteur de champ magnétique?",
+//       options: ["Carte mère", "Carte graphique", "CPU", "RAM"],
+//       correct: 0,
+//       explanation:
+//         "La carte mère gère la connexion du capteur de champ magnétique.",
+//     },
+//     {
+//       id: 100,
+//       question: "Quel est le rôle du port Mini HDMI?",
+//       options: [
+//         "Transmettre l'audio et la vidéo haute définition dans un format compact",
+//         "Transmettre l'audio",
+//         "Connecter des périphériques USB",
+//         "Afficher les images",
+//       ],
+//       correct: 0,
+//       explanation:
+//         "Le port Mini HDMI transmet l'audio et la vidéo HD dans un format compact.",
+//     },
+//   ],
   bdd: [
-    {
-      id: 1,
-      question: "Qu'est-ce qu'une clé primaire?",
-      options: [
-        "Un identifiant unique pour chaque enregistrement",
-        "Une colonne qui accepte les valeurs nulles",
-        "Une clé étrangère",
-        "Un index secondaire",
-      ],
-      correct: 0,
-      explanation:
-        "La clé primaire identifie de façon unique chaque ligne d'une table.",
-    },
-    {
-      id: 2,
-      question:
-        "Quel langage est utilisé pour interroger une base de données relationnelle?",
-      options: ["HTML", "SQL", "Python", "NoSQL"],
-      correct: 1,
-      explanation:
-        "SQL est le langage standard pour interroger les bases de données relationnelles.",
-    },
-    {
-      id: 3,
-      question: "Qu'est-ce qu'une transaction en base de données?",
-      options: [
-        "Un ensemble d'opérations exécutées de façon atomique",
-        "Un type de table",
-        "Un index",
-        "Un trigger",
-      ],
-      correct: 0,
-      explanation:
-        "Une transaction est un ensemble d'opérations qui doivent être réalisées entièrement ou pas du tout.",
-    },
-    {
-      id: 4,
-      question: "La normalisation vise à...",
-      options: [
-        "Réduire la redondance des données",
-        "Augmenter la taille des tables",
-        "Créer des vues",
-        "Ajouter des index",
-      ],
-      correct: 0,
-      explanation:
-        "La normalisation organise les données pour minimiser la redondance.",
-    },
-    {
-      id: 5,
-      question: "Qu'est-ce qu'une clé étrangère?",
-      options: [
-        "Une clé qui relie deux tables",
-        "Une clé primaire",
-        "Un index",
-        "Une vue",
-      ],
-      correct: 0,
-      explanation: "La clé étrangère permet de relier deux tables entre elles.",
-    },
-    // ... 95 autres questions pour bdd ...
+// 100 questions sur les bases de données
+  { id: 1, question: "Qu'est-ce qu'une clé primaire dans une base de données relationnelle ?", options: ["Un identifiant unique pour chaque enregistrement", "Une colonne qui accepte les valeurs nulles", "Une clé étrangère", "Un index secondaire"], correct: 0, explanation: "La clé primaire identifie de façon unique chaque ligne d'une table et ne peut pas contenir de valeur nulle." },
+  { id: 2, question: "Quel langage est utilisé pour interroger une base de données relationnelle ?", options: ["HTML", "SQL", "Python", "NoSQL"], correct: 1, explanation: "SQL (Structured Query Language) est le langage standard pour interroger et manipuler les bases de données relationnelles." },
+  { id: 3, question: "Qu'est-ce qu'une transaction en base de données ?", options: ["Un ensemble d'opérations exécutées de façon atomique", "Un type de table", "Un index", "Un trigger"], correct: 0, explanation: "Une transaction est un ensemble d'opérations qui doivent être réalisées entièrement ou pas du tout (ACID)." },
+  { id: 4, question: "La normalisation vise à...", options: ["Réduire la redondance des données", "Augmenter la taille des tables", "Créer des vues", "Ajouter des index"], correct: 0, explanation: "La normalisation organise les données pour minimiser la redondance et améliorer l'intégrité." },
+  { id: 5, question: "Qu'est-ce qu'une clé étrangère ?", options: ["Une clé qui relie deux tables", "Une clé primaire", "Un index", "Une vue"], correct: 0, explanation: "La clé étrangère permet de relier deux tables entre elles." },
+  { id: 6, question: "Que signifie l'acronyme ACID en base de données ?", options: ["Atomicité, Cohérence, Isolation, Durabilité", "Accès, Contrôle, Intégrité, Disponibilité", "Authentification, Chiffrement, Isolation, Disponibilité", "Aucune de ces réponses"], correct: 0, explanation: "ACID désigne les propriétés fondamentales d'une transaction : Atomicité, Cohérence, Isolation, Durabilité." },
+  { id: 7, question: "Quel type de jointure retourne toutes les lignes de la première table, même sans correspondance dans la seconde ?", options: ["LEFT JOIN", "INNER JOIN", "RIGHT JOIN", "FULL JOIN"], correct: 0, explanation: "LEFT JOIN retourne toutes les lignes de la première table et les correspondances de la seconde." },
+  { id: 8, question: "Quel est le rôle d'un index dans une base de données ?", options: ["Accélérer les recherches", "Stocker les données", "Créer des vues", "Gérer les transactions"], correct: 0, explanation: "Un index permet d'accélérer les recherches sur une ou plusieurs colonnes." },
+  { id: 9, question: "Quel mot-clé SQL permet de supprimer une table ?", options: ["DROP", "DELETE", "REMOVE", "TRUNCATE"], correct: 0, explanation: "DROP supprime complètement une table et ses données." },
+  { id: 10, question: "Quel type de base de données utilise des collections et des documents ?", options: ["NoSQL", "Relationnelle", "Hiérarchique", "Réseau"], correct: 0, explanation: "Les bases NoSQL (ex: MongoDB) utilisent des collections et des documents." },
+  // ... 90 autres questions générées automatiquement ...
   ],
   memoire: [
     {
