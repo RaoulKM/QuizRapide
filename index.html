@@ -1,0 +1,1469 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Système - Ordonnancement & Mémoire</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        /* CSS fourni par l'utilisateur */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f23;
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 2rem;
+            position: relative;
+        }
+
+        /* Animations de fond */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .floating-shape {
+            position: absolute;
+            background: linear-gradient(45deg, #6366f1, #8b5cf6);
+            border-radius: 50%;
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-shape:nth-child(1) {
+            width: 100px;
+            height: 100px;
+            top: 20%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-shape:nth-child(2) {
+            width: 150px;
+            height: 150px;
+            top: 60%;
+            right: 15%;
+            animation-delay: 7s;
+        }
+
+        .floating-shape:nth-child(3) {
+            width: 80px;
+            height: 80px;
+            top: 80%;
+            left: 20%;
+            animation-delay: 14s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6);
+            border-radius: 2px;
+        }
+
+        .header h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+            animation: glow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.2); }
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            color: #94a3b8;
+            font-weight: 300;
+        }
+
+        /* Screens */
+        .screen {
+            display: none;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Cards */
+        .card {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 24px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, #6366f1, transparent);
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 32px 64px rgba(99, 102, 241, 0.2);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        /* Lesson Cards */
+        .lesson-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .lesson-card {
+            cursor: pointer;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .lesson-card.selected {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            transform: scale(1.02);
+        }
+
+        .lesson-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .lesson-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #e2e8f0;
+        }
+
+        .lesson-description {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        /* Level Cards */
+        .level-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .level-card {
+            cursor: pointer;
+            text-align: center;
+            padding: 1.5rem 1rem;
+            border-radius: 16px;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .level-card:hover {
+            transform: translateY(-3px);
+            background: rgba(99, 102, 241, 0.1);
+        }
+
+        .level-card.selected {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            transform: scale(1.05);
+        }
+
+        .level-badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .level-easy .level-badge {
+            background: rgba(34, 197, 94, 0.2);
+            color: #22c55e;
+        }
+
+        .level-medium .level-badge {
+            background: rgba(249, 115, 22, 0.2);
+            color: #f97316;
+        }
+
+        .level-hard .level-badge {
+            background: rgba(239, 68, 68, 0.2);
+            color: #ef4444;
+        }
+        
+        .level-expert .level-badge {
+            background: rgba(200, 100, 200, 0.2);
+            color: #c864c8;
+        }
+
+        .level-questions {
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            box-shadow: 0 10px 25px rgba(99, 102, 241, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(30, 41, 59, 0.8);
+            color: #e2e8f0;
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(51, 65, 85, 0.8);
+            transform: translateY(-1px);
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* Progress Bar */
+        .progress-container {
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(30, 41, 59, 0.8);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #6366f1, #8b5cf6, #ec4899);
+            border-radius: 20px;
+            transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .progress-fill::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        .progress-text {
+            text-align: center;
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            color: #94a3b8;
+        }
+
+        /* Question */
+        .question-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .question-number {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.1rem;
+        }
+
+        .question-info {
+            flex: 1;
+        }
+
+        .question-title {
+            font-size: 0.9rem;
+            color: #94a3b8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.25rem;
+        }
+
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 500;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        /* Answers */
+        .answers {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .answer-option {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 16px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .answer-option::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .answer-option:hover::before {
+            left: 100%;
+        }
+
+        .answer-option:hover {
+            transform: translateX(10px);
+            background: rgba(99, 102, 241, 0.1);
+            border-color: rgba(99, 102, 241, 0.3);
+        }
+
+        .answer-option.selected {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: #6366f1;
+            transform: scale(1.02);
+        }
+
+        .answer-option.correct {
+            background: rgba(34, 197, 94, 0.2);
+            border-color: #22c55e;
+            animation: correctPulse 0.6s ease;
+        }
+
+        .answer-option.incorrect {
+            background: rgba(239, 68, 68, 0.2);
+            border-color: #ef4444;
+            animation: shake 0.5s ease;
+        }
+
+        @keyframes correctPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
+        }
+
+        .answer-letter {
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border-radius: 12px;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .answer-text {
+            flex: 1;
+            font-size: 1.1rem;
+            color: #e2e8f0;
+            font-weight: 500;
+        }
+
+        .answer-icon {
+            font-size: 1.5rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .answer-option.correct .answer-icon.fa-check {
+            opacity: 1;
+            color: #22c55e;
+        }
+
+        .answer-option.incorrect .answer-icon.fa-times {
+            opacity: 1;
+            color: #ef4444;
+        }
+
+        /* Explanation */
+        .explanation {
+            background: rgba(23, 162, 184, 0.1);
+            border: 1px solid rgba(23, 162, 184, 0.2);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+            animation: slideDown 0.5s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .explanation-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .explanation-icon {
+            color: #06b6d4;
+            font-size: 1.5rem;
+        }
+
+        .explanation-title {
+            color: #06b6d4;
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .explanation-content {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 1rem;
+        }
+
+        /* Results */
+        .result-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .score-circle {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .score-display {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 2;
+        }
+
+        .score-ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid rgba(99, 102, 241, 0.2);
+            transform: rotate(-90deg);
+        }
+
+        .score-progress {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            border: 8px solid transparent;
+            border-top: 8px solid #6366f1;
+            transform: rotate(-90deg);
+            animation: rotateScore 2s ease-out;
+        }
+
+        @keyframes rotateScore {
+            from { transform: rotate(-90deg); }
+            to { transform: rotate(calc(-90deg + var(--score-angle))); }
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+
+        .stat-item {
+            background: rgba(30, 41, 59, 0.5);
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #6366f1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .lesson-grid,
+            .level-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .score-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .score-display {
+                font-size: 2.5rem;
+            }
+        }
+
+        /* Loading animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="bg-animation">
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+        <div class="floating-shape"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1><i class="fas fa-microchip"></i> Quiz Système</h1>
+            <p>Maîtrisez l'ordonnancement des tâches et la gestion mémoire</p>
+        </div>
+
+        <div class="screen setup-screen active">
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                    <i class="fas fa-graduation-cap" style="font-size: 2rem; color: #6366f1;"></i>
+                    <div>
+                        <h2 style="color: #e2e8f0; font-size: 1.5rem; margin-bottom: 0.25rem;">Choisissez votre leçon</h2>
+                        <p style="color: #94a3b8;">Sélectionnez le domaine que vous souhaitez étudier</p>
+                    </div>
+                </div>
+
+                <div class="lesson-grid" id="lessonGrid">
+                    <div class="lesson-card card" data-lesson="ordonnancement">
+                        <div class="lesson-icon">
+                            <i class="fas fa-tasks"></i>
+                        </div>
+                        <div class="lesson-title">Ordonnancement des tâches</div>
+                        <div class="lesson-description">
+                            Algorithmes de planification, préemption, métriques de performance
+                        </div>
+                    </div>
+                    
+                    <div class="lesson-card card" data-lesson="memoire">
+                        <div class="lesson-icon">
+                            <i class="fas fa-memory"></i>
+                        </div>
+                        <div class="lesson-title">Gestion mémoire</div>
+                        <div class="lesson-description">
+                            Pagination, segmentation, mémoire virtuelle, algorithmes de remplacement
+                        </div>
+                    </div>
+
+                        <div class="lesson-card card" data-lesson="bdd">
+                            <div class="lesson-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <div class="lesson-title">Base de données</div>
+                            <div class="lesson-description">
+                                Modélisation, SQL, transactions, normalisation
+                            </div>
+                        </div>
+
+                        <div class="lesson-card card" data-lesson="algo">
+                            <div class="lesson-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <div class="lesson-title">Algorithmique</div>
+                            <div class="lesson-description">
+                                Structures de données, complexité, récursivité, tri, recherche
+                            </div>
+                        </div>
+
+                        <div class="lesson-card card" data-lesson="planif">
+                            <div class="lesson-icon">
+                                <i class="fas fa-calendar-check"></i>
+                            </div>
+                            <div class="lesson-title">Planification de projets</div>
+                            <div class="lesson-description">
+                                Méthodes agiles, Gantt, gestion des risques, estimation
+                            </div>
+                        </div>
+
+                        <div class="lesson-card card" data-lesson="archi">
+                            <div class="lesson-icon">
+                                <i class="fas fa-desktop"></i>
+                            </div>
+                            <div class="lesson-title">Architecture des ordinateurs</div>
+                            <div class="lesson-description">
+                                Processeur, mémoire, bus, entrées/sorties, organisation matérielle
+                            </div>
+                        </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div style="display: flex; align-items: center; gap: 1rem; margin-bottom: 2rem;">
+                    <i class="fas fa-chart-line" style="font-size: 2rem; color: #8b5cf6;"></i>
+                    <div>
+                        <h2 style="color: #e2e8f0; font-size: 1.5rem; margin-bottom: 0.25rem;">Sélectionnez le niveau</h2>
+                        <p style="color: #94a3b8;">Choisissez le nombre de questions pour votre session</p>
+                    </div>
+                </div>
+
+                <div class="level-grid" id="levelGrid">
+                    <div class="level-card level-easy" data-level="10">
+                        <div class="level-badge">Facile</div>
+                        <div class="level-questions">10 questions</div>
+                    </div>
+                    
+                    <div class="level-card level-medium" data-level="25">
+                        <div class="level-badge">Moyen</div>
+                        <div class="level-questions">25 questions</div>
+                    </div>
+                    
+                    <div class="level-card level-hard" data-level="50">
+                        <div class="level-badge">Difficile</div>
+                        <div class="level-questions">50 questions</div>
+                    </div>
+                     <div class="level-card level-expert" data-level="100">
+                        <div class="level-badge">Expert</div>
+                        <div class="level-questions">100 questions</div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="startBtn" class="btn btn-primary" disabled>
+                        <i class="fas fa-play"></i>
+                        Commencer le Quiz
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen quiz-screen">
+            <div class="progress-container">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressBar"></div>
+                </div>
+                <div class="progress-text" id="progressText"></div>
+            </div>
+
+            <div class="card">
+                <div class="question-header">
+                    <div class="question-number" id="questionNumber">1</div>
+                    <div class="question-info">
+                        <div class="question-title" id="questionTitle">Question</div>
+                        <div class="question-text" id="questionText"></div>
+                    </div>
+                </div>
+
+                <div class="answers" id="answersContainer"></div>
+
+                <div class="explanation" id="explanationContainer" style="display: none;">
+                    <div class="explanation-header">
+                        <i class="fas fa-lightbulb explanation-icon"></i>
+                        <div class="explanation-title">Explication</div>
+                    </div>
+                    <div class="explanation-content" id="explanationContent"></div>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <button id="nextBtn" class="btn btn-primary" style="display: none;">
+                        <span id="nextBtnText">Question suivante</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                    <button id="finishBtn" class="btn btn-primary" style="display: none;">
+                        <i class="fas fa-flag-checkered"></i>
+                        Voir les résultats
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="screen result-screen">
+            <div class="card result-card">
+                <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+                    <i class="fas fa-trophy" style="font-size: 2.5rem; color: #fbbf24;"></i>
+                    <h2 style="color: #e2e8f0; font-size: 2rem;">Quiz terminé !</h2>
+                </div>
+
+                <div class="score-circle">
+                    <div class="score-ring"></div>
+                    <div class="score-progress" id="scoreProgress"></div>
+                    <div class="score-display" id="finalScore">0%</div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-value" id="correctAnswers">0</div>
+                        <div class="stat-label">Bonnes réponses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="incorrectAnswers">0</div>
+                        <div class="stat-label">Mauvaises réponses</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="totalQuestions">0</div>
+                        <div class="stat-label">Total questions</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="studiedLesson">-</div>
+                        <div class="stat-label">Leçon étudiée</div>
+                    </div>
+                </div>
+
+                <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 2rem;">
+                    <button id="restartBtn" class="btn btn-primary">
+                        <i class="fas fa-redo"></i>
+                        Recommencer
+                    </button>
+                    <button id="changeSettingsBtn" class="btn btn-secondary">
+                        <i class="fas fa-cog"></i>
+                        Nouvelle configuration
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DONNÉES DES QUESTIONS (100 QUESTIONS) ---
+        const questionsDB = {
+            ordonnancement: [
+                { id: 1, question: "Quel est l'objectif principal de l'ordonnancement des processus ?", options: ["Maximiser l'utilisation du CPU", "Minimiser le temps de réponse", "Optimiser l'utilisation des ressources système", "Éviter les interblocages"], correct: 2, explanation: "L'ordonnancement vise à optimiser l'utilisation globale des ressources système, incluant CPU, mémoire et E/S, pour améliorer les performances générales." },
+                { id: 2, question: "Dans l'algorithme FCFS (First Come First Served), quel est le principal inconvénient ?", options: ["Complexité d'implémentation élevée", "Effet de convoi (convoy effect)", "Famine des processus courts", "Surcharge de commutation"], correct: 1, explanation: "L'effet de convoi se produit quand un processus long bloque plusieurs processus courts, augmentant le temps d'attente moyen." },
+                { id: 3, question: "L'algorithme SJF (Shortest Job First) est optimal pour quel critère ?", options: ["Le temps d'attente moyen", "Le débit (throughput)", "Le temps de réponse", "L'équité entre les processus"], correct: 0, explanation: "SJF est optimal car il donne la priorité aux tâches les plus courtes, ce qui minimise le temps d'attente moyen des processus." },
+                { id: 4, question: "Qu'est-ce qu'un ordonnancement préemptif ?", options: ["Le processus en cours ne peut pas être interrompu", "Le processus en cours peut être interrompu par un autre plus prioritaire", "Le système alloue le CPU de manière équitable", "Le processeur exécute une seule tâche à la fois"], correct: 1, explanation: "Un ordonnancement préemptif permet au système d'exploitation de suspendre l'exécution d'un processus pour en exécuter un autre, souvent plus prioritaire." },
+                { id: 5, question: "Quel algorithme d'ordonnancement est basé sur un quantum de temps ?", options: ["SJF", "FCFS", "Priorité", "Round Robin"], correct: 3, explanation: "Round Robin (RR) utilise un quantum de temps : chaque processus a un tour pour s'exécuter pendant une période fixe avant d'être mis en attente." },
+                { id: 6, question: "Qu'est-ce que la famine (starvation) dans l'ordonnancement ?", options: ["Un processus ne reçoit jamais de CPU", "Un processus est exécuté en continu", "Le système est surchargé de processus", "Un processus attend une ressource qui n'est jamais libérée"], correct: 0, explanation: "La famine se produit lorsqu'un processus de basse priorité ne parvient jamais à s'exécuter car il y a toujours des processus de haute priorité dans la file d'attente." },
+                { id: 7, question: "Quel est l'inconvénient principal de l'algorithme d'ordonnancement par priorité ?", options: ["Le temps d'attente est imprévisible", "Il peut causer la famine des processus à basse priorité", "Il est difficile à implémenter", "Il est inefficace pour les systèmes temps réel"], correct: 1, explanation: "Si des processus à haute priorité arrivent continuellement, les processus à basse priorité peuvent ne jamais être exécutés, ce qui mène à la famine." },
+                { id: 8, question: "Le temps de service est le temps que le processus passe...", options: ["Dans la file d'attente", "À s'exécuter sur le CPU", "À attendre des E/S", "À la création"], correct: 1, explanation: "Le temps de service est le temps total d'exécution d'un processus sur le CPU." },
+                { id: 9, question: "Quelle est la principale métrique de performance pour les systèmes par lots ?", options: ["Temps de réponse", "Temps d'attente", "Débit (throughput)", "Latence"], correct: 2, explanation: "Pour les systèmes par lots, le débit (nombre de processus terminés par unité de temps) est la métrique la plus importante." },
+                { id: 10, question: "Quel état représente un processus qui attend la fin d'une opération d'E/S ?", options: ["Prêt", "En cours (running)", "Bloqué (waiting)", "Terminé"], correct: 2, explanation: "Un processus est en état 'bloqué' (ou 'waiting') lorsqu'il est en attente d'une ressource ou d'une opération d'E/S." },
+                { id: 11, question: "Quel algorithme d'ordonnancement est non-préemptif ?", options: ["Round Robin", "SJF préemptif", "FCFS", "Ordonnancement par priorité"], correct: 2, explanation: "FCFS est un algorithme non-préemptif : une fois qu'un processus a le CPU, il le garde jusqu'à sa fin ou une demande d'E/S." },
+                { id: 12, question: "Qu'est-ce que la commutation de contexte (context switch) ?", options: ["Le changement d'un processus en mode utilisateur à mode noyau", "Le passage d'un processus en état bloqué", "Le mécanisme de sauvegarde et de restauration de l'état du processeur", "L'accès à la mémoire virtuelle"], correct: 2, explanation: "La commutation de contexte est le processus de sauvegarde de l'état d'un processus et de chargement de l'état d'un autre pour que le second puisse s'exécuter." },
+                { id: 13, question: "Quel algorithme est le plus efficace pour minimiser le temps de rotation (turnaround time) ?", options: ["FCFS", "SJF", "Round Robin", "Priorité"], correct: 1, explanation: "L'algorithme SJF (Shortest Job First) minimise le temps de rotation moyen en exécutant les tâches les plus courtes en premier." },
+                { id: 14, question: "Le 'temps d'attente' d'un processus est la somme des périodes pendant lesquelles il est en état...", options: ["En cours", "Prêt", "Bloqué", "Terminé"], correct: 1, explanation: "Le temps d'attente est le temps passé par un processus dans la file d'attente (état prêt) à attendre que le CPU devienne disponible." },
+                { id: 15, question: "Dans le Round Robin, si le quantum de temps est très grand, le comportement se rapproche de quel algorithme ?", options: ["SJF", "FCFS", "Priorité", "Multilevel Feedback Queue"], correct: 1, explanation: "Si le quantum est très grand, chaque processus s'exécutera jusqu'à la fin de sa tâche, ce qui est le principe de FCFS." },
+                { id: 16, question: "Qu'est-ce qu'une file d'attente à rétroaction multi-niveaux (Multilevel Feedback Queue) ?", options: ["Un algorithme qui ne gère qu'une seule file d'attente", "Un algorithme qui a plusieurs files d'attente avec des priorités différentes", "Un algorithme qui ne gère pas la préemption", "Un algorithme de remplacement de pages"], correct: 1, explanation: "Cet algorithme utilise plusieurs files d'attente, chacune avec son propre algorithme d'ordonnancement (ex. : Round Robin pour la plus haute priorité, FCFS pour la plus basse)." },
+                { id: 17, question: "Quel est l'inconvénient d'un quantum de temps très court dans Round Robin ?", options: ["Temps d'attente élevé", "Faible débit", "Surcharge de commutations de contexte élevée", "Complexité d'implémentation"], correct: 2, explanation: "Un quantum de temps trop court mène à de fréquentes commutations de contexte, ce qui consomme du temps CPU et réduit la performance utile du système." },
+                { id: 18, question: "L'ordonnancement par priorité peut être sujet à quel problème, que l'inversion de priorité peut aggraver ?", options: ["L'effet de convoi", "La famine (starvation)", "La surcharge", "Les fuites de mémoire"], correct: 1, explanation: "Les processus à basse priorité peuvent mourir de faim si des processus à haute priorité continuent d'arriver." },
+                { id: 19, question: "Quel algorithme garantit que chaque processus reçoit une part équitable du temps CPU ?", options: ["SJF", "FCFS", "Round Robin", "Ordonnancement par priorité"], correct: 2, explanation: "Round Robin est un algorithme d'ordonnancement équitable (fair) car il alloue un quantum de temps égal à chaque processus, assurant que tous obtiennent une chance de s'exécuter." },
+                { id: 20, question: "Qu'est-ce qu'un ordonnanceur à long terme (long-term scheduler) ?", options: ["Il gère les processus dans le processeur", "Il sélectionne les processus de la mémoire vive pour l'exécution", "Il choisit les processus du disque à charger en mémoire", "Il gère la mémoire virtuelle"], correct: 2, explanation: "L'ordonnanceur à long terme gère le 'degré de multiprogrammation', c'est-à-dire le nombre de processus en mémoire vive prêts à être exécutés." },
+                { id: 21, question: "Quel est le critère d'efficacité d'un algorithme d'ordonnancement pour les systèmes interactifs ?", options: ["Le débit", "Le temps de réponse", "Le temps de rotation", "L'utilisation du CPU"], correct: 1, explanation: "Pour les systèmes interactifs (comme les interfaces utilisateur), la rapidité de la réponse à l'utilisateur est cruciale." },
+                { id: 22, question: "Le 'temps de rotation' (turnaround time) est le temps écoulé entre...", options: ["L'arrivée et la fin d'un processus", "L'exécution et la fin d'un processus", "La création et l'arrivée d'un processus", "Le temps d'attente et le temps de service"], correct: 0, explanation: "Le temps de rotation mesure le temps total passé par un processus dans le système, de son arrivée à sa terminaison." },
+                { id: 23, question: "Dans le cas d'une inversion de priorité, un processus de haute priorité peut être bloqué par un processus de... ?", options: ["Même priorité", "Priorité plus élevée", "Priorité plus faible", "Une file d'attente différente"], correct: 2, explanation: "L'inversion de priorité se produit quand un processus à haute priorité est bloqué par un processus à basse priorité qui détient la ressource dont il a besoin." },
+                { id: 24, question: "Quel est l'un des rôles de l'ordonnanceur de bas niveau (short-term scheduler) ?", options: ["Décider des processus à charger en mémoire", "Sélectionner le processus prêt à être exécuté", "Gérer les opérations d'E/S", "Gérer la pagination"], correct: 1, explanation: "L'ordonnanceur de bas niveau choisit, parmi les processus en mémoire et prêts, lequel doit être alloué au CPU pour une courte période." },
+                { id: 25, question: "Qu'est-ce qu'une 'priorité dynamique' ?", options: ["Une priorité qui ne change jamais", "Une priorité attribuée de manière aléatoire", "Une priorité qui s'ajuste en fonction de l'âge ou de l'exécution du processus", "Une priorité qui est toujours la plus élevée"], correct: 2, explanation: "La priorité dynamique est une technique qui ajuste la priorité d'un processus au fil du temps pour éviter la famine, par exemple en augmentant la priorité d'un processus qui attend depuis longtemps." },
+                { id: 26, question: "Quel algorithme d'ordonnancement est non-préemptif ?", options: ["Round Robin", "SJF préemptif", "FCFS", "Ordonnancement par priorité"], correct: 2, explanation: "FCFS est un algorithme non-préemptif : une fois qu'un processus a le CPU, il le garde jusqu'à sa fin ou une demande d'E/S." },
+                { id: 27, question: "Qu'est-ce que la commutation de contexte (context switch) ?", options: ["Le changement d'un processus en mode utilisateur à mode noyau", "Le passage d'un processus en état bloqué", "Le mécanisme de sauvegarde et de restauration de l'état du processeur", "L'accès à la mémoire virtuelle"], correct: 2, explanation: "La commutation de contexte est le processus de sauvegarde de l'état d'un processus et de chargement de l'état d'un autre pour que le second puisse s'exécuter." },
+                { id: 28, question: "Quel algorithme est le plus efficace pour minimiser le temps de rotation (turnaround time) ?", options: ["FCFS", "SJF", "Round Robin", "Priorité"], correct: 1, explanation: "L'algorithme SJF (Shortest Job First) minimise le temps de rotation moyen en exécutant les tâches les plus courtes en premier." },
+                { id: 29, question: "Le 'temps d'attente' d'un processus est la somme des périodes pendant lesquelles il est en état...", options: ["En cours", "Prêt", "Bloqué", "Terminé"], correct: 1, explanation: "Le temps d'attente est le temps passé par un processus dans la file d'attente (état prêt) à attendre que le CPU devienne disponible." },
+                { id: 30, question: "Dans le Round Robin, si le quantum de temps est très grand, le comportement se rapproche de quel algorithme ?", options: ["SJF", "FCFS", "Priorité", "Multilevel Feedback Queue"], correct: 1, explanation: "Si le quantum est très grand, chaque processus s'exécutera jusqu'à la fin de sa tâche, ce qui est le principe de FCFS." },
+                { id: 31, question: "Qu'est-ce qu'une file d'attente à rétroaction multi-niveaux (Multilevel Feedback Queue) ?", options: ["Un algorithme qui ne gère qu'une seule file d'attente", "Un algorithme qui a plusieurs files d'attente avec des priorités différentes", "Un algorithme qui ne gère pas la préemption", "Un algorithme de remplacement de pages"], correct: 1, explanation: "Cet algorithme utilise plusieurs files d'attente, chacune avec son propre algorithme d'ordonnancement (ex. : Round Robin pour la plus haute priorité, FCFS pour la plus basse)." },
+                { id: 32, question: "Quel est l'inconvénient d'un quantum de temps très court dans Round Robin ?", options: ["Temps d'attente élevé", "Faible débit", "Surcharge de commutations de contexte élevée", "Complexité d'implémentation"], correct: 2, explanation: "Un quantum de temps trop court mène à de fréquentes commutations de contexte, ce qui consomme du temps CPU et réduit la performance utile du système." },
+                { id: 33, question: "L'ordonnancement par priorité peut être sujet à quel problème, que l'inversion de priorité peut aggraver ?", options: ["L'effet de convoi", "La famine (starvation)", "La surcharge", "Les fuites de mémoire"], correct: 1, explanation: "Les processus à basse priorité peuvent mourir de faim si des processus à haute priorité continuent d'arriver." },
+                { id: 34, question: "Quel algorithme garantit que chaque processus reçoit une part équitable du temps CPU ?", options: ["SJF", "FCFS", "Round Robin", "Ordonnancement par priorité"], correct: 2, explanation: "Round Robin est un algorithme d'ordonnancement équitable (fair) car il alloue un quantum de temps égal à chaque processus, assurant que tous obtiennent une chance de s'exécuter." },
+                { id: 35, question: "Qu'est-ce qu'un ordonnanceur à long terme (long-term scheduler) ?", options: ["Il gère les processus dans le processeur", "Il sélectionne les processus de la mémoire vive pour l'exécution", "Il choisit les processus du disque à charger en mémoire", "Il gère la mémoire virtuelle"], correct: 2, explanation: "L'ordonnanceur à long terme gère le 'degré de multiprogrammation', c'est-à-dire le nombre de processus en mémoire vive prêts à être exécutés." },
+                { id: 36, question: "Quel est le critère d'efficacité d'un algorithme d'ordonnancement pour les systèmes interactifs ?", options: ["Le débit", "Le temps de réponse", "Le temps de rotation", "L'utilisation du CPU"], correct: 1, explanation: "Pour les systèmes interactifs (comme les interfaces utilisateur), la rapidité de la réponse à l'utilisateur est cruciale." },
+                { id: 37, question: "Le 'temps de rotation' (turnaround time) est le temps écoulé entre...", options: ["L'arrivée et la fin d'un processus", "L'exécution et la fin d'un processus", "La création et l'arrivée d'un processus", "Le temps d'attente et le temps de service"], correct: 0, explanation: "Le temps de rotation mesure le temps total passé par un processus dans le système, de son arrivée à sa terminaison." },
+                { id: 38, question: "Dans le cas d'une inversion de priorité, un processus de haute priorité peut être bloqué par un processus de... ?", options: ["Même priorité", "Priorité plus élevée", "Priorité plus faible", "Une file d'attente différente"], correct: 2, explanation: "L'inversion de priorité se produit quand un processus à haute priorité est bloqué par un processus à basse priorité qui détient la ressource dont il a besoin." },
+                { id: 39, question: "Quel est l'un des rôles de l'ordonnanceur de bas niveau (short-term scheduler) ?", options: ["Décider des processus à charger en mémoire", "Sélectionner le processus prêt à être exécuté", "Gérer les opérations d'E/S", "Gérer la pagination"], correct: 1, explanation: "L'ordonnanceur de bas niveau choisit, parmi les processus en mémoire et prêts, lequel doit être alloué au CPU pour une courte période." },
+                { id: 40, question: "Qu'est-ce qu'une 'priorité dynamique' ?", options: ["Une priorité qui ne change jamais", "Une priorité attribuée de manière aléatoire", "Une priorité qui s'ajuste en fonction de l'âge ou de l'exécution du processus", "Une priorité qui est toujours la plus élevée"], correct: 2, explanation: "La priorité dynamique est une technique qui ajuste la priorité d'un processus au fil du temps pour éviter la famine, par exemple en augmentant la priorité d'un processus qui attend depuis longtemps." },
+                { id: 41, question: "Quel algorithme garantit que chaque processus reçoit une part équitable du temps CPU ?", options: ["SJF", "FCFS", "Round Robin", "Ordonnancement par priorité"], correct: 2, explanation: "Round Robin est un algorithme d'ordonnancement équitable (fair) car il alloue un quantum de temps égal à chaque processus, assurant que tous obtiennent une chance de s'exécuter." },
+                { id: 42, question: "Qu'est-ce qu'un ordonnanceur à long terme (long-term scheduler) ?", options: ["Il gère les processus dans le processeur", "Il sélectionne les processus de la mémoire vive pour l'exécution", "Il choisit les processus du disque à charger en mémoire", "Il gère la mémoire virtuelle"], correct: 2, explanation: "L'ordonnanceur à long terme gère le 'degré de multiprogrammation', c'est-à-dire le nombre de processus en mémoire vive prêts à être exécutés." },
+                { id: 43, question: "Quel est le critère d'efficacité d'un algorithme d'ordonnancement pour les systèmes interactifs ?", options: ["Le débit", "Le temps de réponse", "Le temps de rotation", "L'utilisation du CPU"], correct: 1, explanation: "Pour les systèmes interactifs (comme les interfaces utilisateur), la rapidité de la réponse à l'utilisateur est cruciale." },
+                { id: 44, question: "Le 'temps de rotation' (turnaround time) est le temps écoulé entre...", options: ["L'arrivée et la fin d'un processus", "L'exécution et la fin d'un processus", "La création et l'arrivée d'un processus", "Le temps d'attente et le temps de service"], correct: 0, explanation: "Le temps de rotation mesure le temps total passé par un processus dans le système, de son arrivée à sa terminaison." },
+                { id: 45, question: "Dans le cas d'une inversion de priorité, un processus de haute priorité peut être bloqué par un processus de... ?", options: ["Même priorité", "Priorité plus élevée", "Priorité plus faible", "Une file d'attente différente"], correct: 2, explanation: "L'inversion de priorité se produit quand un processus à haute priorité est bloqué par un processus à basse priorité qui détient la ressource dont il a besoin." },
+                { id: 46, question: "Quel est l'un des rôles de l'ordonnanceur de bas niveau (short-term scheduler) ?", options: ["Décider des processus à charger en mémoire", "Sélectionner le processus prêt à être exécuté", "Gérer les opérations d'E/S", "Gérer la pagination"], correct: 1, explanation: "L'ordonnanceur de bas niveau choisit, parmi les processus en mémoire et prêts, lequel doit être alloué au CPU pour une courte période." },
+                { id: 47, question: "Qu'est-ce qu'une 'priorité dynamique' ?", options: ["Une priorité qui ne change jamais", "Une priorité attribuée de manière aléatoire", "Une priorité qui s'ajuste en fonction de l'âge ou de l'exécution du processus", "Une priorité qui est toujours la plus élevée"], correct: 2, explanation: "La priorité dynamique est une technique qui ajuste la priorité d'un processus au fil du temps pour éviter la famine, par exemple en augmentant la priorité d'un processus qui attend depuis longtemps." },
+                { id: 48, question: "Dans l'ordonnancement à priorités, la politique 'Aging' sert à résoudre quel problème ?", options: ["L'effet de convoi", "La famine", "L'inversion de priorité", "La surcharge"], correct: 1, explanation: "L'Aging (vieillissement) est un mécanisme qui augmente la priorité d'un processus qui a attendu longtemps dans la file d'attente, prévenant ainsi la famine." },
+                { id: 49, question: "Quel est le principal avantage de l'algorithme SJF préemptif (SRTF) par rapport au SJF non-préemptif ?", options: ["Il est plus simple à implémenter", "Il est plus équitable", "Il a un temps d'attente moyen plus élevé", "Il peut être interrompu par un processus plus court"], correct: 3, explanation: "SRTF (Shortest Remaining Time First) est la version préemptive de SJF. Il peut interrompre un processus en cours si un nouveau processus avec un temps d'exécution restant plus court arrive." },
+                { id: 50, question: "Quel algorithme d'ordonnancement est le plus adapté pour les systèmes temps réel ?", options: ["FCFS", "Round Robin", "Ordonnancement par priorité (avec échéance)", "SJF"], correct: 2, explanation: "Les systèmes temps réel nécessitent que les tâches soient terminées dans des délais stricts, ce qui est géré par des algorithmes à priorité basés sur les échéances." },
+                { id: 51, question: "Qu'est-ce que le 'Thrashing' dans la gestion de la mémoire virtuelle ?", options: ["Un excès d'E/S dû à un manque de frames de pages", "Une fragmentation externe excessive", "Un phénomène où un processus ne trouve pas ses pages en mémoire", "Une mauvaise utilisation de la mémoire physique"], correct: 0, explanation: "Le Thrashing se produit lorsque le système passe la majorité de son temps à échanger des pages entre la mémoire physique et le disque, au lieu d'effectuer un travail utile." },
+                { id: 52, question: "Quel est l'objectif principal de la mémoire virtuelle ?", options: ["Augmenter la taille de la mémoire physique", "Permettre aux processus d'utiliser plus de mémoire qu'il n'y en a physiquement", "Accélérer l'accès à la mémoire RAM", "Éliminer la fragmentation"], correct: 1, explanation: "La mémoire virtuelle donne à chaque processus l'impression d'avoir un grand espace d'adressage privé, en utilisant le disque comme extension de la mémoire physique." },
+                { id: 53, question: "Qu'est-ce que la pagination (paging) ?", options: ["Une méthode pour diviser la mémoire en blocs de taille fixe", "Une technique pour diviser la mémoire en blocs de taille variable", "Une méthode d'échange de données entre disques", "Une technique pour gérer l'espace d'adressage logique"], correct: 0, explanation: "La pagination divise la mémoire physique en 'frames' et la mémoire logique en 'pages', toutes de taille fixe." },
+                { id: 54, question: "Quelle est la fonction principale d'une 'Table de pages' ?", options: ["Associer une adresse logique à une adresse physique", "Gérer les opérations d'E/S", "Stocker les registres du processeur", "Gérer les priorités des processus"], correct: 0, explanation: "La table de pages contient les correspondances entre les adresses logiques (pages) et les adresses physiques (frames)." },
+                { id: 55, question: "Quel est le problème de la 'fragmentation externe' ?", options: ["De l'espace inutilisé dans les blocs de mémoire", "Des trous de mémoire trop petits pour être alloués, dispersés dans la mémoire", "Une mémoire physique qui ne peut pas être paginée", "Un manque de frames de pages"], correct: 1, explanation: "La fragmentation externe se produit lorsque la mémoire libre est divisée en petits blocs non contigus, même si la quantité totale de mémoire libre est suffisante." },
+                { id: 56, question: "Qu'est-ce qu'une 'Table de Segmentation' ?", options: ["Une table qui stocke les adresses logiques", "Une table qui associe les segments aux adresses physiques", "Une table qui gère les pages de mémoire virtuelle", "Une table qui stocke les informations de pagination"], correct: 1, explanation: "Dans la segmentation, la mémoire est divisée en segments de taille variable. La table de segmentation stocke l'adresse de base et la limite de chaque segment." },
+                { id: 57, question: "Quel est le rôle de la TLB (Translation Lookaside Buffer) ?", options: ["Gérer l'accès aux fichiers", "Accélérer la conversion des adresses logiques en adresses physiques", "Stocker les pages de mémoire virtuelle", "Gérer l'allocation de mémoire aux processus"], correct: 1, explanation: "La TLB est un cache matériel qui stocke les entrées récentes de la table de pages pour accélérer les traductions d'adresses." },
+                { id: 58, question: "Quel algorithme de remplacement de pages remplace la page qui n'a pas été utilisée depuis le plus longtemps ?", options: ["FIFO", "LRU (Least Recently Used)", "Optimal", "LFU (Least Frequently Used)"], correct: 1, explanation: "LRU est un algorithme qui se base sur le principe de localité temporelle, en supposant que la page la moins récemment utilisée est la moins susceptible d'être utilisée à nouveau." },
+                { id: 59, question: "L'algorithme de remplacement de pages FIFO (First-In, First-Out) est sujet à quel problème ?", options: ["Thrashing", "Famine", "La fragmentation", "L'anomalie de Belady"], correct: 3, explanation: "L'anomalie de Belady est un phénomène où un nombre accru de frames de pages peut paradoxalement augmenter le nombre de défauts de pages pour l'algorithme FIFO." },
+                { id: 60, question: "Dans le concept de 'swapping', à quoi sert le 'swap space' ?", options: ["À stocker les tables de pages", "À stocker les processus en attente d'exécution", "À servir de mémoire virtuelle temporaire", "À stocker les fichiers du système d'exploitation"], correct: 2, explanation: "Le 'swap space' est une partie du disque dur utilisée comme extension temporaire de la mémoire physique pour les processus qui ne sont pas en cours d'exécution." },
+                { id: 61, question: "Quel est l'inconvénient principal de la segmentation ?", options: ["Fragmentation interne", "Fragmentation externe", "Surcharge des tables de pages", "Gestion complexe"], correct: 1, explanation: "La segmentation peut causer de la fragmentation externe car les segments, de tailles variables, peuvent laisser de petits trous de mémoire inutilisables." },
+                { id: 62, question: "Qu'est-ce que l'adressage logique ?", options: ["L'adresse vue par le processeur", "L'adresse réelle dans la mémoire physique", "L'adresse d'un fichier sur le disque", "L'adresse d'une page de mémoire"], correct: 0, explanation: "L'adressage logique est l'adresse générée par le CPU, qui est indépendante de l'organisation physique de la mémoire." },
+                { id: 63, question: "Quelle technique de gestion de mémoire est plus simple à mettre en œuvre ?", options: ["Pagination", "Segmentation", "Les deux sont de complexité similaire", "Aucune des deux"], correct: 0, explanation: "La pagination est souvent considérée comme plus simple à mettre en œuvre car les pages et frames sont de taille fixe, ce qui simplifie l'allocation." },
+                { id: 64, question: "Quel est l'un des avantages de la mémoire virtuelle ?", options: ["Augmentation du temps d'accès à la mémoire", "Réduction de l'espace de stockage", "Possibilité d'utiliser une mémoire physique plus petite", "Augmentation du temps de réponse"], correct: 2, explanation: "La mémoire virtuelle permet au système d'exécuter des programmes dont la taille est supérieure à la mémoire physique disponible, en utilisant le disque dur." },
+                { id: 65, question: "Qu'est-ce qu'un 'défaut de page' (page fault) ?", options: ["Une erreur dans la table de pages", "Le programme tente d'accéder à une page non autorisée", "La page demandée n'est pas en mémoire physique", "Le système a une surcharge de pages"], correct: 2, explanation: "Un défaut de page se produit lorsque le CPU tente d'accéder à une page qui ne se trouve pas dans la mémoire physique et doit être chargée du disque." },
+                { id: 66, question: "Dans l'algorithme de remplacement de pages LFU (Least Frequently Used), on remplace la page qui...", options: ["A été utilisée le plus souvent", "N'a pas été utilisée depuis le plus longtemps", "A la plus faible fréquence d'accès", "Est la plus ancienne en mémoire"], correct: 2, explanation: "LFU remplace la page qui a été utilisée le moins souvent, en supposant que son utilité future est faible." },
+                { id: 67, question: "Quel algorithme de remplacement de pages est considéré comme 'optimal' mais ne peut pas être implémenté dans la pratique ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 2, explanation: "L'algorithme Optimal (OPT) remplace la page qui ne sera pas utilisée pendant la plus longue période de temps, ce qui nécessite de connaître le futur." },
+                { id: 68, question: "Quel est le problème de la 'fragmentation interne' ?", options: ["De l'espace inutilisé à l'intérieur d'un bloc alloué", "Des trous de mémoire dispersés", "Une table de pages trop grande", "Une mauvaise gestion du disque"], correct: 0, explanation: "La fragmentation interne se produit lorsque l'espace alloué est légèrement plus grand que l'espace nécessaire, laissant un petit espace inutilisé à l'intérieur du bloc." },
+                { id: 69, question: "Le 'working set' d'un processus représente quoi ?", options: ["L'ensemble des pages que le processus est autorisé à utiliser", "L'ensemble des pages dont le processus a activement besoin à un moment donné", "La taille totale du programme sur le disque", "L'ensemble des frames de pages disponibles"], correct: 1, explanation: "Le 'working set' est l'ensemble des pages que le processus utilise activement et qui devraient idéalement rester en mémoire pour éviter les défauts de page." },
+                { id: 70, question: "Quel est l'un des avantages de la pagination ?", options: ["Complexité de mise en œuvre", "Absence de fragmentation externe", "Allocation de mémoire par taille variable", "Difficulté de partage de code"], correct: 1, explanation: "La pagination élimine la fragmentation externe car la mémoire physique est allouée par frames de taille fixe, qui peuvent être dispersés sans laisser de trous." },
+                { id: 71, question: "Dans la segmentation, un 'segment' correspond à quoi ?", options: ["Un bloc de taille fixe", "Une unité logique du programme", "Un petit morceau de mémoire physique", "Une adresse physique"], correct: 1, explanation: "Les segments sont des unités logiques du programme, comme le code, les données, la pile, etc." },
+                { id: 72, question: "Le 'page swapping' est un terme souvent utilisé pour décrire l'échange de quoi entre la mémoire et le disque ?", options: ["Des processus entiers", "Des pages individuelles", "Des segments de code", "Des tables de pages"], correct: 1, explanation: "Le 'page swapping' est le mouvement des pages de la mémoire physique vers le disque (et vice-versa) en réponse aux défauts de pages." },
+                { id: 73, question: "Quel est le rôle du 'gestionnaire de mémoire' dans un système d'exploitation ?", options: ["De gérer la file d'attente des processus", "D'allouer et de libérer l'espace mémoire", "D'ordonnancer les tâches du processeur", "De traduire les adresses logiques en adresses physiques"], correct: 1, explanation: "Le gestionnaire de mémoire est responsable de l'allocation et de la libération de la mémoire pour les processus, en utilisant des techniques comme la pagination ou la segmentation." },
+                { id: 74, question: "Quel est l'avantage principal d'un espace d'adressage virtuel plus grand que l'espace physique ?", options: ["Permet d'exécuter plus de processus", "Augmente la vitesse du processeur", "Réduit le nombre de défauts de pages", "Facilite l'accès au disque dur"], correct: 0, explanation: "Un espace d'adressage virtuel plus grand permet d'exécuter simultanément plus de processus, ou des processus plus grands, que la mémoire physique disponible ne le permettrait." },
+                { id: 75, question: "Quel est l'algorithme de remplacement de pages le plus simple à implémenter ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 0, explanation: "FIFO est l'algorithme le plus simple à implémenter car il suffit de maintenir une file d'attente pour savoir quelle est la page la plus ancienne en mémoire." },
+                { id: 76, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
+                { id: 77, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." },
+                { id: 78, question: "Quel terme est utilisé pour décrire une situation où un processus a une table de pages trop petite pour son 'working set' ?", options: ["Segmentation", "Thrashing", "Paging", "Swapping"], correct: 1, explanation: "Si la table de pages est trop petite, le système doit constamment échanger les pages, ce qui mène au Thrashing." },
+                { id: 79, question: "Dans le concept de 'dirty bit' (bit de modification), que signifie sa valeur ?", options: ["La page a été lue", "La page a été modifiée depuis son chargement", "La page est en lecture seule", "La page est dans le cache"], correct: 1, explanation: "Le 'dirty bit' (ou bit de modification) indique si une page a été modifiée. Si elle est 'sale', elle doit être réécrite sur le disque avant d'être remplacée." },
+                { id: 80, question: "Quel est l'un des inconvénients de la pagination ?", options: ["Fragmentation externe", "La difficulté de partager du code", "La fragmentation interne", "La complexité de l'implémentation matérielle"], correct: 2, explanation: "La fragmentation interne est un inconvénient de la pagination, car un processus peut ne pas utiliser entièrement la dernière page qui lui a été allouée, laissant un espace inutilisé." },
+                { id: 81, question: "La 'table de pages inversée' est utilisée pour résoudre quel problème ?", options: ["La fragmentation externe", "La taille des tables de pages", "La famine", "La commutation de contexte"], correct: 1, explanation: "La table de pages inversée est une technique qui utilise une table de pages par frame de mémoire physique au lieu d'une table par processus, ce qui est plus efficace pour gérer de grands espaces d'adressage virtuel." },
+                { id: 82, question: "Quel algorithme de remplacement de pages est basé sur le principe de 'la page qui vient d'arriver en mémoire est la plus susceptible d'être utilisée' ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 0, explanation: "C'est une prémisse non-scientifique mais qui explique le principe de base de FIFO : la page la plus ancienne est la première à partir, quel que soit son usage." },
+                { id: 83, question: "Dans un système avec segmentation, le 'compteur de segments' représente quoi ?", options: ["Le nombre total de segments en mémoire", "La taille du segment", "Le nombre de segments qu'un processus peut avoir", "Le nombre de pages dans un segment"], correct: 1, explanation: "Chaque entrée dans la table de segmentation contient l'adresse de base du segment et sa taille (limite)." },
+                { id: 84, question: "Quelle est la principale différence entre la pagination et la segmentation ?", options: ["La pagination utilise des blocs de taille fixe, la segmentation des blocs de taille variable", "La pagination est pour la mémoire physique, la segmentation pour la mémoire virtuelle", "La pagination ne souffre pas de fragmentation, la segmentation oui", "La pagination est plus lente que la segmentation"], correct: 0, explanation: "La principale différence est l'unité d'allocation : pages de taille fixe pour la pagination, et segments de taille variable pour la segmentation." },
+                { id: 85, question: "Quel est le principal problème de l'allocation de mémoire 'Best-Fit' ?", options: ["Il est lent", "Il peut créer de la fragmentation externe", "Il est trop complexe à implémenter", "Il est inefficace pour les petits processus"], correct: 1, explanation: "Best-Fit trouve le plus petit bloc de mémoire libre qui correspond, mais cela laisse de très petits fragments inutilisables (fragmentation externe)." },
+                { id: 86, question: "Dans l'algorithme de remplacement de pages 'Clock', qu'est-ce que le 'bit de référence' ?", options: ["Indique si la page a été utilisée récemment", "Indique si la page a été modifiée", "Indique si la page est valide", "Indique l'âge de la page"], correct: 0, explanation: "Le bit de référence est utilisé par l'algorithme 'Clock' (et d'autres variantes de LRU) pour indiquer si une page a été accédée récemment." },
+                { id: 87, question: "Qu'est-ce que l'espace d'adressage virtuel d'un processus ?", options: ["L'ensemble des adresses physiques qu'il peut utiliser", "L'ensemble des adresses logiques qu'il peut utiliser", "La taille de sa table de pages", "La quantité de mémoire physique qui lui est allouée"], correct: 1, explanation: "L'espace d'adressage virtuel est l'ensemble des adresses logiques qu'un processus peut utiliser. C'est la vue 'privée' de la mémoire que le système d'exploitation lui offre." },
+                { id: 88, question: "La technique de 'swapping' est-elle utilisée dans la mémoire virtuelle ?", options: ["Oui, pour échanger des pages", "Oui, pour échanger des processus entiers", "Non, elle est obsolète", "Non, elle est seulement pour les systèmes embarqués"], correct: 1, explanation: "Le swapping consiste à déplacer un processus entier entre la mémoire physique et le disque. C'est une technique plus lourde que le 'paging' qui ne déplace que des pages." },
+                { id: 89, question: "Qu'est-ce que l'allocation de mémoire 'Buddy System' ?", options: ["Une méthode pour allouer de petits blocs de mémoire", "Un algorithme de remplacement de pages", "Une technique qui divise la mémoire en blocs de puissance de 2", "Une méthode d'échange de pages"], correct: 2, explanation: "Le 'Buddy System' est une technique d'allocation qui divise la mémoire en blocs qui sont des puissances de 2, ce qui facilite la recherche de blocs libres." },
+                { id: 90, question: "Quel est l'inconvénient principal de l'algorithme de remplacement de pages 'FIFO' ?", options: ["Complexité d'implémentation", "Surcharge de CPU", "Il ne tient pas compte de l'usage des pages", "Il cause de la fragmentation externe"], correct: 2, explanation: "FIFO ne prend pas en compte la fréquence ou la date d'utilisation d'une page, ce qui peut entraîner le remplacement d'une page très utilisée." },
+                { id: 91, question: "Quel est le rôle du 'gestionnaire de mémoire' dans un système d'exploitation ?", options: ["De gérer la file d'attente des processus", "D'allouer et de libérer l'espace mémoire", "D'ordonnancer les tâches du processeur", "De traduire les adresses logiques en adresses physiques"], correct: 1, explanation: "Le gestionnaire de mémoire est responsable de l'allocation et de la libération de la mémoire pour les processus, en utilisant des techniques comme la pagination ou la segmentation." },
+                { id: 92, question: "Quel est l'avantage principal d'un espace d'adressage virtuel plus grand que l'espace physique ?", options: ["Permet d'exécuter plus de processus", "Augmente la vitesse du processeur", "Réduit le nombre de défauts de pages", "Facilite l'accès au disque dur"], correct: 0, explanation: "Un espace d'adressage virtuel plus grand permet d'exécuter simultanément plus de processus, ou des processus plus grands, que la mémoire physique disponible ne le permettrait." },
+                { id: 93, question: "Quel est l'algorithme de remplacement de pages le plus simple à implémenter ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 0, explanation: "FIFO est l'algorithme le plus simple à implémenter car il suffit de maintenir une file d'attente pour savoir quelle est la page la plus ancienne en mémoire." },
+                { id: 94, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
+                { id: 95, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." },
+                { id: 96, question: "Quel terme est utilisé pour décrire une situation où un processus a une table de pages trop petite pour son 'working set' ?", options: ["Segmentation", "Thrashing", "Paging", "Swapping"], correct: 1, explanation: "Si la table de pages est trop petite, le système doit constamment échanger les pages, ce qui mène au Thrashing." },
+                { id: 97, question: "Dans le concept de 'dirty bit' (bit de modification), que signifie sa valeur ?", options: ["La page a été lue", "La page a été modifiée depuis son chargement", "La page est en lecture seule", "La page est dans le cache"], correct: 1, explanation: "Le 'dirty bit' (ou bit de modification) indique si une page a été modifiée. Si elle est 'sale', elle doit être réécrite sur le disque avant d'être remplacée." },
+                { id: 98, question: "Quel est l'un des inconvénients de la pagination ?", options: ["Fragmentation externe", "La difficulté de partager du code", "La fragmentation interne", "La complexité de l'implémentation matérielle"], correct: 2, explanation: "La fragmentation interne est un inconvénient de la pagination, car un processus peut ne pas utiliser entièrement la dernière page qui lui a été allouée, laissant un espace inutilisé." },
+                { id: 99, question: "La 'table de pages inversée' est utilisée pour résoudre quel problème ?", options: ["La fragmentation externe", "La taille des tables de pages", "La famine", "La commutation de contexte"], correct: 1, explanation: "La table de pages inversée est une technique qui utilise une table de pages par frame de mémoire physique au lieu d'une table par processus, ce qui est plus efficace pour gérer de grands espaces d'adressage virtuel." },
+                { id: 100, question: "Quel algorithme de remplacement de pages est basé sur le principe de 'la page qui vient d'arriver en mémoire est la plus susceptible d'être utilisée' ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 0, explanation: "C'est une prémisse non-scientifique mais qui explique le principe de base de FIFO : la page la plus ancienne est la première à partir, quel que soit son usage." }
+            ],
+            memoire: [
+                { id: 101, question: "Qu'est-ce que le 'Thrashing' dans la gestion de la mémoire virtuelle ?", options: ["Un excès d'E/S dû à un manque de frames de pages", "Une fragmentation externe excessive", "Un phénomène où un processus ne trouve pas ses pages en mémoire", "Une mauvaise utilisation de la mémoire physique"], correct: 0, explanation: "Le Thrashing se produit lorsque le système passe la majorité de son temps à échanger des pages entre la mémoire physique et le disque, au lieu d'effectuer un travail utile." },
+                { id: 102, question: "Quel est l'objectif principal de la mémoire virtuelle ?", options: ["Augmenter la taille de la mémoire physique", "Permettre aux processus d'utiliser plus de mémoire qu'il n'y en a physiquement", "Accélérer l'accès à la mémoire RAM", "Éliminer la fragmentation"], correct: 1, explanation: "La mémoire virtuelle donne à chaque processus l'impression d'avoir un grand espace d'adressage privé, en utilisant le disque comme extension de la mémoire physique." },
+                { id: 103, question: "Qu'est-ce que la pagination (paging) ?", options: ["Une méthode pour diviser la mémoire en blocs de taille fixe", "Une technique pour diviser la mémoire en blocs de taille variable", "Une méthode d'échange de données entre disques", "Une technique pour gérer l'espace d'adressage logique"], correct: 0, explanation: "La pagination divise la mémoire physique en 'frames' et la mémoire logique en 'pages', toutes de taille fixe." },
+                { id: 104, question: "Quelle est la fonction principale d'une 'Table de pages' ?", options: ["Associer une adresse logique à une adresse physique", "Gérer les opérations d'E/S", "Stocker les registres du processeur", "Gérer les priorités des processus"], correct: 0, explanation: "La table de pages contient les correspondances entre les adresses logiques (pages) et les adresses physiques (frames)." },
+                { id: 105, question: "Quel est le problème de la 'fragmentation externe' ?", options: ["De l'espace inutilisé dans les blocs de mémoire", "Des trous de mémoire trop petits pour être alloués, dispersés dans la mémoire", "Une mémoire physique qui ne peut pas être paginée", "Un manque de frames de pages"], correct: 1, explanation: "La fragmentation externe se produit lorsque la mémoire libre est divisée en petits blocs non contigus, même si la quantité totale de mémoire libre est suffisante." },
+                { id: 106, question: "Qu'est-ce qu'une 'Table de Segmentation' ?", options: ["Une table qui stocke les adresses logiques", "Une table qui associe les segments aux adresses physiques", "Une table qui gère les pages de mémoire virtuelle", "Une table qui stocke les informations de pagination"], correct: 1, explanation: "Dans la segmentation, la mémoire est divisée en segments de taille variable. La table de segmentation stocke l'adresse de base et la limite de chaque segment." },
+                { id: 107, question: "Quel est le rôle de la TLB (Translation Lookaside Buffer) ?", options: ["Gérer l'accès aux fichiers", "Accélérer la conversion des adresses logiques en adresses physiques", "Stocker les pages de mémoire virtuelle", "Gérer l'allocation de mémoire aux processus"], correct: 1, explanation: "La TLB est un cache matériel qui stocke les entrées récentes de la table de pages pour accélérer les traductions d'adresses." },
+                { id: 108, question: "Quel algorithme de remplacement de pages remplace la page qui n'a pas été utilisée depuis le plus longtemps ?", options: ["FIFO", "LRU (Least Recently Used)", "Optimal", "LFU (Least Frequently Used)"], correct: 1, explanation: "LRU est un algorithme qui se base sur le principe de localité temporelle, en supposant que la page la moins récemment utilisée est la moins susceptible d'être utilisée à nouveau." },
+                { id: 109, question: "L'algorithme de remplacement de pages FIFO (First-In, First-Out) est sujet à quel problème ?", options: ["Thrashing", "Famine", "La fragmentation", "L'anomalie de Belady"], correct: 3, explanation: "L'anomalie de Belady est un phénomène où un nombre accru de frames de pages peut paradoxalement augmenter le nombre de défauts de pages pour l'algorithme FIFO." },
+                { id: 110, question: "Dans le concept de 'swapping', à quoi sert le 'swap space' ?", options: ["À stocker les tables de pages", "À stocker les processus en attente d'exécution", "À servir de mémoire virtuelle temporaire", "À stocker les fichiers du système d'exploitation"], correct: 2, explanation: "Le 'swap space' est une partie du disque dur utilisée comme extension temporaire de la mémoire physique pour les processus qui ne sont pas en cours d'exécution." },
+                { id: 111, question: "Quel est l'inconvénient principal de la segmentation ?", options: ["Fragmentation interne", "Fragmentation externe", "Surcharge des tables de pages", "Gestion complexe"], correct: 1, explanation: "La segmentation peut causer de la fragmentation externe car les segments, de tailles variables, peuvent laisser de petits trous de mémoire inutilisables." },
+                { id: 112, question: "Qu'est-ce que l'adressage logique ?", options: ["L'adresse vue par le processeur", "L'adresse réelle dans la mémoire physique", "L'adresse d'un fichier sur le disque", "L'adresse d'une page de mémoire"], correct: 0, explanation: "L'adressage logique est l'adresse générée par le CPU, qui est indépendante de l'organisation physique de la mémoire." },
+                { id: 113, question: "Quelle technique de gestion de mémoire est plus simple à mettre en œuvre ?", options: ["Pagination", "Segmentation", "Les deux sont de complexité similaire", "Aucune des deux"], correct: 0, explanation: "La pagination est souvent considérée comme plus simple à mettre en œuvre car les pages et frames sont de taille fixe, ce qui simplifie l'allocation." },
+                { id: 114, question: "Quel est l'un des avantages de la mémoire virtuelle ?", options: ["Augmentation du temps d'accès à la mémoire", "Réduction de l'espace de stockage", "Possibilité d'utiliser une mémoire physique plus petite", "Augmentation du temps de réponse"], correct: 2, explanation: "La mémoire virtuelle permet au système d'exécuter des programmes dont la taille est supérieure à la mémoire physique disponible, en utilisant le disque dur." },
+                { id: 115, question: "Qu'est-ce qu'un 'défaut de page' (page fault) ?", options: ["Une erreur dans la table de pages", "Le programme tente d'accéder à une page non autorisée", "La page demandée n'est pas en mémoire physique", "Le système a une surcharge de pages"], correct: 2, explanation: "Un défaut de page se produit lorsque le CPU tente d'accéder à une page qui ne se trouve pas dans la mémoire physique et doit être chargée du disque." },
+                { id: 116, question: "Dans l'algorithme de remplacement de pages LFU (Least Frequently Used), on remplace la page qui...", options: ["A été utilisée le plus souvent", "N'a pas été utilisée depuis le plus longtemps", "A la plus faible fréquence d'accès", "Est la plus ancienne en mémoire"], correct: 2, explanation: "LFU remplace la page qui a été utilisée le moins souvent, en supposant que son utilité future est faible." },
+                { id: 117, question: "Quel algorithme de remplacement de pages est considéré comme 'optimal' mais ne peut pas être implémenté dans la pratique ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 2, explanation: "L'algorithme Optimal (OPT) remplace la page qui ne sera pas utilisée pendant la plus longue période de temps, ce qui nécessite de connaître le futur." },
+                { id: 118, question: "Quel est le problème de la 'fragmentation interne' ?", options: ["De l'espace inutilisé à l'intérieur d'un bloc alloué", "Des trous de mémoire dispersés", "Une table de pages trop grande", "Une mauvaise gestion du disque"], correct: 0, explanation: "La fragmentation interne se produit lorsque l'espace alloué est légèrement plus grand que l'espace nécessaire, laissant un petit espace inutilisé à l'intérieur du bloc." },
+                { id: 119, question: "Le 'working set' d'un processus représente quoi ?", options: ["L'ensemble des pages que le processus est autorisé à utiliser", "L'ensemble des pages dont le processus a activement besoin à un moment donné", "La taille totale du programme sur le disque", "L'ensemble des frames de pages disponibles"], correct: 1, explanation: "Le 'working set' est l'ensemble des pages que le processus utilise activement et qui devraient idéalement rester en mémoire pour éviter les défauts de page." },
+                { id: 120, question: "Quel est l'un des avantages de la pagination ?", options: ["Complexité de mise en œuvre", "Absence de fragmentation externe", "Allocation de mémoire par taille variable", "Difficulté de partage de code"], correct: 1, explanation: "La pagination élimine la fragmentation externe car la mémoire physique est allouée par frames de taille fixe, qui peuvent être dispersés sans laisser de trous." },
+                { id: 121, question: "Dans la segmentation, un 'segment' correspond à quoi ?", options: ["Un bloc de taille fixe", "Une unité logique du programme", "Un petit morceau de mémoire physique", "Une adresse physique"], correct: 1, explanation: "Les segments sont des unités logiques du programme, comme le code, les données, la pile, etc." },
+                { id: 122, question: "Le 'page swapping' est un terme souvent utilisé pour décrire l'échange de quoi entre la mémoire et le disque ?", options: ["Des processus entiers", "Des pages individuelles", "Des segments de code", "Des tables de pages"], correct: 1, explanation: "Le 'page swapping' est le mouvement des pages de la mémoire physique vers le disque (et vice-versa) en réponse aux défauts de pages." },
+                { id: 123, question: "Quel est le rôle du 'gestionnaire de mémoire' dans un système d'exploitation ?", options: ["De gérer la file d'attente des processus", "D'allouer et de libérer l'espace mémoire", "D'ordonnancer les tâches du processeur", "De traduire les adresses logiques en adresses physiques"], correct: 1, explanation: "Le gestionnaire de mémoire est responsable de l'allocation et de la libération de la mémoire pour les processus, en utilisant des techniques comme la pagination ou la segmentation." },
+                { id: 124, question: "Quel est l'avantage principal d'un espace d'adressage virtuel plus grand que l'espace physique ?", options: ["Permet d'exécuter plus de processus", "Augmente la vitesse du processeur", "Réduit le nombre de défauts de pages", "Facilite l'accès au disque dur"], correct: 0, explanation: "Un espace d'adressage virtuel plus grand permet d'exécuter simultanément plus de processus, ou des processus plus grands, que la mémoire physique disponible ne le permettrait." },
+                { id: 125, question: "Quel est l'algorithme de remplacement de pages le plus simple à implémenter ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 0, explanation: "FIFO est l'algorithme le plus simple à implémenter car il suffit de maintenir une file d'attente pour savoir quelle est la page la plus ancienne en mémoire." },
+                { id: 126, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
+                { id: 127, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." },
+                { id: 128, question: "Quel terme est utilisé pour décrire une situation où un processus a une table de pages trop petite pour son 'working set' ?", options: ["Segmentation", "Thrashing", "Paging", "Swapping"], correct: 1, explanation: "Si la table de pages est trop petite, le système doit constamment échanger les pages, ce qui mène au Thrashing." },
+                { id: 129, question: "Dans le concept de 'dirty bit' (bit de modification), que signifie sa valeur ?", options: ["La page a été lue", "La page a été modifiée depuis son chargement", "La page est en lecture seule", "La page est dans le cache"], correct: 1, explanation: "Le 'dirty bit' (ou bit de modification) indique si une page a été modifiée. Si elle est 'sale', elle doit être réécrite sur le disque avant d'être remplacée." },
+                { id: 130, question: "Quel est l'un des inconvénients de la pagination ?", options: ["Fragmentation externe", "La difficulté de partager du code", "La fragmentation interne", "La complexité de l'implémentation matérielle"], correct: 2, explanation: "La fragmentation interne est un inconvénient de la pagination, car un processus peut ne pas utiliser entièrement la dernière page qui lui a été allouée, laissant un espace inutilisé." },
+                { id: 131, question: "La 'table de pages inversée' est utilisée pour résoudre quel problème ?", options: ["La fragmentation externe", "La taille des tables de pages", "La famine", "La commutation de contexte"], correct: 1, explanation: "La table de pages inversée est une technique qui utilise une table de pages par frame de mémoire physique au lieu d'une table par processus, ce qui est plus efficace pour gérer de grands espaces d'adressage virtuel." },
+                { id: 132, question: "Quel algorithme de remplacement de pages est basé sur le principe de 'la page qui vient d'arriver en mémoire est la plus susceptible d'être utilisée' ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 0, explanation: "C'est une prémisse non-scientifique mais qui explique le principe de base de FIFO : la page la plus ancienne est la première à partir, quel que soit son usage." },
+                { id: 133, question: "Dans un système avec segmentation, le 'compteur de segments' représente quoi ?", options: ["Le nombre total de segments en mémoire", "La taille du segment", "Le nombre de segments qu'un processus peut avoir", "Le nombre de pages dans un segment"], correct: 1, explanation: "Chaque entrée dans la table de segmentation contient l'adresse de base du segment et sa taille (limite)." },
+                { id: 134, question: "Quelle est la principale différence entre la pagination et la segmentation ?", options: ["La pagination utilise des blocs de taille fixe, la segmentation des blocs de taille variable", "La pagination est pour la mémoire physique, la segmentation pour la mémoire virtuelle", "La pagination ne souffre pas de fragmentation, la segmentation oui", "La pagination est plus lente que la segmentation"], correct: 0, explanation: "La principale différence est l'unité d'allocation : pages de taille fixe pour la pagination, et segments de taille variable pour la segmentation." },
+                { id: 135, question: "Quel est le principal problème de l'allocation de mémoire 'Best-Fit' ?", options: ["Il est lent", "Il peut créer de la fragmentation externe", "Il est trop complexe à implémenter", "Il est inefficace pour les petits processus"], correct: 1, explanation: "Best-Fit trouve le plus petit bloc de mémoire libre qui correspond, mais cela laisse de très petits fragments inutilisables (fragmentation externe)." },
+                { id: 136, question: "Dans l'algorithme de remplacement de pages 'Clock', qu'est-ce que le 'bit de référence' ?", options: ["Indique si la page a été utilisée récemment", "Indique si la page a été modifiée", "Indique si la page est valide", "Indique l'âge de la page"], correct: 0, explanation: "Le bit de référence est utilisé par l'algorithme 'Clock' (et d'autres variantes de LRU) pour indiquer si une page a été accédée récemment." },
+                { id: 137, question: "Qu'est-ce que l'espace d'adressage virtuel d'un processus ?", options: ["L'ensemble des adresses physiques qu'il peut utiliser", "L'ensemble des adresses logiques qu'il peut utiliser", "La taille de sa table de pages", "La quantité de mémoire physique qui lui est allouée"], correct: 1, explanation: "L'espace d'adressage virtuel est l'ensemble des adresses logiques qu'un processus peut utiliser. C'est la vue 'privée' de la mémoire que le système d'exploitation lui offre." },
+                { id: 138, question: "La technique de 'swapping' est-elle utilisée dans la mémoire virtuelle ?", options: ["Oui, pour échanger des pages", "Oui, pour échanger des processus entiers", "Non, elle est obsolète", "Non, elle est seulement pour les systèmes embarqués"], correct: 1, explanation: "Le swapping consiste à déplacer un processus entier entre la mémoire physique et le disque. C'est une technique plus lourde que le 'paging' qui ne déplace que des pages." },
+                { id: 139, question: "Qu'est-ce que l'allocation de mémoire 'Buddy System' ?", options: ["Une méthode pour allouer de petits blocs de mémoire", "Un algorithme de remplacement de pages", "Une technique qui divise la mémoire en blocs de puissance de 2", "Une méthode d'échange de pages"], correct: 2, explanation: "Le 'Buddy System' est une technique d'allocation qui divise la mémoire en blocs qui sont des puissances de 2, ce qui facilite la recherche de blocs libres." },
+                { id: 140, question: "Quel est l'inconvénient principal de l'algorithme de remplacement de pages 'FIFO' ?", options: ["Complexité d'implémentation", "Surcharge de CPU", "Il ne tient pas compte de l'usage des pages", "Il cause de la fragmentation externe"], correct: 2, explanation: "FIFO ne prend pas en compte la fréquence ou la date d'utilisation d'une page, ce qui peut entraîner le remplacement d'une page très utilisée." },
+                { id: 141, question: "Quelle est la fonction principale d'une 'Table de pages' ?", options: ["Associer une adresse logique à une adresse physique", "Gérer les opérations d'E/S", "Stocker les registres du processeur", "Gérer les priorités des processus"], correct: 0, explanation: "La table de pages contient les correspondances entre les adresses logiques (pages) et les adresses physiques (frames)." },
+                { id: 142, question: "Quel est le problème de la 'fragmentation externe' ?", options: ["De l'espace inutilisé dans les blocs de mémoire", "Des trous de mémoire trop petits pour être alloués, dispersés dans la mémoire", "Une mémoire physique qui ne peut pas être paginée", "Un manque de frames de pages"], correct: 1, explanation: "La fragmentation externe se produit lorsque la mémoire libre est divisée en petits blocs non contigus, même si la quantité totale de mémoire libre est suffisante." },
+                { id: 143, question: "Qu'est-ce qu'une 'Table de Segmentation' ?", options: ["Une table qui stocke les adresses logiques", "Une table qui associe les segments aux adresses physiques", "Une table qui gère les pages de mémoire virtuelle", "Une table qui stocke les informations de pagination"], correct: 1, explanation: "Dans la segmentation, la mémoire est divisée en segments de taille variable. La table de segmentation stocke l'adresse de base et la limite de chaque segment." },
+                { id: 144, question: "Quel est le rôle de la TLB (Translation Lookaside Buffer) ?", options: ["Gérer l'accès aux fichiers", "Accélérer la conversion des adresses logiques en adresses physiques", "Stocker les pages de mémoire virtuelle", "Gérer l'allocation de mémoire aux processus"], correct: 1, explanation: "La TLB est un cache matériel qui stocke les entrées récentes de la table de pages pour accélérer les traductions d'adresses." },
+                { id: 145, question: "Quel algorithme de remplacement de pages remplace la page qui n'a pas été utilisée depuis le plus longtemps ?", options: ["FIFO", "LRU (Least Recently Used)", "Optimal", "LFU (Least Frequently Used)"], correct: 1, explanation: "LRU est un algorithme qui se base sur le principe de localité temporelle, en supposant que la page la moins récemment utilisée est la moins susceptible d'être utilisée à nouveau." },
+                { id: 146, question: "L'algorithme de remplacement de pages FIFO (First-In, First-Out) est sujet à quel problème ?", options: ["Thrashing", "Famine", "La fragmentation", "L'anomalie de Belady"], correct: 3, explanation: "L'anomalie de Belady est un phénomène où un nombre accru de frames de pages peut paradoxalement augmenter le nombre de défauts de pages pour l'algorithme FIFO." },
+                { id: 147, question: "Dans le concept de 'swapping', à quoi sert le 'swap space' ?", options: ["À stocker les tables de pages", "À stocker les processus en attente d'exécution", "À servir de mémoire virtuelle temporaire", "À stocker les fichiers du système d'exploitation"], correct: 2, explanation: "Le 'swap space' est une partie du disque dur utilisée comme extension temporaire de la mémoire physique pour les processus qui ne sont pas en cours d'exécution." },
+                { id: 148, question: "Quel est l'inconvénient principal de la segmentation ?", options: ["Fragmentation interne", "Fragmentation externe", "Surcharge des tables de pages", "Gestion complexe"], correct: 1, explanation: "La segmentation peut causer de la fragmentation externe car les segments, de tailles variables, peuvent laisser de petits trous de mémoire inutilisables." },
+                { id: 149, question: "Qu'est-ce que l'adressage logique ?", options: ["L'adresse vue par le processeur", "L'adresse réelle dans la mémoire physique", "L'adresse d'un fichier sur le disque", "L'adresse d'une page de mémoire"], correct: 0, explanation: "L'adressage logique est l'adresse générée par le CPU, qui est indépendante de l'organisation physique de la mémoire." },
+                { id: 150, question: "Quelle technique de gestion de mémoire est plus simple à mettre en œuvre ?", options: ["Pagination", "Segmentation", "Les deux sont de complexité similaire", "Aucune des deux"], correct: 0, explanation: "La pagination est souvent considérée comme plus simple à mettre en œuvre car les pages et frames sont de taille fixe, ce qui simplifie l'allocation." },
+                { id: 151, question: "Quel est l'un des avantages de la mémoire virtuelle ?", options: ["Augmentation du temps d'accès à la mémoire", "Réduction de l'espace de stockage", "Possibilité d'utiliser une mémoire physique plus petite", "Augmentation du temps de réponse"], correct: 2, explanation: "La mémoire virtuelle permet au système d'exécuter des programmes dont la taille est supérieure à la mémoire physique disponible, en utilisant le disque dur." },
+                { id: 152, question: "Qu'est-ce qu'un 'défaut de page' (page fault) ?", options: ["Une erreur dans la table de pages", "Le programme tente d'accéder à une page non autorisée", "La page demandée n'est pas en mémoire physique", "Le système a une surcharge de pages"], correct: 2, explanation: "Un défaut de page se produit lorsque le CPU tente d'accéder à une page qui ne se trouve pas dans la mémoire physique et doit être chargée du disque." },
+                { id: 153, question: "Dans l'algorithme de remplacement de pages LFU (Least Frequently Used), on remplace la page qui...", options: ["A été utilisée le plus souvent", "N'a pas été utilisée depuis le plus longtemps", "A la plus faible fréquence d'accès", "Est la plus ancienne en mémoire"], correct: 2, explanation: "LFU remplace la page qui a été utilisée le moins souvent, en supposant que son utilité future est faible." },
+                { id: 154, question: "Quel algorithme de remplacement de pages est considéré comme 'optimal' mais ne peut pas être implémenté dans la pratique ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 2, explanation: "L'algorithme Optimal (OPT) remplace la page qui ne sera pas utilisée pendant la plus longue période de temps, ce qui nécessite de connaître le futur." },
+                { id: 155, question: "Quel est le problème de la 'fragmentation interne' ?", options: ["De l'espace inutilisé à l'intérieur d'un bloc alloué", "Des trous de mémoire dispersés", "Une table de pages trop grande", "Une mauvaise gestion du disque"], correct: 0, explanation: "La fragmentation interne se produit lorsque l'espace alloué est légèrement plus grand que l'espace nécessaire, laissant un petit espace inutilisé à l'intérieur du bloc." },
+                { id: 156, question: "Le 'working set' d'un processus représente quoi ?", options: ["L'ensemble des pages que le processus est autorisé à utiliser", "L'ensemble des pages dont le processus a activement besoin à un moment donné", "La taille totale du programme sur le disque", "L'ensemble des frames de pages disponibles"], correct: 1, explanation: "Le 'working set' est l'ensemble des pages que le processus utilise activement et qui devraient idéalement rester en mémoire pour éviter les défauts de page." },
+                { id: 157, question: "Quel est l'un des avantages de la pagination ?", options: ["Complexité de mise en œuvre", "Absence de fragmentation externe", "Allocation de mémoire par taille variable", "Difficulté de partage de code"], correct: 1, explanation: "La pagination élimine la fragmentation externe car la mémoire physique est allouée par frames de taille fixe, qui peuvent être dispersés sans laisser de trous." },
+                { id: 158, question: "Dans la segmentation, un 'segment' correspond à quoi ?", options: ["Un bloc de taille fixe", "Une unité logique du programme", "Un petit morceau de mémoire physique", "Une adresse physique"], correct: 1, explanation: "Les segments sont des unités logiques du programme, comme le code, les données, la pile, etc." },
+                { id: 159, question: "Le 'page swapping' est un terme souvent utilisé pour décrire l'échange de quoi entre la mémoire et le disque ?", options: ["Des processus entiers", "Des pages individuelles", "Des segments de code", "Des tables de pages"], correct: 1, explanation: "Le 'page swapping' est le mouvement des pages de la mémoire physique vers le disque (et vice-versa) en réponse aux défauts de pages." },
+                { id: 160, question: "Quel est le rôle du 'gestionnaire de mémoire' dans un système d'exploitation ?", options: ["De gérer la file d'attente des processus", "D'allouer et de libérer l'espace mémoire", "D'ordonnancer les tâches du processeur", "De traduire les adresses logiques en adresses physiques"], correct: 1, explanation: "Le gestionnaire de mémoire est responsable de l'allocation et de la libération de la mémoire pour les processus, en utilisant des techniques comme la pagination ou la segmentation." },
+                { id: 161, question: "Quel est l'avantage principal d'un espace d'adressage virtuel plus grand que l'espace physique ?", options: ["Permet d'exécuter plus de processus", "Augmente la vitesse du processeur", "Réduit le nombre de défauts de pages", "Facilite l'accès au disque dur"], correct: 0, explanation: "Un espace d'adressage virtuel plus grand permet d'exécuter simultanément plus de processus, ou des processus plus grands, que la mémoire physique disponible ne le permettrait." },
+                { id: 162, question: "Quel est l'algorithme de remplacement de pages le plus simple à implémenter ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 0, explanation: "FIFO est l'algorithme le plus simple à implémenter car il suffit de maintenir une file d'attente pour savoir quelle est la page la plus ancienne en mémoire." },
+                { id: 163, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
+                { id: 164, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." },
+                { id: 165, question: "Quel terme est utilisé pour décrire une situation où un processus a une table de pages trop petite pour son 'working set' ?", options: ["Segmentation", "Thrashing", "Paging", "Swapping"], correct: 1, explanation: "Si la table de pages est trop petite, le système doit constamment échanger les pages, ce qui mène au Thrashing." },
+                { id: 166, question: "Dans le concept de 'dirty bit' (bit de modification), que signifie sa valeur ?", options: ["La page a été lue", "La page a été modifiée depuis son chargement", "La page est en lecture seule", "La page est dans le cache"], correct: 1, explanation: "Le 'dirty bit' (ou bit de modification) indique si une page a été modifiée. Si elle est 'sale', elle doit être réécrite sur le disque avant d'être remplacée." },
+                { id: 167, question: "Quel est l'un des inconvénients de la pagination ?", options: ["Fragmentation externe", "La difficulté de partager du code", "La fragmentation interne", "La complexité de l'implémentation matérielle"], correct: 2, explanation: "La fragmentation interne est un inconvénient de la pagination, car un processus peut ne pas utiliser entièrement la dernière page qui lui a été allouée, laissant un espace inutilisé." },
+                { id: 168, question: "La 'table de pages inversée' est utilisée pour résoudre quel problème ?", options: ["La fragmentation externe", "La taille des tables de pages", "La famine", "La commutation de contexte"], correct: 1, explanation: "La table de pages inversée est une technique qui utilise une table de pages par frame de mémoire physique au lieu d'une table par processus, ce qui est plus efficace pour gérer de grands espaces d'adressage virtuel." },
+                { id: 169, question: "Quel algorithme de remplacement de pages est basé sur le principe de 'la page qui vient d'arriver en mémoire est la plus susceptible d'être utilisée' ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 0, explanation: "C'est une prémisse non-scientifique mais qui explique le principe de base de FIFO : la page la plus ancienne est la première à partir, quel que soit son usage." },
+                { id: 170, question: "Dans un système avec segmentation, le 'compteur de segments' représente quoi ?", options: ["Le nombre total de segments en mémoire", "La taille du segment", "Le nombre de segments qu'un processus peut avoir", "Le nombre de pages dans un segment"], correct: 1, explanation: "Chaque entrée dans la table de segmentation contient l'adresse de base du segment et sa taille (limite)." },
+                { id: 171, question: "Quelle est la principale différence entre la pagination et la segmentation ?", options: ["La pagination utilise des blocs de taille fixe, la segmentation des blocs de taille variable", "La pagination est pour la mémoire physique, la segmentation pour la mémoire virtuelle", "La pagination ne souffre pas de fragmentation, la segmentation oui", "La pagination est plus lente que la segmentation"], correct: 0, explanation: "La principale différence est l'unité d'allocation : pages de taille fixe pour la pagination, et segments de taille variable pour la segmentation." },
+                { id: 172, question: "Quel est le principal problème de l'allocation de mémoire 'Best-Fit' ?", options: ["Il est lent", "Il peut créer de la fragmentation externe", "Il est trop complexe à implémenter", "Il est inefficace pour les petits processus"], correct: 1, explanation: "Best-Fit trouve le plus petit bloc de mémoire libre qui correspond, mais cela laisse de très petits fragments inutilisables (fragmentation externe)." },
+                { id: 173, question: "Dans l'algorithme de remplacement de pages 'Clock', qu'est-ce que le 'bit de référence' ?", options: ["Indique si la page a été utilisée récemment", "Indique si la page a été modifiée", "Indique si la page est valide", "Indique l'âge de la page"], correct: 0, explanation: "Le bit de référence est utilisé par l'algorithme 'Clock' (et d'autres variantes de LRU) pour indiquer si une page a été accédée récemment." },
+                { id: 174, question: "Qu'est-ce que l'espace d'adressage virtuel d'un processus ?", options: ["L'ensemble des adresses physiques qu'il peut utiliser", "L'ensemble des adresses logiques qu'il peut utiliser", "La taille de sa table de pages", "La quantité de mémoire physique qui lui est allouée"], correct: 1, explanation: "L'espace d'adressage virtuel est l'ensemble des adresses logiques qu'un processus peut utiliser. C'est la vue 'privée' de la mémoire que le système d'exploitation lui offre." },
+                { id: 175, question: "La technique de 'swapping' est-elle utilisée dans la mémoire virtuelle ?", options: ["Oui, pour échanger des pages", "Oui, pour échanger des processus entiers", "Non, elle est obsolète", "Non, elle est seulement pour les systèmes embarqués"], correct: 1, explanation: "Le swapping consiste à déplacer un processus entier entre la mémoire physique et le disque. C'est une technique plus lourde que le 'paging' qui ne déplace que des pages." },
+                { id: 176, question: "Qu'est-ce que l'allocation de mémoire 'Buddy System' ?", options: ["Une méthode pour allouer de petits blocs de mémoire", "Un algorithme de remplacement de pages", "Une technique qui divise la mémoire en blocs de puissance de 2", "Une méthode d'échange de pages"], correct: 2, explanation: "Le 'Buddy System' est une technique d'allocation qui divise la mémoire en blocs qui sont des puissances de 2, ce qui facilite la recherche de blocs libres." },
+                { id: 177, question: "Quel est l'inconvénient principal de l'algorithme de remplacement de pages 'FIFO' ?", options: ["Complexité d'implémentation", "Surcharge de CPU", "Il ne tient pas compte de l'usage des pages", "Il cause de la fragmentation externe"], correct: 2, explanation: "FIFO ne prend pas en compte la fréquence ou la date d'utilisation d'une page, ce qui peut entraîner le remplacement d'une page très utilisée." },
+                { id: 178, question: "Quel est le rôle du 'gestionnaire de mémoire' dans un système d'exploitation ?", options: ["De gérer la file d'attente des processus", "D'allouer et de libérer l'espace mémoire", "D'ordonnancer les tâches du processeur", "De traduire les adresses logiques en adresses physiques"], correct: 1, explanation: "Le gestionnaire de mémoire est responsable de l'allocation et de la libération de la mémoire pour les processus, en utilisant des techniques comme la pagination ou la segmentation." },
+                { id: 179, question: "Quel est l'avantage principal d'un espace d'adressage virtuel plus grand que l'espace physique ?", options: ["Permet d'exécuter plus de processus", "Augmente la vitesse du processeur", "Réduit le nombre de défauts de pages", "Facilite l'accès au disque dur"], correct: 0, explanation: "Un espace d'adressage virtuel plus grand permet d'exécuter simultanément plus de processus, ou des processus plus grands, que la mémoire physique disponible ne le permettrait." },
+                { id: 180, question: "Quel est l'algorithme de remplacement de pages le plus simple à implémenter ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 0, explanation: "FIFO est l'algorithme le plus simple à implémenter car il suffit de maintenir une file d'attente pour savoir quelle est la page la plus ancienne en mémoire." },
+                { id: 181, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
+                { id: 182, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." },
+                { id: 183, question: "Quel terme est utilisé pour décrire une situation où un processus a une table de pages trop petite pour son 'working set' ?", options: ["Segmentation", "Thrashing", "Paging", "Swapping"], correct: 1, explanation: "Si la table de pages est trop petite, le système doit constamment échanger les pages, ce qui mène au Thrashing." },
+                { id: 184, question: "Dans le concept de 'dirty bit' (bit de modification), que signifie sa valeur ?", options: ["La page a été lue", "La page a été modifiée depuis son chargement", "La page est en lecture seule", "La page est dans le cache"], correct: 1, explanation: "Le 'dirty bit' (ou bit de modification) indique si une page a été modifiée. Si elle est 'sale', elle doit être réécrite sur le disque avant d'être remplacée." },
+                { id: 185, question: "Quel est l'un des inconvénients de la pagination ?", options: ["Fragmentation externe", "La difficulté de partager du code", "La fragmentation interne", "La complexité de l'implémentation matérielle"], correct: 2, explanation: "La fragmentation interne est un inconvénient de la pagination, car un processus peut ne pas utiliser entièrement la dernière page qui lui a été allouée, laissant un espace inutilisé." },
+                { id: 186, question: "La 'table de pages inversée' est utilisée pour résoudre quel problème ?", options: ["La fragmentation externe", "La taille des tables de pages", "La famine", "La commutation de contexte"], correct: 1, explanation: "La table de pages inversée est une technique qui utilise une table de pages par frame de mémoire physique au lieu d'une table par processus, ce qui est plus efficace pour gérer de grands espaces d'adressage virtuel." },
+                { id: 187, question: "Quel algorithme de remplacement de pages est basé sur le principe de 'la page qui vient d'arriver en mémoire est la plus susceptible d'être utilisée' ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 0, explanation: "C'est une prémisse non-scientifique mais qui explique le principe de base de FIFO : la page la plus ancienne est la première à partir, quel que soit son usage." },
+                { id: 188, question: "Dans un système avec segmentation, le 'compteur de segments' représente quoi ?", options: ["Le nombre total de segments en mémoire", "La taille du segment", "Le nombre de segments qu'un processus peut avoir", "Le nombre de pages dans un segment"], correct: 1, explanation: "Chaque entrée dans la table de segmentation contient l'adresse de base du segment et sa taille (limite)." },
+                { id: 189, question: "Quelle est la principale différence entre la pagination et la segmentation ?", options: ["La pagination utilise des blocs de taille fixe, la segmentation des blocs de taille variable", "La pagination est pour la mémoire physique, la segmentation pour la mémoire virtuelle", "La pagination ne souffre pas de fragmentation, la segmentation oui", "La pagination est plus lente que la segmentation"], correct: 0, explanation: "La principale différence est l'unité d'allocation : pages de taille fixe pour la pagination, et segments de taille variable pour la segmentation." },
+                { id: 190, question: "Quel est le principal problème de l'allocation de mémoire 'Best-Fit' ?", options: ["Il est lent", "Il peut créer de la fragmentation externe", "Il est trop complexe à implémenter", "Il est inefficace pour les petits processus"], correct: 1, explanation: "Best-Fit trouve le plus petit bloc de mémoire libre qui correspond, mais cela laisse de très petits fragments inutilisables (fragmentation externe)." },
+                { id: 191, question: "Dans l'algorithme de remplacement de pages 'Clock', qu'est-ce que le 'bit de référence' ?", options: ["Indique si la page a été utilisée récemment", "Indique si la page a été modifiée", "Indique si la page est valide", "Indique l'âge de la page"], correct: 0, explanation: "Le bit de référence est utilisé par l'algorithme 'Clock' (et d'autres variantes de LRU) pour indiquer si une page a été accédée récemment." },
+                { id: 192, question: "Qu'est-ce que l'espace d'adressage virtuel d'un processus ?", options: ["L'ensemble des adresses physiques qu'il peut utiliser", "L'ensemble des adresses logiques qu'il peut utiliser", "La taille de sa table de pages", "La quantité de mémoire physique qui lui est allouée"], correct: 1, explanation: "L'espace d'adressage virtuel est l'ensemble des adresses logiques qu'un processus peut utiliser. C'est la vue 'privée' de la mémoire que le système d'exploitation lui offre." },
+                { id: 193, question: "La technique de 'swapping' est-elle utilisée dans la mémoire virtuelle ?", options: ["Oui, pour échanger des pages", "Oui, pour échanger des processus entiers", "Non, elle est obsolète", "Non, elle est seulement pour les systèmes embarqués"], correct: 1, explanation: "Le swapping consiste à déplacer un processus entier entre la mémoire physique et le disque. C'est une technique plus lourde que le 'paging' qui ne déplace que des pages." },
+                { id: 194, question: "Qu'est-ce que l'allocation de mémoire 'Buddy System' ?", options: ["Une méthode pour allouer de petits blocs de mémoire", "Un algorithme de remplacement de pages", "Une technique qui divise la mémoire en blocs de puissance de 2", "Une méthode d'échange de pages"], correct: 2, explanation: "Le 'Buddy System' est une technique d'allocation qui divise la mémoire en blocs qui sont des puissances de 2, ce qui facilite la recherche de blocs libres." },
+                { id: 195, question: "Quel est l'inconvénient principal de l'algorithme de remplacement de pages 'FIFO' ?", options: ["Complexité d'implémentation", "Surcharge de CPU", "Il ne tient pas compte de l'usage des pages", "Il cause de la fragmentation externe"], correct: 2, explanation: "FIFO ne prend pas en compte la fréquence ou la date d'utilisation d'une page, ce qui peut entraîner le remplacement d'une page très utilisée." },
+                { id: 196, question: "Quel est le rôle du 'gestionnaire de mémoire' dans un système d'exploitation ?", options: ["De gérer la file d'attente des processus", "D'allouer et de libérer l'espace mémoire", "D'ordonnancer les tâches du processeur", "De traduire les adresses logiques en adresses physiques"], correct: 1, explanation: "Le gestionnaire de mémoire est responsable de l'allocation et de la libération de la mémoire pour les processus, en utilisant des techniques comme la pagination ou la segmentation." },
+                { id: 197, question: "Quel est l'avantage principal d'un espace d'adressage virtuel plus grand que l'espace physique ?", options: ["Permet d'exécuter plus de processus", "Augmente la vitesse du processeur", "Réduit le nombre de défauts de pages", "Facilite l'accès au disque dur"], correct: 0, explanation: "Un espace d'adressage virtuel plus grand permet d'exécuter simultanément plus de processus, ou des processus plus grands, que la mémoire physique disponible ne le permettrait." },
+                { id: 198, question: "Quel est l'algorithme de remplacement de pages le plus simple à implémenter ?", options: ["FIFO", "LRU", "Optimal", "LFU"], correct: 0, explanation: "FIFO est l'algorithme le plus simple à implémenter car il suffit de maintenir une file d'attente pour savoir quelle est la page la plus ancienne en mémoire." },
+                { id: 199, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
+                { id: 200, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." }
+            ],
+            algo: [
+    { id: 1, question: "Qu'est-ce qu'un algorithme?", options: ["Un langage de programmation", "Une suite d'instructions pour résoudre un problème", "Un type de variable", "Un matériel informatique"], correct: 1, explanation: "Un algorithme est une suite finie d'instructions permettant de résoudre un problème." },
+    { id: 2, question: "Quelle est la complexité moyenne du tri à bulles?", options: ["O(n)", "O(log n)", "O(n^2)", "O(n log n)"], correct: 2, explanation: "Le tri à bulles a une complexité moyenne de O(n^2)." },
+    { id: 3, question: "Quelle structure de données fonctionne selon le principe FIFO?", options: ["Pile", "File", "Arbre", "Graphe"], correct: 1, explanation: "La file (queue) fonctionne selon le principe First In First Out." },
+    { id: 4, question: "Quel algorithme est utilisé pour trouver le plus court chemin dans un graphe pondéré?", options: ["Kruskal", "Dijkstra", "Prim", "Bellman-Ford"], correct: 1, explanation: "L'algorithme de Dijkstra permet de trouver le plus court chemin dans un graphe pondéré sans arêtes négatives." },
+    { id: 5, question: "Qu'est-ce qu'une récursivité?", options: ["Une boucle infinie", "Une fonction qui s'appelle elle-même", "Un type de tri", "Un type de variable"], correct: 1, explanation: "La récursivité est le fait qu'une fonction s'appelle elle-même." },
+    { id: 6, question: "Quel est le but d'un algorithme de tri?", options: ["Trier des données selon un ordre défini", "Rechercher une valeur", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un algorithme de tri organise les éléments d'une liste selon un ordre (croissant ou décroissant)." },
+    { id: 7, question: "Quelle est la complexité moyenne du tri rapide (QuickSort)?", options: ["O(n^2)", "O(n)", "O(n log n)", "O(log n)"], correct: 2, explanation: "QuickSort a une complexité moyenne de O(n log n)." },
+    { id: 8, question: "Une pile (stack) fonctionne selon le principe...", options: ["FIFO", "LIFO", "LILO", "FILO"], correct: 1, explanation: "La pile est une structure de données LIFO (Last In, First Out)." },
+    { id: 9, question: "Quel algorithme est utilisé pour rechercher un élément dans un tableau trié?", options: ["Recherche linéaire", "Recherche binaire", "Recherche par hachage", "Recherche séquentielle"], correct: 1, explanation: "La recherche binaire est efficace pour les tableaux triés." },
+    { id: 10, question: "Quel est le principe de la programmation dynamique?", options: ["Diviser pour régner", "Résoudre des sous-problèmes et mémoriser les résultats", "Utiliser des piles", "Utiliser des files"], correct: 1, explanation: "La programmation dynamique consiste à résoudre des sous-problèmes et à stocker leurs résultats pour éviter les calculs redondants." },
+    { id: 11, question: "Quel est le but d'un algorithme glouton?", options: ["Trouver une solution optimale globale en faisant des choix locaux optimaux", "Trier des données", "Rechercher une valeur", "Compresser des données"], correct: 0, explanation: "Un algorithme glouton fait des choix optimaux à chaque étape pour trouver une solution globale." },
+    { id: 12, question: "Quel est le pire cas de la recherche binaire?", options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"], correct: 1, explanation: "La recherche binaire a une complexité de O(log n) dans le pire cas." },
+    { id: 13, question: "Quel algorithme est utilisé pour le tri par insertion?", options: ["Insertion Sort", "Merge Sort", "Quick Sort", "Heap Sort"], correct: 0, explanation: "Insertion Sort est l'algorithme de tri par insertion." },
+    { id: 14, question: "Quelle structure de données permet un accès direct à un élément par son index?", options: ["Pile", "File", "Tableau", "Arbre binaire"], correct: 2, explanation: "Le tableau permet un accès direct à un élément par son index." },
+    { id: 15, question: "Quel est le principe du tri fusion (Merge Sort)?", options: ["Diviser pour régner", "Glouton", "Programmation dynamique", "Recherche binaire"], correct: 0, explanation: "Le tri fusion utilise la stratégie diviser pour régner." },
+    { id: 16, question: "Quel est le but d'une table de hachage?", options: ["Stocker des données de façon ordonnée", "Permettre un accès rapide à des données via une clé", "Trier des données", "Compresser des données"], correct: 1, explanation: "La table de hachage permet un accès rapide à des données via une clé unique." },
+    { id: 17, question: "Quel est le principe de l'algorithme de Kruskal?", options: ["Trouver le plus court chemin", "Trouver l'arbre couvrant de poids minimal", "Trier des données", "Compresser des données"], correct: 1, explanation: "Kruskal trouve l'arbre couvrant de poids minimal dans un graphe." },
+    { id: 18, question: "Quelle est la complexité du tri par sélection (Selection Sort)?", options: ["O(n)", "O(n^2)", "O(n log n)", "O(log n)"], correct: 1, explanation: "Le tri par sélection a une complexité de O(n^2)." },
+    { id: 19, question: "Quel algorithme utilise une file de priorité?", options: ["Recherche binaire", "Tri à bulles", "Dijkstra", "Tri par insertion"], correct: 2, explanation: "L'algorithme de Dijkstra utilise une file de priorité pour sélectionner le prochain sommet à traiter." },
+    { id: 20, question: "Quel est le but d'un arbre binaire de recherche?", options: ["Trier des données", "Permettre une recherche rapide", "Compresser des données", "Crypter des données"], correct: 1, explanation: "L'arbre binaire de recherche permet une recherche rapide d'éléments." },
+    // ...questions 21 à 100 générées automatiquement...
+    { id: 21, question: "Quel est le principe de l'algorithme de Prim?", options: ["Trouver le plus court chemin", "Trouver l'arbre couvrant de poids minimal", "Trier des données", "Compresser des données"], correct: 1, explanation: "Prim trouve l'arbre couvrant de poids minimal dans un graphe pondéré." },
+    { id: 22, question: "Quelle structure de données est utilisée pour l'algorithme BFS?", options: ["Pile", "File", "Tableau", "Arbre"], correct: 1, explanation: "BFS (parcours en largeur) utilise une file pour explorer les sommets." },
+    { id: 23, question: "Quelle est la complexité du tri par tas (Heap Sort)?", options: ["O(n^2)", "O(n log n)", "O(n)", "O(log n)"], correct: 1, explanation: "Le tri par tas a une complexité de O(n log n)." },
+    { id: 24, question: "Quel est le but d'un algorithme de recherche linéaire?", options: ["Trouver un élément dans une liste non triée", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "La recherche linéaire parcourt chaque élément jusqu'à trouver la valeur recherchée." },
+    { id: 25, question: "Quel est le principe de la récursivité terminale?", options: ["La fonction s'appelle elle-même en dernière instruction", "La fonction ne s'appelle jamais elle-même", "La fonction utilise une pile", "La fonction utilise une file"], correct: 0, explanation: "La récursivité terminale permet une optimisation de la pile d'appels." },
+    { id: 26, question: "Quel algorithme est utilisé pour le tri par comptage (Counting Sort)?", options: ["Trier des entiers dans un intervalle limité", "Trier des chaînes de caractères", "Trier des objets", "Trier des flottants"], correct: 0, explanation: "Counting Sort est efficace pour trier des entiers dans un intervalle restreint." },
+    { id: 27, question: "Quelle structure de données permet d'implémenter une file de priorité?", options: ["Tableau", "Tas binaire (heap)", "Pile", "Liste chaînée"], correct: 1, explanation: "Le tas binaire est utilisé pour implémenter une file de priorité." },
+    { id: 28, question: "Quel est le but d'un arbre AVL?", options: ["Arbre binaire équilibré pour garantir O(log n) à l'insertion et la recherche", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre AVL est un arbre binaire de recherche auto-équilibré." },
+    { id: 29, question: "Quel algorithme est utilisé pour le tri par fusion?", options: ["Merge Sort", "Quick Sort", "Heap Sort", "Bubble Sort"], correct: 0, explanation: "Merge Sort est l'algorithme de tri par fusion." },
+    { id: 30, question: "Quel est le principe de l'algorithme de Bellman-Ford?", options: ["Trouver le plus court chemin même avec des arêtes négatives", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Bellman-Ford trouve le plus court chemin dans un graphe, même avec des arêtes négatives." },
+    // ...questions 31 à 100 générées automatiquement...
+    { id: 31, question: "Quel est le but d'un arbre B?", options: ["Stocker efficacement de grandes quantités de données sur disque", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre B est utilisé dans les bases de données pour l'indexation." },
+    { id: 32, question: "Quelle est la complexité de la recherche dans un arbre binaire équilibré?", options: ["O(n)", "O(log n)", "O(n^2)", "O(1)"], correct: 1, explanation: "Dans un arbre binaire équilibré, la recherche est en O(log n)." },
+    { id: 33, question: "Quel algorithme est utilisé pour le parcours en profondeur d'un graphe?", options: ["BFS", "DFS", "Dijkstra", "Kruskal"], correct: 1, explanation: "DFS (Depth First Search) est le parcours en profondeur." },
+    { id: 34, question: "Quel est le but d'une table de hachage parfaite?", options: ["Aucune collision de clés", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Une table de hachage parfaite ne provoque aucune collision." },
+    { id: 35, question: "Quel est le principe de l'algorithme de Floyd-Warshall?", options: ["Trouver les plus courts chemins entre tous les couples de sommets", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Floyd-Warshall calcule les plus courts chemins entre tous les sommets d'un graphe." },
+    // ...questions 36 à 100 générées automatiquement...
+    { id: 36, question: "Quel est le but d'un arbre rouge-noir?", options: ["Arbre binaire équilibré pour garantir O(log n) à l'insertion et la recherche", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre rouge-noir est un arbre binaire de recherche auto-équilibré." },
+    { id: 37, question: "Quel algorithme est utilisé pour le tri par tas?", options: ["Heap Sort", "Quick Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Heap Sort est l'algorithme de tri par tas." },
+    { id: 38, question: "Quel est le principe de la programmation récursive?", options: ["Une fonction s'appelle elle-même pour résoudre un problème", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "La programmation récursive consiste à résoudre un problème en le divisant en sous-problèmes similaires." },
+    { id: 39, question: "Quel est le but d'un graphe orienté acyclique (DAG)?", options: ["Représenter des dépendances sans cycles", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un DAG est utilisé pour représenter des dépendances, comme dans les tâches à exécuter dans un ordre précis." },
+    { id: 40, question: "Quel algorithme est utilisé pour le tri topologique?", options: ["DFS", "BFS", "Dijkstra", "Kruskal"], correct: 0, explanation: "Le tri topologique d'un graphe orienté acyclique peut être réalisé avec DFS." },
+    // ...questions 41 à 100 générées automatiquement...
+    { id: 41, question: "Quel est le but d'un arbre suffixe?", options: ["Rechercher rapidement des sous-chaînes dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre suffixe permet de rechercher efficacement des motifs dans une chaîne." },
+    { id: 42, question: "Quel algorithme est utilisé pour la compression de Huffman?", options: ["Huffman", "LZW", "RLE", "Shannon"], correct: 0, explanation: "L'algorithme de Huffman est utilisé pour la compression sans perte." },
+    { id: 43, question: "Quel est le principe de l'algorithme de Boyer-Moore?", options: ["Recherche efficace de motifs dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Boyer-Moore est un algorithme efficace de recherche de motifs dans une chaîne." },
+    { id: 44, question: "Quel est le but d'un automate fini?", options: ["Reconnaître des langages réguliers", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un automate fini reconnaît des langages réguliers." },
+    { id: 45, question: "Quel algorithme est utilisé pour la recherche de motifs de Knuth-Morris-Pratt?", options: ["KMP", "Boyer-Moore", "Rabin-Karp", "Aho-Corasick"], correct: 0, explanation: "KMP est un algorithme efficace de recherche de motifs dans une chaîne." },
+    // ...questions 46 à 100 générées automatiquement...
+    { id: 46, question: "Quel est le but d'un arbre segmentaire?", options: ["Effectuer des requêtes et mises à jour rapides sur des intervalles", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre segmentaire est utilisé pour les requêtes d'intervalles dans les tableaux." },
+    { id: 47, question: "Quel algorithme est utilisé pour la recherche de motifs de Rabin-Karp?", options: ["Rabin-Karp", "KMP", "Boyer-Moore", "Aho-Corasick"], correct: 0, explanation: "Rabin-Karp utilise le hachage pour rechercher des motifs dans une chaîne." },
+    { id: 48, question: "Quel est le principe de l'algorithme de Ford-Fulkerson?", options: ["Trouver le flot maximal dans un réseau", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Ford-Fulkerson trouve le flot maximal dans un graphe orienté." },
+    { id: 49, question: "Quel est le but d'un arbre Fenwick (Binary Indexed Tree)?", options: ["Effectuer des requêtes de sommes de préfixes efficacement", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre Fenwick permet des requêtes et mises à jour rapides sur des préfixes de tableaux." },
+    { id: 50, question: "Quel algorithme est utilisé pour la compression LZW?", options: ["LZW", "Huffman", "RLE", "Shannon"], correct: 0, explanation: "LZW est un algorithme de compression sans perte." },
+    // ...questions 51 à 100 générées automatiquement...
+    { id: 51, question: "Quel est le but d'un arbre Trie?", options: ["Stocker efficacement des ensembles de chaînes de caractères", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Trie est utilisé pour stocker et rechercher des chaînes efficacement." },
+    { id: 52, question: "Quel algorithme est utilisé pour le tri radix (Radix Sort)?", options: ["Radix Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Radix Sort trie les entiers en traitant les chiffres un à un." },
+    { id: 53, question: "Quel est le principe de l'algorithme de Tarjan?", options: ["Trouver les composantes fortement connexes dans un graphe", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Tarjan trouve les composantes fortement connexes dans un graphe orienté." },
+    { id: 54, question: "Quel est le but d'un arbre segmentaire paresseux (Lazy Segment Tree)?", options: ["Optimiser les mises à jour d'intervalles dans un tableau", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Lazy Segment Tree optimise les mises à jour d'intervalles." },
+    { id: 55, question: "Quel algorithme est utilisé pour la recherche de motifs de Aho-Corasick?", options: ["Aho-Corasick", "KMP", "Boyer-Moore", "Rabin-Karp"], correct: 0, explanation: "Aho-Corasick recherche plusieurs motifs simultanément dans une chaîne." },
+    // ...questions 56 à 100 générées automatiquement...
+    { id: 56, question: "Quel est le but d'un arbre Suffix Automaton?", options: ["Rechercher efficacement des sous-chaînes dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Suffix Automaton permet des recherches rapides de sous-chaînes." },
+    { id: 57, question: "Quel algorithme est utilisé pour la compression RLE?", options: ["RLE", "Huffman", "LZW", "Shannon"], correct: 0, explanation: "RLE (Run-Length Encoding) est un algorithme de compression simple." },
+    { id: 58, question: "Quel est le principe de l'algorithme de Johnson?", options: ["Trouver les plus courts chemins entre tous les couples de sommets dans un graphe avec arêtes négatives", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'algorithme de Johnson combine Bellman-Ford et Dijkstra pour les plus courts chemins." },
+    { id: 59, question: "Quel est le but d'un arbre Patricia?", options: ["Optimiser le stockage des chaînes dans un Trie compressé", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre Patricia est un Trie compressé pour optimiser l'espace." },
+    { id: 60, question: "Quel algorithme est utilisé pour le tri Shell (Shell Sort)?", options: ["Shell Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Shell Sort est une amélioration du tri par insertion." },
+    // ...questions 61 à 100 générées automatiquement...
+    { id: 61, question: "Quel est le but d'un graphe biparti?", options: ["Représenter des relations entre deux ensembles disjoints", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un graphe biparti relie deux ensembles sans arêtes internes à chaque ensemble." },
+    { id: 62, question: "Quel algorithme est utilisé pour le flot maximal dans un réseau?", options: ["Ford-Fulkerson", "Dijkstra", "Kruskal", "Prim"], correct: 0, explanation: "Ford-Fulkerson calcule le flot maximal dans un réseau." },
+    { id: 63, question: "Quel est le principe de l'algorithme de Kosaraju?", options: ["Trouver les composantes fortement connexes dans un graphe", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Kosaraju trouve les composantes fortement connexes dans un graphe orienté." },
+    { id: 64, question: "Quel est le but d'un arbre Splay?", options: ["Arbre binaire auto-ajustable pour optimiser l'accès aux éléments récemment utilisés", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre Splay optimise l'accès aux éléments fréquemment utilisés." },
+    { id: 65, question: "Quel algorithme est utilisé pour le tri cocktail (Cocktail Sort)?", options: ["Cocktail Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Cocktail Sort est une variante bidirectionnelle du tri à bulles." },
+    // ...questions 66 à 100 générées automatiquement...
+    { id: 66, question: "Quel est le but d'un graphe pondéré?", options: ["Représenter des relations avec des poids sur les arêtes", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un graphe pondéré attribue un poids à chaque arête." },
+    { id: 67, question: "Quel algorithme est utilisé pour le tri gnome (Gnome Sort)?", options: ["Gnome Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Gnome Sort est un algorithme de tri simple basé sur l'échange d'éléments." },
+    { id: 68, question: "Quel est le principe de l'algorithme de Warshall?", options: ["Calculer la fermeture transitive d'un graphe", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'algorithme de Warshall calcule la fermeture transitive d'un graphe." },
+    { id: 69, question: "Quel est le but d'un arbre 2-3?", options: ["Arbre de recherche équilibré avec 2 ou 3 enfants par nœud", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre 2-3 est un arbre de recherche équilibré." },
+    { id: 70, question: "Quel algorithme est utilisé pour le tri pigeonhole (Pigeonhole Sort)?", options: ["Pigeonhole Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Pigeonhole Sort trie les entiers dans un intervalle restreint." },
+    // ...questions 71 à 100 générées automatiquement...
+    { id: 71, question: "Quel est le but d'un graphe complet?", options: ["Chaque paire de sommets est reliée par une arête", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Dans un graphe complet, chaque sommet est relié à tous les autres." },
+    { id: 72, question: "Quel algorithme est utilisé pour le tri bogo (Bogo Sort)?", options: ["Bogo Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Bogo Sort est un algorithme de tri inefficace basé sur le hasard." },
+    { id: 73, question: "Quel est le principe de l'algorithme de Z?", options: ["Recherche efficace de motifs dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'algorithme de Z est utilisé pour la recherche de motifs dans une chaîne." },
+    { id: 74, question: "Quel est le but d'un arbre AA?", options: ["Arbre binaire de recherche équilibré simplifié", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre AA est une variante simplifiée de l'arbre rouge-noir." },
+    { id: 75, question: "Quel algorithme est utilisé pour le tri cycle (Cycle Sort)?", options: ["Cycle Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Cycle Sort minimise le nombre d'écritures lors du tri." },
+    // ...questions 76 à 100 générées automatiquement...
+    { id: 76, question: "Quel est le but d'un graphe connexe?", options: ["Il existe un chemin entre chaque paire de sommets", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un graphe connexe permet d'aller de n'importe quel sommet à un autre." },
+    { id: 77, question: "Quel algorithme est utilisé pour le tri bitonic (Bitonic Sort)?", options: ["Bitonic Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Bitonic Sort est utilisé dans les architectures parallèles." },
+    { id: 78, question: "Quel est le principe de l'algorithme de Hopcroft-Karp?", options: ["Trouver un appariement maximal dans un graphe biparti", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Hopcroft-Karp trouve un appariement maximal dans un graphe biparti." },
+    { id: 79, question: "Quel est le but d'un arbre Suffix Tree?", options: ["Rechercher efficacement des sous-chaînes dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Suffix Tree permet des recherches rapides de sous-chaînes." },
+    { id: 80, question: "Quel algorithme est utilisé pour le tri pancake (Pancake Sort)?", options: ["Pancake Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Pancake Sort trie une pile d'éléments en retournant des sous-listes." },
+    // ...questions 81 à 100 générées automatiquement...
+    { id: 81, question: "Quel est le but d'un graphe orienté?", options: ["Les arêtes ont un sens (direction)", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Dans un graphe orienté, les arêtes ont une direction." },
+    { id: 82, question: "Quel algorithme est utilisé pour le tri stooge (Stooge Sort)?", options: ["Stooge Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Stooge Sort est un algorithme de tri récursif inefficace." },
+    { id: 83, question: "Quel est le principe de l'algorithme de Edmonds-Karp?", options: ["Calculer le flot maximal dans un réseau en utilisant BFS", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Edmonds-Karp est une variante de Ford-Fulkerson utilisant BFS." },
+    { id: 84, question: "Quel est le but d'un arbre Suffix Array?", options: ["Rechercher efficacement des sous-chaînes dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Suffix Array permet des recherches rapides de sous-chaînes." },
+    { id: 85, question: "Quel algorithme est utilisé pour le tri comb (Comb Sort)?", options: ["Comb Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Comb Sort améliore le tri à bulles en éliminant les petits éléments à la fin." },
+    // ...questions 86 à 100 générées automatiquement...
+    { id: 86, question: "Quel est le but d'un graphe non orienté?", options: ["Les arêtes n'ont pas de sens (direction)", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Dans un graphe non orienté, les arêtes n'ont pas de direction." },
+    { id: 87, question: "Quel algorithme est utilisé pour le tri odd-even (Odd-Even Sort)?", options: ["Odd-Even Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Odd-Even Sort est un algorithme de tri parallèle." },
+    { id: 88, question: "Quel est le principe de l'algorithme de Johnson-Trotter?", options: ["Générer toutes les permutations d'un ensemble", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Johnson-Trotter génère toutes les permutations d'un ensemble." },
+    { id: 89, question: "Quel est le but d'un arbre Suffix Link?", options: ["Optimiser la recherche de motifs dans un arbre suffixe", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Suffix Link optimise la navigation dans un arbre suffixe." },
+    { id: 90, question: "Quel algorithme est utilisé pour le tri patience (Patience Sort)?", options: ["Patience Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Patience Sort est utilisé pour trouver la plus longue sous-séquence croissante." },
+    // ...questions 91 à 100 générées automatiquement...
+    { id: 91, question: "Quel est le but d'un graphe cyclique?", options: ["Il existe au moins un cycle dans le graphe", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un graphe cyclique contient au moins un cycle." },
+    { id: 92, question: "Quel algorithme est utilisé pour le tri strand (Strand Sort)?", options: ["Strand Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Strand Sort est un algorithme de tri basé sur l'extraction de sous-listes croissantes." },
+    { id: 93, question: "Quel est le principe de l'algorithme de Manacher?", options: ["Trouver la plus longue sous-chaîne palindrome dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Manacher trouve la plus longue sous-chaîne palindrome en temps linéaire." },
+    { id: 94, question: "Quel est le but d'un arbre Cartesian?", options: ["Arbre binaire de recherche avec propriétés de tas", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'arbre Cartesian combine les propriétés d'un tas et d'un arbre binaire de recherche." },
+    { id: 95, question: "Quel algorithme est utilisé pour le tri sleep (Sleep Sort)?", options: ["Sleep Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Sleep Sort est un algorithme de tri basé sur le temps d'attente (non utilisé en pratique)." },
+    { id: 96, question: "Quel est le but d'un graphe acyclique?", options: ["Il n'existe aucun cycle dans le graphe", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Un graphe acyclique ne contient aucun cycle." },
+    { id: 97, question: "Quel algorithme est utilisé pour le tri stooge (Stooge Sort)?", options: ["Stooge Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Stooge Sort est un algorithme de tri récursif inefficace." },
+    { id: 98, question: "Quel est le principe de l'algorithme de Z?", options: ["Recherche efficace de motifs dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "L'algorithme de Z est utilisé pour la recherche de motifs dans une chaîne." },
+    { id: 99, question: "Quel est le but d'un arbre Suffix Array?", options: ["Rechercher efficacement des sous-chaînes dans une chaîne", "Trier des données", "Compresser des données", "Crypter des données"], correct: 0, explanation: "Le Suffix Array permet des recherches rapides de sous-chaînes." },
+    { id: 100, question: "Quel algorithme est utilisé pour le tri patience (Patience Sort)?", options: ["Patience Sort", "Heap Sort", "Merge Sort", "Bubble Sort"], correct: 0, explanation: "Patience Sort est utilisé pour trouver la plus longue sous-séquence croissante." }
+  ],
+
+  
+
+        };
+
+        // --- LOGIQUE JAVASCRIPT ---
+        document.addEventListener('DOMContentLoaded', () => {
+            // Sélection des éléments DOM
+            const setupScreen = document.querySelector('.setup-screen');
+            const quizScreen = document.querySelector('.quiz-screen');
+            const resultScreen = document.querySelector('.result-screen');
+            const startBtn = document.getElementById('startBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const finishBtn = document.getElementById('finishBtn');
+            const restartBtn = document.getElementById('restartBtn');
+            const changeSettingsBtn = document.getElementById('changeSettingsBtn');
+
+            const lessonCards = document.querySelectorAll('.lesson-card');
+            const levelCards = document.querySelectorAll('.level-card');
+            
+            const questionNumberElement = document.getElementById('questionNumber');
+            const questionTextElement = document.getElementById('questionText');
+            const answersContainer = document.getElementById('answersContainer');
+            const explanationContainer = document.getElementById('explanationContainer');
+            const explanationContent = document.getElementById('explanationContent');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+
+            const finalScore = document.getElementById('finalScore');
+            const scoreProgress = document.getElementById('scoreProgress');
+            const correctAnswersElement = document.getElementById('correctAnswers');
+            const incorrectAnswersElement = document.getElementById('incorrectAnswers');
+            const totalQuestionsElement = document.getElementById('totalQuestions');
+            const studiedLessonElement = document.getElementById('studiedLesson');
+
+            let currentLesson = null;
+            let currentLevel = null;
+            let currentQuestions = [];
+            let currentQuestionIndex = 0;
+            let score = 0;
+
+            // Sélection de la leçon
+            lessonCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    lessonCards.forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    currentLesson = card.dataset.lesson;
+                    checkStartButton();
+                });
+            });
+
+            // Sélection du niveau
+            levelCards.forEach(card => {
+                card.addEventListener('click', () => {
+                    levelCards.forEach(c => c.classList.remove('selected'));
+                    card.classList.add('selected');
+                    currentLevel = parseInt(card.dataset.level);
+                    checkStartButton();
+                });
+            });
+
+            // Vérifie si le bouton 'Commencer' doit être activé
+            function checkStartButton() {
+                if (currentLesson && currentLevel) {
+                    startBtn.disabled = false;
+                } else {
+                    startBtn.disabled = true;
+                }
+            }
+
+            // Mélange un tableau de questions
+            function shuffle(array) {
+                for (let i = array.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [array[i], array[j]] = [array[j], array[i]];
+                }
+            }
+
+            // Passe à l'écran du quiz
+            startBtn.addEventListener('click', () => {
+                // S'assure que les questions existent pour la leçon choisie
+                if (questionsDB[currentLesson]) {
+                    shuffle(questionsDB[currentLesson]);
+                    currentQuestions = questionsDB[currentLesson].slice(0, currentLevel);
+                    currentQuestionIndex = 0;
+                    score = 0;
+                    
+                    setupScreen.classList.remove('active');
+                    quizScreen.classList.add('active');
+                    
+                    displayQuestion();
+                } else {
+                    alert("La leçon sélectionnée n'existe pas.");
+                }
+            });
+
+            // Affiche la question actuelle
+            function displayQuestion() {
+                if (currentQuestionIndex < currentQuestions.length) {
+                    const question = currentQuestions[currentQuestionIndex];
+                    questionNumberElement.textContent = currentQuestionIndex + 1;
+                    questionTextElement.textContent = question.question;
+                    answersContainer.innerHTML = '';
+                    explanationContainer.style.display = 'none';
+                    nextBtn.style.display = 'none';
+                    finishBtn.style.display = 'none';
+                    
+                    updateProgress();
+
+                    question.options.forEach((option, index) => {
+                        const optionElement = document.createElement('div');
+                        optionElement.classList.add('answer-option');
+                        optionElement.innerHTML = `
+                            <div class="answer-letter">${String.fromCharCode(65 + index)}</div>
+                            <div class="answer-text">${option}</div>
+                            <i class="fas fa-check answer-icon"></i>
+                            <i class="fas fa-times answer-icon"></i>
+                        `;
+                        optionElement.addEventListener('click', () => handleAnswer(optionElement, index, question.correct));
+                        answersContainer.appendChild(optionElement);
+                    });
+                } else {
+                    showResults();
+                }
+            }
+
+            // Gère la réponse de l'utilisateur
+            function handleAnswer(selectedElement, selectedIndex, correctIndex) {
+                // Désactive tous les boutons pour empêcher de nouvelles sélections
+                Array.from(answersContainer.children).forEach(el => {
+                    el.style.pointerEvents = 'none';
+                });
+
+                const isCorrect = (selectedIndex === correctIndex);
+                if (isCorrect) {
+                    selectedElement.classList.add('correct');
+                    score++;
+                } else {
+                    selectedElement.classList.add('incorrect');
+                    // Met en évidence la bonne réponse
+                    const correctElement = answersContainer.children[correctIndex];
+                    if (correctElement) {
+                        correctElement.classList.add('correct');
+                    }
+                }
+                
+                // Affiche l'explication
+                explanationContent.textContent = currentQuestions[currentQuestionIndex].explanation;
+                explanationContainer.style.display = 'block';
+
+                // Affiche le bouton "Suivant" ou "Terminer"
+                if (currentQuestionIndex < currentQuestions.length - 1) {
+                    nextBtn.style.display = 'inline-flex';
+                } else {
+                    finishBtn.style.display = 'inline-flex';
+                }
+            }
+            
+            // Passe à la question suivante
+            nextBtn.addEventListener('click', () => {
+                currentQuestionIndex++;
+                displayQuestion();
+            });
+
+            // Termine le quiz et affiche les résultats
+            finishBtn.addEventListener('click', showResults);
+            
+            function updateProgress() {
+                const progress = (currentQuestionIndex / currentQuestions.length) * 100;
+                progressBar.style.width = `${progress}%`;
+                progressText.textContent = `Question ${currentQuestionIndex + 1} de ${currentQuestions.length}`;
+            }
+
+            // Affiche les résultats finaux
+            function showResults() {
+                quizScreen.classList.remove('active');
+                resultScreen.classList.add('active');
+
+                const correctCount = score;
+                const incorrectCount = currentQuestions.length - score;
+                const totalCount = currentQuestions.length;
+                const scorePercentage = totalCount > 0 ? Math.round((correctCount / totalCount) * 100) : 0;
+                const scoreAngle = (scorePercentage / 100) * 360;
+
+                finalScore.textContent = `${scorePercentage}%`;
+                scoreProgress.style.setProperty('--score-angle', `${scoreAngle}deg`);
+                correctAnswersElement.textContent = correctCount;
+                incorrectAnswersElement.textContent = incorrectCount;
+                totalQuestionsElement.textContent = totalCount;
+                studiedLessonElement.textContent = currentLesson === 'ordonnancement' ? 'Ordonnancement des tâches' : 'Gestion mémoire';
+            }
+            
+            // Bouton "Recommencer"
+            restartBtn.addEventListener('click', () => {
+                currentQuestionIndex = 0;
+                score = 0;
+                shuffle(currentQuestions);
+                resultScreen.classList.remove('active');
+                quizScreen.classList.add('active');
+                displayQuestion();
+            });
+
+            // Bouton "Nouvelle configuration"
+            changeSettingsBtn.addEventListener('click', () => {
+                resultScreen.classList.remove('active');
+                setupScreen.classList.add('active');
+                // Réinitialise la sélection
+                lessonCards.forEach(c => c.classList.remove('selected'));
+                levelCards.forEach(c => c.classList.remove('selected'));
+                currentLesson = null;
+                currentLevel = null;
+                startBtn.disabled = true;
+            });
+        });
+    </script>
+</body>
+</html>
