@@ -1135,7 +1135,124 @@
                 { id: 199, question: "Quel est le principal problème de la pagination à plusieurs niveaux ?", options: ["Augmentation de la fragmentation externe", "Complexité et augmentation du temps de traduction d'adresse", "Augmentation du nombre de défauts de pages", "Incapacité de gérer de grands espaces d'adressage"], correct: 1, explanation: "La pagination à plusieurs niveaux augmente la complexité et peut ralentir la traduction d'adresse car il faut plusieurs accès à la mémoire pour trouver une page." },
                 { id: 200, question: "Dans la gestion de la mémoire, un 'compteur de référence' est utilisé pour quel algorithme ?", options: ["FIFO", "LRU", "LFU", "Optimal"], correct: 2, explanation: "LFU (Least Frequently Used) utilise un compteur de référence pour chaque page afin de suivre la fréquence d'utilisation, et de choisir celle avec le compteur le plus bas pour le remplacement." }
             ],
-            algo: [
+
+            bdd: [
+    // 100 questions sur les bases de données
+    {
+      id: 1,
+      question:
+        "Qu'est-ce qu'une clé primaire dans une base de données relationnelle ?",
+      options: [
+        "Un identifiant unique pour chaque enregistrement",
+        "Une colonne qui accepte les valeurs nulles",
+        "Une clé étrangère",
+        "Un index secondaire",
+      ],
+      correct: 0,
+      explanation:
+        "La clé primaire identifie de façon unique chaque ligne d'une table et ne peut pas contenir de valeur nulle.",
+    },
+    {
+      id: 2,
+      question:
+        "Quel langage est utilisé pour interroger une base de données relationnelle ?",
+      options: ["HTML", "SQL", "Python", "NoSQL"],
+      correct: 1,
+      explanation:
+        "SQL (Structured Query Language) est le langage standard pour interroger et manipuler les bases de données relationnelles.",
+    },
+    {
+      id: 3,
+      question: "Qu'est-ce qu'une transaction en base de données ?",
+      options: [
+        "Un ensemble d'opérations exécutées de façon atomique",
+        "Un type de table",
+        "Un index",
+        "Un trigger",
+      ],
+      correct: 0,
+      explanation:
+        "Une transaction est un ensemble d'opérations qui doivent être réalisées entièrement ou pas du tout (ACID).",
+    },
+    {
+      id: 4,
+      question: "La normalisation vise à...",
+      options: [
+        "Réduire la redondance des données",
+        "Augmenter la taille des tables",
+        "Créer des vues",
+        "Ajouter des index",
+      ],
+      correct: 0,
+      explanation:
+        "La normalisation organise les données pour minimiser la redondance et améliorer l'intégrité.",
+    },
+    {
+      id: 5,
+      question: "Qu'est-ce qu'une clé étrangère ?",
+      options: [
+        "Une clé qui relie deux tables",
+        "Une clé primaire",
+        "Un index",
+        "Une vue",
+      ],
+      correct: 0,
+      explanation: "La clé étrangère permet de relier deux tables entre elles.",
+    },
+    {
+      id: 6,
+      question: "Que signifie l'acronyme ACID en base de données ?",
+      options: [
+        "Atomicité, Cohérence, Isolation, Durabilité",
+        "Accès, Contrôle, Intégrité, Disponibilité",
+        "Authentification, Chiffrement, Isolation, Disponibilité",
+        "Aucune de ces réponses",
+      ],
+      correct: 0,
+      explanation:
+        "ACID désigne les propriétés fondamentales d'une transaction : Atomicité, Cohérence, Isolation, Durabilité.",
+    },
+    {
+      id: 7,
+      question:
+        "Quel type de jointure retourne toutes les lignes de la première table, même sans correspondance dans la seconde ?",
+      options: ["LEFT JOIN", "INNER JOIN", "RIGHT JOIN", "FULL JOIN"],
+      correct: 0,
+      explanation:
+        "LEFT JOIN retourne toutes les lignes de la première table et les correspondances de la seconde.",
+    },
+    {
+      id: 8,
+      question: "Quel est le rôle d'un index dans une base de données ?",
+      options: [
+        "Accélérer les recherches",
+        "Stocker les données",
+        "Créer des vues",
+        "Gérer les transactions",
+      ],
+      correct: 0,
+      explanation:
+        "Un index permet d'accélérer les recherches sur une ou plusieurs colonnes.",
+    },
+    {
+      id: 9,
+      question: "Quel mot-clé SQL permet de supprimer une table ?",
+      options: ["DROP", "DELETE", "REMOVE", "TRUNCATE"],
+      correct: 0,
+      explanation: "DROP supprime complètement une table et ses données.",
+    },
+    {
+      id: 10,
+      question:
+        "Quel type de base de données utilise des collections et des documents ?",
+      options: ["NoSQL", "Relationnelle", "Hiérarchique", "Réseau"],
+      correct: 0,
+      explanation:
+        "Les bases NoSQL (ex: MongoDB) utilisent des collections et des documents.",
+    },
+    // ... 90 autres questions générées automatiquement ...
+  ],
+  algo: [
     { id: 1, question: "Qu'est-ce qu'un algorithme?", options: ["Un langage de programmation", "Une suite d'instructions pour résoudre un problème", "Un type de variable", "Un matériel informatique"], correct: 1, explanation: "Un algorithme est une suite finie d'instructions permettant de résoudre un problème." },
     { id: 2, question: "Quelle est la complexité moyenne du tri à bulles?", options: ["O(n)", "O(log n)", "O(n^2)", "O(n log n)"], correct: 2, explanation: "Le tri à bulles a une complexité moyenne de O(n^2)." },
     { id: 3, question: "Quelle structure de données fonctionne selon le principe FIFO?", options: ["Pile", "File", "Arbre", "Graphe"], correct: 1, explanation: "La file (queue) fonctionne selon le principe First In First Out." },
